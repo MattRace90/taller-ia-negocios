@@ -111,7 +111,7 @@ Skills que usamos en la agencia, limpias de datos de clientes. Se descargan como
 - [estrategia-benchmark](kit/plan-b/estrategia-benchmark.zip): analiza y puntúa los anuncios de tu competencia en Meta y arma una presentación de estrategia.
 - [product-bible](kit/plan-b/product-bible.zip): arma una carpeta por producto con ficha, colores, mensajes, reseñas e imágenes.
 - [frontend-design](kit/plan-b/frontend-design.zip): guía de diseño de Anthropic para webs y landings que no parezcan de plantilla.
-- [animaciones](kit/plan-b/animaciones.zip): 20 estilos de animación en código para animar una escena de tu negocio (necesita Node.js).
+- [animaciones](kit/plan-b/animaciones.zip): 20 estilos de animación en código para animar una escena de tu negocio (necesita Node.js). Guía para instalarlas y usarlas: [20 estilos de animación (Notion)](https://vivid-armadillo-c06.notion.site/20-estilos-de-animaci-n-para-tus-v-deos-se-instalan-una-vez-y-se-piden-con-un-comando-41242dad0d3881b3b9a8d83cfc972946).
 
 ## Skills de otros
 ¿Buscás algo que no está acá? Mirá [Skills y repos de otros](#r-skills-externas): dónde buscar, cómo revisarlas antes de instalar y dos ejemplos (animaciones para video y agent-desktop).

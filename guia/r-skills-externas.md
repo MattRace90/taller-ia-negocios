@@ -60,6 +60,7 @@ Después salí con `/exit`, volvé a entrar con `claude` y escribí `/skills`.
 ### Animaciones para tus videos
 [github.com/remonkevin99-collab/animaciones](https://github.com/remonkevin99-collab/animaciones): 30 estilos de animación en código para Claude Code (holograma, plastilina, pixel art, cómic, grafiti y más), gratis y en español. Sirve para animar una escena de tu negocio y sumarla a un reel.
 - Necesita **Node.js** ([S3](#s3-herramientas-base)) y usa **Remotion** (gratis hasta 3 personas en la empresa; si son más, revisá la licencia de Remotion).
+- **Guía paso a paso para instalarlas y pedirlas con un comando:** [20 estilos de animación para tus videos (Notion)](https://vivid-armadillo-c06.notion.site/20-estilos-de-animaci-n-para-tus-v-deos-se-instalan-una-vez-y-se-piden-con-un-comando-41242dad0d3881b3b9a8d83cfc972946).
 - También está en el plan B del [Kit](#r-kit).
 
 ```prompt
