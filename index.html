@@ -360,6 +360,11 @@ main .md blockquote.ojo{background:#FFF8D1!important;border-left-color:#E0B800!i
 main .md blockquote.datos{background:#F1ECFC!important;border-left-color:#8E73D9!important}
 main .md blockquote.costo{background:#E8F8F2!important;border-left-color:#3FA884!important}
 main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!important}
+
+.seqnav{margin-left:auto;display:flex;gap:6px}
+.seqnav a{font:800 12px/1 var(--f-body);letter-spacing:.04em;color:#0A0A0A;text-decoration:none;border:1.5px solid #0A0A0A;border-radius:999px;padding:7px 11px;background:#FFFFFF;white-space:nowrap}
+.seqnav a:hover{background:var(--gc,#FFE51F)}
+@media (max-width:700px){ .seqnav{margin-left:0;width:100%} .seqnav a{flex:1;text-align:center} }
 </style>
 
 <header class="top">
@@ -890,10 +895,12 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       var cur = navStack[navStack.length-1]; if(cur!==id) navStack.push(id);
       var prevId = navStack.length>1 ? navStack[navStack.length-2] : null;
       var first = PAGES.filter(function(x){ return x.g===p.g; })[0];
+      var sp = PAGES[p.i-1], sn = PAGES[p.i+1];
+      var seqNav = '<span class="seqnav">'+(sp? '<a href="#'+sp.id+'" title="Página anterior: '+esc(sp.t)+'">‹ Anterior</a>':'')+(sn? '<a href="#'+sn.id+'" title="Página siguiente: '+esc(sn.t)+'">Siguiente ›</a>':'')+'</span>';
       var crumb = '<div class="crumbbar"><button type="button" class="backbtn" id="backBtn" title="'+(prevId&&byId[prevId]?'Volver a: '+esc(byId[prevId].t):'Ir a Inicio')+'">← '+(prevId&&byId[prevId]?'Volver a '+esc(byId[prevId].k||"")+' '+esc(byId[prevId].t):'Inicio')+'</button>'+
         '<nav class="crumbs" aria-label="Estás en"><a href="#inicio">⌂ Inicio</a><span>›</span>'+
         (id!=="inicio" ? '<a href="#'+first.id+'" style="--gc:'+(typeof gc==='function'?gc(p.g):'#FFE51F')+'" class="crumbsec">'+esc(p.g)+'</a><span>›</span>' : '')+
-        '<b>'+esc((p.k&&p.k.length<5&&/[A-Z0-9]/.test(p.k)?p.k+' · ':'')+p.t)+'</b></nav></div>';
+        '<b>'+esc((p.k&&p.k.length<5&&/[A-Z0-9]/.test(p.k)?p.k+' · ':'')+p.t)+'</b></nav>'+seqNav+'</div>';
       art.innerHTML = crumb + head + '<div class="md">'+html+'</div>' + pager;
       var bb = document.getElementById("backBtn"); if(bb) bb.onclick = goBack;
       var md = art.querySelector(".md");
