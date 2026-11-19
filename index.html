@@ -393,6 +393,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     {id:"s11b-obsidian-atajos", g:"Cuentas obligatorias", t:"Usá Obsidian como un pro (atajos)", k:"S11b", req:"todos", c:4},
     {id:"p1-cerebro", g:"Tu cerebro", t:"Armá tu cerebro", k:"C1", req:"todos", c:3},
     {id:"c2-tu-borrador", g:"Tu cerebro", req:"todos", t:"Usá tu borrador y mantenelo", k:"C2", c:9},
+    {id:"elegir", g:"Desafíos", t:"Elegí tus desafíos (menú)", k:"☆", c:0},
     {id:"mis-desafios", g:"Desafíos", t:"Mis desafíos (los que elegiste)", k:"★", c:0},
     {id:"d1-automatiza", g:"Desafíos", t:"Automatizá una tarea", k:"D1", c:7},
     {id:"d2-agente", g:"Desafíos", t:"Un agente que responde", k:"D2", c:8},
@@ -734,13 +735,14 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     });
   }
   function decoratePicker(md, id){
-    if(id!=="inicio") return;
+    if(id!=="inicio" && id!=="elegir") return;
     md.querySelectorAll("table").forEach(function(t){
-      var rows = [].slice.call(t.querySelectorAll("tbody tr")).filter(function(tr){ var a = tr.querySelector('td:first-child a[href^="#d"]'); return !!a; });
+      function didOf(tr){ var a = tr.querySelector('td:first-child a'); if(!a) return null; var m = (a.getAttribute("href")||"").match(/#(d\d[\w-]*)$/); return m ? m[1] : null; }
+      var rows = [].slice.call(t.querySelectorAll("tbody tr")).filter(function(tr){ return !!didOf(tr); });
       if(rows.length<5) return;
       var hr = t.querySelector("thead tr"); var th = document.createElement("th"); th.textContent = "Elegí"; hr.insertBefore(th, hr.firstChild);
       rows.forEach(function(tr){
-        var did = tr.querySelector('td:first-child a').getAttribute("href").slice(1);
+        var did = didOf(tr);
         var td = document.createElement("td"); td.className = "pickcell";
         if(/^d7-/.test(did)){ td.innerHTML = '<span class="forall">Para todos</span>'; }
         else {
@@ -825,6 +827,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
   }
   function load(id){
     if(id==="mis-desafios") return buildMine();
+    if(id==="elegir") return load("inicio");
     if(cache[id]) return Promise.resolve(cache[id]);
     return fetch("guia/"+id+".md").then(function(r){ if(!r.ok) throw 0; return r.text(); }).then(function(t){ cache[id]=t; return t; });
   }
@@ -836,6 +839,8 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
   }
   function render(){
     var id = (location.hash||"").replace(/^#/,"") || "inicio";
+    var jumpTo = null;
+    if(id==="elegir"){ jumpTo = "El menú de desafíos"; id = "inicio"; history.replaceState(null,"","#inicio"); }
     if(ALIAS[id]){ id = ALIAS[id]; history.replaceState(null,"","#"+id); }
     if(!byId[id]) id = "inicio";
     var p = byId[id];
@@ -900,6 +905,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       wrapSteps(md);
       document.title = "Taller IA para Negocios";
       window.scrollTo(0,0);
+      if(jumpTo){ var h = [].filter.call(art.querySelectorAll(".md h2"), function(x){ return x.textContent.indexOf(jumpTo)>=0; })[0]; if(h){ var hh = (document.querySelector(".top")||{}).offsetHeight||60; window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - hh - 70); } }
     }).catch(function(){
       art.innerHTML = '<div class="eyebrow"><span class="pill solid">'+esc(p.g)+'</span></div><h1 class="title">'+esc(p.t)+'</h1><div class="empty">Esta página se está terminando de escribir. Volvé en un rato.</div>';
     });
