@@ -113,6 +113,9 @@ Skills que usamos en la agencia, limpias de datos de clientes. Se descargan como
 - [frontend-design](kit/plan-b/frontend-design.zip): guía de diseño de Anthropic para webs y landings que no parezcan de plantilla.
 - [animaciones](kit/plan-b/animaciones.zip): 20 estilos de animación en código para animar una escena de tu negocio (necesita Node.js).
 
+## Skills de otros
+¿Buscás algo que no está acá? Mirá [Skills y repos de otros](#r-skills-externas): dónde buscar, cómo revisarlas antes de instalar y dos ejemplos (animaciones para video y agent-desktop).
+
 ## Toda la guía en un ZIP
 Todas las páginas del taller, las skills y los agentes en una carpeta para tu compu: [Descargá la guía completa](kit/descargas/taller-completo.zip).
 

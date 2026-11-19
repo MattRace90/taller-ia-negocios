@@ -1,3 +1,4 @@
+<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
@@ -321,6 +322,13 @@ body[data-os="mac"] [data-os="win"], body[data-os="win"] [data-os="mac"]{display
 .pickbox .gomine{margin-left:auto}
 /* Página actual en el índice: pastillas legibles */
 .grp a[aria-current="page"] .k,.grp a[aria-current="page"] .done,.grp a[aria-current="page"] .req{background:#0A0A0A!important;color:#FFFDF6!important;border-color:#0A0A0A!important}
+
+/* Contraste: tablas y textos siempre oscuros sobre el papel */
+main .md table, main .md th, main .md td, main .md caption{color:#0A0A0A}
+main .md td a, main .md th a{color:#4B2FC4}
+main .md blockquote{color:#0A0A0A}
+.forall{color:#0A0A0A!important}
+.gomine.off{opacity:1;background:#55544D;color:#FFFDF6!important}
 </style>
 
 <header class="top">
@@ -371,6 +379,7 @@ body[data-os="mac"] [data-os="win"], body[data-os="win"] [data-os="mac"]{display
     {id:"s12-creativas", g:"Cuentas según tu desafío", t:"Higgsfield, HeyGen, ElevenLabs, Canva, Metricool", k:"S12", req:["d4"], c:4},
     {id:"s13-vapi", g:"Cuentas según tu desafío", t:"Vapi: agentes de voz", k:"S13", req:["d2"], c:4},
     {id:"s14-meta-y-google", g:"Cuentas según tu desafío", t:"Meta y Google", k:"S14", req:["d1","d6","d7"], c:4},
+    {id:"s15-apify", g:"Cuentas según tu desafío", t:"Apify: datos de la web (opcional)", k:"S15", req:"opcional", c:2},
     {id:"p2-asistente-telegram", g:"Tutoriales", t:"Propuestas y gastos en Telegram", k:"P2", c:7},
     {id:"p3-agente-preguntas", g:"Tutoriales", t:"Agente que responde y filtra", k:"P3", c:6},
     {id:"p4-foto-a-tabla", g:"Tutoriales", t:"De foto a planilla", k:"P4", c:4},
@@ -401,7 +410,8 @@ body[data-os="mac"] [data-os="win"], body[data-os="win"] [data-os="mac"]{display
     {id:"t6-datos-y-seguridad", g:"Teoría", t:"Datos y seguridad", k:"T6", c:13},
     {id:"r-stack-y-costos", g:"Referencia", t:"Stack y costos", k:"R", c:2},
     {id:"r-descargas", g:"Referencia", t:"Qué tiene cada descarga", k:"R", c:2},
-    {id:"r-kit", g:"Referencia", t:"Kit: skills, agentes y descargas", k:"R", c:2}
+    {id:"r-kit", g:"Referencia", t:"Kit: skills, agentes y descargas", k:"R", c:2},
+    {id:"r-skills-externas", g:"Referencia", t:"Skills y repos de otros", k:"R", c:3},
   ];
   // Carpeta pública (Drive) con los ZIP del taller: fabrica-de-contenidos.zip, taller-completo.zip y kit/plan-b/*.zip
   var DESCARGAS_URL = "https://drive.google.com/drive/folders/1X5C1NtBXbjxZdh8FMy6JiupVl5S-3GgN";
@@ -464,6 +474,7 @@ body[data-os="mac"] [data-os="win"], body[data-os="win"] [data-os="mac"]{display
     if(!p.req) return null;
     if(p.req==="todos") return {cls:"must", txt:"Obligatoria"};
     if(p.req==="ref") return {cls:"ref", txt:"Referencia"};
+    if(p.req==="opcional") return {cls:"ref", txt:"Opcional"};
     var ch = chosen(), hit = p.req.filter(function(d){ return ch.some(function(c){ return c.indexOf(d+"-")===0; }); });
     if(hit.length) return {cls:"prio", txt:"Para vos"};
     return {cls:(ch.length?"later":"dep"), txt:p.req.map(function(d){return d.toUpperCase();}).join("·")};
@@ -805,6 +816,7 @@ body[data-os="mac"] [data-os="win"], body[data-os="win"] [data-os="mac"]{display
       if(needs) head += '<p class="needs">Antes: '+needs+'</p>';
       if(p.req){
         if(p.req==="todos") head += '<div class="reqbox must"><b>Obligatoria para todos</b>'+(p.g==='Tu cerebro' ? 'Va después de las cuentas obligatorias, de 12 a 13. Todo lo de la tarde usa tu cerebro.' : 'Hacela a la mañana (o antes del taller). Sin esto no funciona nada de lo demás.')+'</div>';
+        else if(p.req==="opcional") head += '<div class="reqbox"><b>Opcional</b>No hace falta para el taller. Sumala si te sirve: queda acá para cuando la quieras.</div>';
         else if(p.req==="ref") head += '<div class="reqbox"><b>Referencia</b>Leela cuando quieras conectar algo nuevo. Queda acá para siempre.</div>';
         else {
           var ch = chosen();

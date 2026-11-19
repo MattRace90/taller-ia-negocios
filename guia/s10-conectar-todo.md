@@ -168,10 +168,12 @@ Revisala con tu equipo y anotá lo que ya tienen. **Obligatoria** = la hace todo
 | **Canva** | Placas y diseños | D4 | Free 0 · Pro ≈ 18 (verificar) | Conector oficial | [Creativas](#s12-creativas) |
 | **Metricool** | Programar y medir redes | D4 | Free 0 · Starter 25 | Conector / MCP remoto (también en el plan gratis) | [Creativas](#s12-creativas) |
 | **Vapi** | Agentes de voz por teléfono | D2 (extra: voz) | Pago por uso (USD 5 de prueba) | MCP remoto oficial | [Vapi](#s13-vapi) |
-| **Apify** | Sacar datos de webs y redes (reseñas, competencia) | Opcional (D5, D6) | Free (USD 5 de uso/mes) · Starter 19 | MCP remoto oficial | abajo |
+| **Apify** | Sacar datos de webs y redes (reseñas, competencia) | Opcional (D5, D6) | Free (USD 5 de uso/mes) · Starter 19 | MCP remoto oficial | [S15 · Apify](#s15-apify) |
 | **Notion** | Notas y bases de tu equipo, si ya lo usan | Opcional | Free 0 (verificar planes) | Conector / MCP remoto oficial | abajo |
 
 ### Apify y Notion, en corto
+El paso a paso completo de Apify está en [S15 · Apify](#s15-apify).
+
 **Apify** junta datos públicos de la web (reseñas de Google Maps, posteos de la competencia, precios). Es lo que usamos en la agencia para minar dolores de clientes.
 - Cuenta: **[apify.com](https://apify.com)** › sign up. El plan **Free** trae USD 5 de uso por mes; cuando se acaba, se frena hasta el mes siguiente ([precios](https://apify.com/pricing)).
 - Conexión: MCP remoto `https://mcp.apify.com` con inicio de sesión. En la app, **Add custom connector**; en Claude Code:
