@@ -389,7 +389,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script>
 (function(){
-  var BUILD = "202611190742";
+  var BUILD = "202611190747";
   var PAGES = [
     {id:"inicio", g:"Empezá acá", t:"El día, el menú y tu ruta", k:"→", c:6},
     {id:"s1-claude", g:"Cuentas obligatorias", t:"Cuenta y app de Claude", k:"S1", req:"todos", c:2},
@@ -529,13 +529,13 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     {t:"11:00", e:"12:00", n:"Cuentas obligatorias", s:22},
     {t:"12:00", e:"13:00", n:"Tu cerebro", s:27},
     {t:"13:00", e:"13:45", n:"Almuerzo", s:31},
-    {t:"13:45", e:"14:40", n:"Desafíos · Ronda 1", s:32},
-    {t:"14:40", e:"15:30", n:"Desafíos · Ronda 2", s:35},
-    {t:"15:30", e:"15:40", n:"Corte", s:35},
-    {t:"15:40", e:"16:30", n:"Desafíos · Ronda 3", s:35},
-    {t:"16:30", e:"17:30", n:"Cierre: bots de WhatsApp", s:37},
-    {t:"17:30", e:"17:48", n:"Tu plan de 30 días", s:48},
-    {t:"17:48", e:"18:00", n:"Bonos y cierre", s:52}
+    {t:"13:45", e:"14:30", n:"Desafíos · Ronda 1", s:32},
+    {t:"14:30", e:"15:15", n:"Desafíos · Ronda 2", s:35},
+    {t:"15:15", e:"15:25", n:"Corte", s:35},
+    {t:"15:25", e:"16:00", n:"Desafíos · Ronda 3", s:35},
+    {t:"16:00", e:"17:15", n:"Cierre: bots de WhatsApp", s:37},
+    {t:"17:15", e:"17:35", n:"Tu plan de 30 días", s:48},
+    {t:"17:35", e:"18:00", n:"Bonos y cierre", s:52}
   ];
   function mins(hhmm){ var a = hhmm.split(":"); return (+a[0])*60 + (+a[1]); }
   function nowInfo(){
@@ -554,10 +554,10 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       {due:"12:00", ids:["s1-claude","s2-claude-code","s3-herramientas-base","s4-github"], n:"Cuentas obligatorias"},
       {due:"13:00", ids:["p1-cerebro","c2-tu-borrador"], n:"Tu cerebro"}
     ];
-    var ch = chosen(), dues = ["14:40","15:30","16:30"];
-    ch.forEach(function(id,i){ ms.push({due:dues[i]||"16:30", ids:[id], n:"Tu desafío "+(i+1)}); });
-    ms.push({due:"17:30", ids:["d7-whatsapp"], n:"Instrucciones de tu bot"});
-    ms.push({due:"17:48", ids:["t4-tareas-programadas"], n:"Tu tarea programada"});
+    var ch = chosen(), dues = ["14:30","15:15","16:00"];
+    ch.forEach(function(id,i){ ms.push({due:dues[i]||"16:00", ids:[id], n:"Tu desafío "+(i+1)}); });
+    ms.push({due:"17:15", ids:["d7-whatsapp"], n:"Instrucciones de tu bot"});
+    ms.push({due:"17:35", ids:["t4-tareas-programadas"], n:"Tu tarea programada"});
     return ms;
   }
   function pageDone(id){ var c = countDone(id); return c && c.t ? c.n/c.t >= 0.75 : false; }
@@ -819,8 +819,8 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
 
   var cache = {};
   function buildMine(){
-    var ch = chosen(), RONDA = ["Ronda 1 · 13:45","Ronda 2 · 14:40","Ronda 3 · 15:40"];
-    var head = "---\ntitulo: Mis desafíos\nbloque: Desafío\ntiempo: Tu tarde, de 13:45 a 16:30\npara: Vos\nnecesitas: nada\nresultado: Tenés a mano solo los desafíos que elegiste, en orden, con las cuentas que necesitás para cada uno.\n---\n\n";
+    var ch = chosen(), RONDA = ["Ronda 1 · 13:45","Ronda 2 · 14:30","Ronda 3 · 15:25"];
+    var head = "---\ntitulo: Mis desafíos\nbloque: Desafío\ntiempo: Tu tarde, de 13:45 a 16:00\npara: Vos\nnecesitas: nada\nresultado: Tenés a mano solo los desafíos que elegiste, en orden, con las cuentas que necesitás para cada uno.\n---\n\n";
     if(!ch.length){
       return Promise.resolve(head + "Todavía no elegiste ningún desafío.\n\n1. Andá al [menú de desafíos del Inicio](#inicio).\n2. Tocá **☆ Elegir** en hasta 3 (uno por ronda).\n3. Volvé acá con **Ir a mis desafíos →**.\n\n> **Tip:** si no sabés cuál, mirá la página de tu empresa en la sección **Empresas**: ahí tenés los que te sugerimos.\n");
     }
@@ -842,7 +842,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
         }
         md += "[Abrir "+p.k+" · "+p.t+" →](#"+id+")\n\n";
       });
-      md += "## Cierre para todos · 16:30 · D7 · Tu bot de WhatsApp\nNo se elige: lo hacemos todos juntos. [Abrir D7 →](#d7-whatsapp)\n\n";
+      md += "## Cierre para todos · 16:00 · D7 · Tu bot de WhatsApp\nNo se elige: lo hacemos todos juntos. [Abrir D7 →](#d7-whatsapp)\n\n";
       md += "> **Tip:** ¿Querés cambiar? Volvé al [menú del Inicio](#inicio) o entrá a cualquier desafío y tocá el botón para elegirlo o sacarlo.\n";
       return md;
     });
@@ -894,7 +894,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       if(p.g==="Desafíos" && id!=="mis-desafios"){
         var chs = chosen(), isCh = chs.indexOf(id)>=0, full = !isCh && chs.length>=MAX_DESAFIOS;
         if(id.indexOf("d7-")===0){
-          head += '<div class="pickbox all"><b>Para todos</b>Este no se elige: lo hacemos todos juntos al cierre, de 16:30 a 17:30.</div>';
+          head += '<div class="pickbox all"><b>Para todos</b>Este no se elige: lo hacemos todos juntos al cierre, de 16:00 a 17:15.</div>';
         } else {
           head += '<div class="pickbox'+(isCh?' on':'')+'"><button type="button" class="pick'+(isCh?' on':'')+'" id="pickBtn" aria-pressed="'+isCh+'"'+(full?' disabled':'')+'>'+(isCh?'★ Elegiste este desafío':(full?'Ya elegiste '+MAX_DESAFIOS+' (el máximo)':'☆ Elegí este desafío'))+'</button>'+
             '<span class="count">'+chs.length+' de '+MAX_DESAFIOS+' elegidos</span>'+

@@ -35,12 +35,12 @@ Hoy trabajamos en la **pestaña Code** de la app de Claude (no hace falta la ter
 | 11:00 | **Cuentas y conexiones** | Cuentas, instalaciones y conectores, con mesa de ayuda. Empezá por [Tu cuenta de Claude](#s1-claude) y seguí la [checklist de todo](#s10-conectar-todo). |
 | 12:00 | **Tu cerebro** | [Armá el cerebro de tu empresa](#p1-cerebro) y [usá el borrador que te preparamos](#c2-tu-borrador). |
 | 13:00 | Almuerzo | |
-| 13:45 | **Desafíos a elección · Ronda 1** | Elegí un desafío del menú (abajo) y tu nivel: Rápido, Completo o Pro. |
-| 14:40 | **Ronda 2** | Seguí con el mismo o pasá a otro. |
-| 15:30 | Corte | |
-| 15:40 | **Ronda 3** | Terminá lo que empezaste o sumá uno corto. |
-| 16:30 | **Cierre: bots de WhatsApp** | Todos juntos: opciones, dos demos en vivo y las instrucciones de tu bot escritas desde tu cerebro: [Cierre: tu bot de WhatsApp](#d7-whatsapp). |
-| 17:30 | **Tu plan de 30 días** | Qué seguís en casa, quién mantiene el cerebro y qué dejás programado: [Tareas programadas](#t4-tareas-programadas). |
+| 13:45 | **Desafíos a elección · Ronda 1** | Elegí un desafío del menú (abajo) y arrancá por su versión **MVP**. |
+| 14:30 | **Ronda 2** | Seguí con el mismo o pasá a otro. |
+| 15:15 | Corte | |
+| 15:25 | **Ronda 3** | Terminá lo que empezaste o sumá una MVP corta (35 min). |
+| 16:00 | **Cierre: bots de WhatsApp** | Todos juntos: opciones, dos demos en vivo y las instrucciones de tu bot escritas desde tu cerebro: [Cierre: tu bot de WhatsApp](#d7-whatsapp). |
+| 17:15 | **Tu plan de 30 días** | Qué seguís en casa, quién mantiene el cerebro y qué dejás programado: [Tareas programadas](#t4-tareas-programadas). |
 
 ## Cómo usar esta guía
 - **Índice:** a la izquierda (en el celular, en el menú) están todas las páginas por bloque: Teoría, Cuentas y conexiones, Tu cerebro, Desafíos, Tutoriales, WhatsApp y Referencia.
@@ -63,7 +63,7 @@ Cada uno elige. No hay un orden obligatorio: arrancá por el que más te duele h
 | [Tu fábrica de contenido](#d4-contenido) | Publicar seguido, con tu voz, sin depender de una persona | 30 a 90 min | El contenido depende de vos o de la inspiración del día |
 | [Vendé más](#d5-vender) | Propuestas que tardan y consultas que nadie recontacta | 30 a 90 min | Perdés ventas por demora o por falta de seguimiento |
 | [Medí y decidí](#d6-medir) | Informes manuales y no saber cuánto invertir en publicidad | 30 a 90 min | Invertís en Meta o querés ver tus números sin armarlos a mano |
-| [Cierre: tu bot de WhatsApp](#d7-whatsapp) | Qué bot te conviene y qué tiene que decir | 60 min | Es para todos, a las 16:30 |
+| [Cierre: tu bot de WhatsApp](#d7-whatsapp) | Qué bot te conviene y qué tiene que decir | 75 min | Es para todos, a las 16:00 |
 
 > **Tip:** las 3 rondas suman unas 2 horas y media: alcanzan para 1 o 2 desafíos en nivel Completo, o 3 o 4 en nivel Rápido. Mejor uno terminado que tres a medias.
 

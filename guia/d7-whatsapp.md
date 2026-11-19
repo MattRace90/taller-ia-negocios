@@ -1,7 +1,7 @@
 ---
 titulo: "Cierre: tu bot de WhatsApp"
 bloque: Desafío
-tiempo: 60 min (16:30 a 17:30)
+tiempo: 60 min (16:00 a 17:15)
 para: Todos
 necesitas: p1-cerebro
 cuentas_mvp: s6-n8n, s7-telegram
@@ -14,16 +14,16 @@ WhatsApp no se arma en una hora: Meta pide verificar el negocio, un número solo
 
 **En 30 segundos**
 - **Qué te llevás:** sabés qué opción de WhatsApp te conviene y tenés las instrucciones de tu bot, escritas desde tu cerebro y probadas.
-- **Cuánto tarda:** 60 min, todos juntos (16:30 a 17:30).
-- **Por dónde empezar:** a las 17:05, la **Versión MVP**, acá abajo.
+- **Cuánto tarda:** 60 min, todos juntos (16:00 a 17:15).
+- **Por dónde empezar:** a las 16:44, la **Versión MVP**, acá abajo.
 
 ## Los 3 momentos del cierre
 
 | Hora | Qué pasa | Página |
 |---|---|---|
-| 16:30 | **El menú de opciones**: pros, contras, riesgo de bloqueo y costos. | [Opciones de WhatsApp](#w1-opciones) |
-| 16:45 | **Dos demos en vivo**: un bot con dlastcrm y una plataforma propia de turnos, como la que armamos para un hospital. Mirá y preguntá. | [Bot con dlastcrm](#w2-bot-dlastcrm) · [Plataforma propia](#w3-bot-propio) |
-| 17:05 | **Las instrucciones de tu bot**, escritas y probadas. Cada uno. | Versión MVP, abajo |
+| 16:00 | **El menú de opciones**: pros, contras, riesgo de bloqueo y costos. | [Opciones de WhatsApp](#w1-opciones) |
+| 16:19 | **Dos demos en vivo**: un bot con dlastcrm y una plataforma propia de turnos, como la que armamos para un hospital. Mirá y preguntá. | [Bot con dlastcrm](#w2-bot-dlastcrm) · [Plataforma propia](#w3-bot-propio) |
+| 16:44 | **Las instrucciones de tu bot**, escritas y probadas. Cada uno. | Versión MVP, abajo |
 
 ## El menú: 6 opciones para tu bot
 dlastcrm tiene dos formas de conectar, por eso hay 7 filas.
