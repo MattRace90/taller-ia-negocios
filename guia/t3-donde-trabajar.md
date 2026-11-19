@@ -101,13 +101,57 @@ Mirá qué hay en esta carpeta y explicame en 5 líneas qué es este proyecto. D
 
 **Tenés que ver:** un resumen de los archivos de la carpeta que abriste. Si te dice que está vacía, abriste otra carpeta.
 
-## Claude Code en la web (agente en la nube)
-Claude Code corriendo en una compu de Anthropic, no en la tuya. Le das una tarea y **sigue trabajando aunque cierres la laptop**.
-- Se abre en la app de escritorio eligiendo **Cloud** en el selector de entorno, en [claude.ai/code](https://claude.ai/code) o en la pestaña **Code** de la app del celular.
-- Trabaja sobre un **repo de GitHub**: lo copia, hace los cambios en una **rama** nueva (una copia aparte) y te propone un **pull request** (PR): un pedido para sumar esos cambios, que vos revisás y aceptás. Por eso necesitás [GitHub](#s4-github) conectado. Estas palabras están en el [glosario](#t2-piezas).
-- Consume el mismo límite de uso de tu plan. La compu de la nube no se cobra aparte.
+## Claude Code en la web (sesiones en la nube)
+Una **sesión en la nube** es Claude Code corriendo en una compu de Anthropic, no en la tuya. Le das una tarea y **sigue trabajando aunque cierres la laptop**. La mirás y le escribís desde [claude.ai/code](https://claude.ai/code), la app de escritorio o el celular.
+- Trabaja sobre un **repo de GitHub** (tu carpeta guardada en GitHub): lo copia, hace los cambios en una **rama** (una copia aparte) y te propone un **pull request** (PR): un pedido para sumar esos cambios que vos revisás y aceptás. Palabras en el [glosario](#t2-piezas).
+- **Plan:** Pro, Max, Ultra o Team (en Enterprise, con asiento premium). Usa el mismo límite de uso de tu plan: la compu de la nube no se cobra aparte.
 
 Ejemplo: desde el celular, Viajes TDH le pide "cambiá el precio del paquete a Mendoza en la web y abrí el PR". A la noche revisa el cambio y lo publica.
+
+### 1. Habilitar el entorno web (una sola vez)
+1. Entrá a [claude.ai/code](https://claude.ai/code) con tu cuenta de Claude.
+2. Conectá GitHub: te pide autorizar la **Claude GitHub App**. Dale acceso al repo de tu cerebro o de tu web. Paso a paso de GitHub: [GitHub](#s4-github).
+3. El **entorno** (environment) es la configuración de la compu de la nube: a qué páginas de internet puede entrar y qué se instala al arrancar. La primera vez se crea solo uno llamado **Default**, con acceso a internet **Limited** (limitado). Para el taller alcanza.
+4. Elegí el repo y escribí tu primera tarea.
+
+En la app de escritorio: pestaña **Code** › **+ New** › en el selector de entorno (debajo del cuadro) elegí un entorno de la parte **Cloud**. Para crear otro: **New environment** (al final del selector) › pestaña **Cloud** › **Add environment**.
+
+**Tenés que ver:** en [claude.ai/code](https://claude.ai/code), tu repo en la lista y la sesión arrancando.
+
+> **Ojo:** en planes Team o Enterprise, el dueño de la cuenta tiene que tener habilitadas las sesiones en la nube. Si no te deja, pedíselo.
+
+### 2. Pasar una sesión de la app a la nube (y traerla de vuelta)
+**Ida (de tu compu a la nube):**
+1. **Antes que nada:** subí tus cambios a GitHub (en GitHub Desktop: **Commit to main** y **Push origin**). La nube copia lo que está en GitHub.
+2. En la pestaña Code, abrí el menú de la sesión (la flechita al lado del título, o la fila de la barra lateral) › **Open in** › **Cloud**.
+3. Leé el aviso: te dice si se llevan los archivos y si la sesión local se archiva. Confirmá.
+
+**Tenés que ver:** la sesión en la nube, trabajando (también aparece en [claude.ai/code](https://claude.ai/code)). La conversación pasa **resumida**, no entera.
+
+**Vuelta (de la nube a tu compu):** lo más simple es traer el **resultado**: la sesión deja sus cambios en una rama de GitHub. En GitHub Desktop: **Fetch origin**, elegí esa rama (o aceptá el PR) y seguí en la pestaña Code con tu carpeta.
+
+> **Ojo:** la documentación no muestra un botón para traer una sesión de la nube a la pestaña Code **Local**. La forma oficial de traer la conversación entera es **en la terminal**: en [claude.ai/code](https://claude.ai/code), menú de la sesión › **Open in** › **Terminal** copia el comando `claude --teleport ...`; lo pegás en la terminal parado en la carpeta del repo (sin cambios sin guardar). Adentro de la terminal, `/teleport` hace lo mismo.
+
+> **Ojo:** las sesiones de **SSH** o **WSL** no se pueden pasar a la nube con **Open in**.
+
+> **Tip:** planificá en tu compu y ejecutá en la nube. Usá el modo **Plan**, guardá el plan en un archivo, subilo a GitHub y abrí una sesión **Cloud** con "Ejecutá el plan de notas/plan-web.md".
+
+### 3. Dejar una tarea corriendo en la nube (y retomarla después)
+1. Arrancá la sesión en **Cloud** (o pasala con **Open in › Cloud**) y dale una tarea clara, con un final concreto ("…y abrí un PR").
+2. Cerrá la compu. La tarea sigue.
+3. Después, mirala en [claude.ai/code](https://claude.ai/code) o en la app del celular › **Code**: está en la lista de sesiones de la barra lateral.
+4. Si Claude te dejó una pregunta, contestala cuando vuelvas y sigue desde ahí.
+
+> **Ojo:** no existe una "sesión temporal" o descartable como opción. Lo que sí pasa: si la sesión queda **quieta un rato**, la compu de la nube se apaga sola. Al reabrirla desde [claude.ai/code](https://claude.ai/code) arranca una compu nueva con **toda la conversación**, pero lo que estaba corriendo en ese momento (comandos, subagentes, tareas programadas de la sesión) se corta: pedile a Claude que lo vuelva a correr.
+
+**Cuando terminás:**
+- **Archivar** (la saca de la lista, se puede recuperar): en la barra lateral, pasá el mouse sobre la sesión › **⋯** › **Archive**. Para verlas: [claude.ai/code/sessions](https://claude.ai/code/sessions) › pestaña **Archived** › **⋮** › **Unarchive**.
+- **Borrar** (para siempre, no se puede deshacer): **⋯** › **Delete** y confirmás.
+- **Compartir**: cambiá la visibilidad de la sesión y mandá el link. En Pro, Max y Ultra: **Private** o **Public** (la ve cualquiera con cuenta de Claude que tenga el link). En Team o Enterprise: **Private** o **Team**. El otro ve cómo estaba al abrir el link, no en vivo.
+
+> **Ojo:** antes de poner una sesión en **Public**, revisá que no tenga claves ni datos de clientes.
+
+Para seguirla desde el celular, mirá más abajo **Remote Control y la app del celular**, paso 3.
 
 **Probalo** (entorno **Cloud**, con el repo de tu cerebro o tu web):
 
@@ -115,34 +159,69 @@ Ejemplo: desde el celular, Viajes TDH le pide "cambiá el precio del paquete a M
 Leé el CLAUDE.md de este repo. Revisá los archivos y armame una lista de lo que está desactualizado o dice PENDIENTE. No cambies nada: solo dejame la lista en notas/pendientes.md y abrí un PR.
 ```
 
-## Pasar una sesión de tu compu a la nube
-1. **Antes que nada:** subí tus cambios a GitHub (en GitHub Desktop: **Commit to main** y **Push origin**). La nube copia lo que está en GitHub.
-2. En la pestaña Code, abrí el menú de la sesión (al lado del título, o en la fila de la barra lateral) › **Open in** › **Cloud**.
-3. Leé el aviso: te dice qué pasa con los archivos y con la sesión local. Confirmá.
+**Tenés que ver:** la sesión en la lista de [claude.ai/code](https://claude.ai/code) y, al rato, un PR nuevo en tu repo.
 
-**Tenés que ver:** la sesión en la nube, trabajando (también la ves en [claude.ai/code](https://claude.ai/code)).
+## Remote Control y la app del celular
+Distinto de la nube: con **Remote Control**, Claude sigue trabajando **en tu compu** (con tus archivos, programas y conexiones) y el celular es solo **una ventana** para mirarlo y escribirle. Analogía: el control remoto de la tele; la tele sigue siendo la de tu casa.
 
-> **Ojo:** si tu carpeta no está en GitHub, puede subir una copia de la carpeta, con archivos sensibles como `.env`. Antes, revisá que no haya claves en la carpeta.
-
-> **Tip:** planificá en tu compu y ejecutá en la nube. Usá el modo **Plan**, guardá el plan en un archivo, subilo a GitHub y abrí una sesión **Cloud** con "Ejecutá el plan de notas/plan-web.md".
-
-## Remote Control: seguir desde el celular
-Distinto de la nube: con Remote Control, **Claude sigue trabajando en tu compu** (con tus archivos y conexiones) y vos lo mirás y le escribís desde el celular o desde otro navegador.
-1. En la sesión de la pestaña Code, activá el interruptor **Remote Control** (en la tarjeta **Environment** de la sesión) o escribí `/remote-control`. La primera vez confirmás con **Enable Remote Control**.
-2. En el celular, abrí la app de Claude › **Code** y buscá la sesión. Las sesiones conectadas tienen un ícono de compu con un punto verde.
-3. Para desconectar, apagá el interruptor o escribí `/remote-control` otra vez.
-
-> **Ojo:** la compu tiene que quedar **prendida** y la app **abierta**. Si se duerme o se corta internet, se reconecta sola cuando vuelve. Si querés que siga con la compu apagada, usá la nube.
-
-**Probalo:**
+### 1. Habilitar Remote Control en la pestaña Code
+Necesitás: plan **Pro, Max, Ultra, Team o Enterprise** y la app con tu cuenta de Claude. En Team o Enterprise, el dueño de la cuenta tiene que tener prendido Remote Control en la configuración de la organización.
+1. Abrí tu sesión **Local** en la pestaña Code.
+2. Prendé el interruptor **Remote Control** (en la tarjeta **Environment** del panel de detalles de la sesión), o escribí en el cuadro:
 
 ```prompt
-/remote-control Taller
+/remote-control
 ```
 
-Después abrí la app de Claude en el celular, entrá a **Code** y mandá un mensaje a la sesión "Taller".
+(`/rc` es lo mismo, más corto.)
+
+**Tenés que ver:** la sesión aparece en la lista de [claude.ai/code](https://claude.ai/code).
+
+Para que **todas** las sesiones nuevas se conecten solas: **Settings › Code** (o **Settings › Claude Code**) › **Connect new sessions to Remote Control**.
+Para cortar: apagá el interruptor o escribí `/remote-control` de nuevo.
+
+### 2. Seguir la sesión desde el celular
+1. Instalá la app de **Claude** ([iOS](https://apps.apple.com/us/app/claude-by-anthropic/id6473753684) o [Android](https://play.google.com/store/apps/details?id=com.anthropic.claude)). Atajo: escribí `/mobile` en el cuadro y escaneá el QR, te lleva a la tienda correcta.
+2. Iniciá sesión con **la misma cuenta** que usás en la compu.
+3. Tocá **Code** en el menú de la app. Ahí está la lista de sesiones: las de Remote Control tienen **un ícono de compu con un punto verde** cuando están conectadas.
+4. Abrí la sesión y mandá un mensaje.
 
 **Tenés que ver:** tu mensaje del celular aparece en la compu y Claude responde.
+
+**Desde el celular podés:** mandar mensajes, mandar fotos y archivos (llegan a tu compu), ver los avances y los cambios, **contestar los pedidos de permiso y las preguntas de Claude**, cambiar el modo (**Manual**, **Accept edits**, **Plan**, **Auto**), el modelo y el esfuerzo, y frenar subagentes que estén corriendo.
+**No podés:** usar comandos que son solo de la terminal (por ejemplo `/plugin` o `/resume`) ni elegir **Bypass permissions**.
+
+**Probalo** (con Remote Control prendido, desde el celular):
+
+```prompt
+Contame en 3 líneas qué hiciste hasta ahora en esta sesión y qué falta. Avisame cuando termines lo que estás haciendo.
+```
+
+> **Ojo:** las notificaciones al celular ("terminé" o "necesito tu OK") se prenden con las opciones **Push when Claude decides** y **Push when actions required** de `/config`. La documentación lo explica para la terminal; en la app, `/config` abre **Settings › Code** y no confirmamos que estén ahí. Aceptá las notificaciones de la app de Claude en el celular igual.
+
+### 3. Seguir una sesión en la nube desde el celular
+No hace falta Remote Control: las sesiones en la nube ya están en tu cuenta.
+1. App de Claude › **Code** › tocá la sesión.
+2. Mirá cómo va, contestale si preguntó algo o cambiale el rumbo.
+3. Para arrancar una nueva desde el celular: en **Code**, elegí el repo y la rama, escribí la tarea y mandala.
+
+**Tenés que ver:** la misma sesión que arrancaste en la compu, con lo que hizo hasta ahora.
+
+### 4. ¿Qué pasa si la compu se duerme o cerrás la app?
+- **Remote Control:** la compu tiene que estar **prendida** y la app de Claude **abierta**. Si se duerme o se corta internet, se reconecta sola cuando vuelve. Si **cerrás la app**, la sesión queda desconectada hasta que la vuelvas a abrir.
+- **Sesión en la nube:** sigue aunque cierres la app o apagues la compu.
+
+> **Ojo:** la documentación no muestra una opción de la app para **mantener la compu despierta**. Si vas a usar Remote Control lejos de la compu, dejala enchufada y cambiá la opción de suspensión en la configuración de energía de tu compu (Mac: **Ajustes del Sistema**; Windows: **Configuración › Sistema › Energía**). Si tiene que andar con la compu apagada, usá la nube.
+
+## ¿Qué uso: local, nube o Remote Control?
+| | Local en la app | Sesión en la nube | Remote Control |
+|---|---|---|---|
+| **Dónde corre** | En tu compu | En una compu de Anthropic | En tu compu |
+| **Cómo arranca** | **Code › Local › Open folder…** | **Code › Cloud**, [claude.ai/code](https://claude.ai/code) u **Open in › Cloud** | Interruptor **Remote Control** o `/remote-control` |
+| **Con la compu apagada** | Se frena | Sigue | Se frena |
+| **Tus archivos y conexiones** | Todos | Solo lo que está en GitHub | Todos |
+| **Desde el celular** | No | Sí | Sí |
+| **Ideal para** | El día a día del taller | Tareas largas o de noche, sobre un repo | Seguir algo de tu compu desde otro lado |
 
 ## Si querés X → usá Y
 | Si querés… | Usá | Por qué |
@@ -165,6 +244,7 @@ Después abrí la app de Claude en el celular, entrá a **Code** y mandá un men
 | En **Cloud** no aparece mi repo | Conectá GitHub e instalá la app de Claude en ese repo ([GitHub](#s4-github)). |
 | **Open in › Cloud** da error de rama | Subí tus cambios a GitHub (**Push origin** en GitHub Desktop) y probá de nuevo. |
 | Remote Control no conecta | Revisá que la compu esté prendida, con internet y la app abierta, y activalo de nuevo. |
+| La sesión en la nube "se apagó" | Abrila de nuevo en [claude.ai/code](https://claude.ai/code): vuelve con la conversación. Pedile que retome lo que estaba corriendo. |
 
 ## Para seguir solo
 - Creá un Proyecto en [claude.ai](https://claude.ai) con los archivos de tu cerebro y usalo una semana desde el celular.
