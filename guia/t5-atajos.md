@@ -40,13 +40,27 @@ Los comandos `/` y las teclas funcionan en la terminal y en la pestaña **Code**
 | `/agents` | Te recuerda cómo crear subagentes: pidiéndoselo a Claude o en `.claude/agents/` | Cuando querés repartir una tarea grande ([Las piezas](#t2-piezas)) |
 | `/plugin` | Instala y maneja plugins (paquetes de skills, agentes y MCP) | Por ejemplo: `/plugin install skill-creator@claude-plugins-official` |
 
+## Los que más vas a usar hoy
+| Atajo | Para qué sirve | Ejemplo |
+|---|---|---|
+| `/nombre-de-la-skill` | Usa una skill a mano. Igual, Claude las usa solo cuando tu pedido coincide con lo que hace la skill | `/armar-mi-cerebro` · `/propuesta-comercial` |
+| `/btw [pregunta]` | Una pregunta al costado: Claude contesta con lo que ya sabe de la conversación, **sin cortar lo que está haciendo** y sin que quede en el historial | `/btw ¿cómo se llamaba el archivo de precios?` mientras Claude sigue trabajando |
+| `/compact` | Resume la conversación para liberar lugar sin perder el hilo. Podés decirle qué conservar | `/compact quedate con las decisiones de precios` |
+| `/clear` | Conversación nueva, vacía. Una tarea = una conversación | Cuando terminás un desafío y arrancás otro |
+| `/context` | Muestra cuánto de la "mochila" está lleno | Cuando Claude empieza a olvidarse cosas |
+| `/resume` | Retoma una conversación anterior | Al otro día, para seguir donde quedaste |
+| `/rewind` o **Esc Esc** | Vuelve atrás la conversación y los cambios en archivos | Cuando Claude rompió algo |
+| **Shift+Tab** | Cambia de modo: manual → acepta cambios → **plan** (solo propone) | Antes de una tarea grande: modo plan |
+| `@archivo` | Le pasa un archivo puntual | `@ventas/objeciones.md` |
+| `/insights` | Informe de cómo venís usando Claude Code y qué conviene automatizar | Los viernes |
+
 ## Modelo, uso y conexiones
 | Comando | Qué hace | Cuándo usarlo |
 |---|---|---|
 | `/model` | Cambia el modelo (Opus, Sonnet, Haiku, Fable). Con flechas izquierda/derecha cambiás el esfuerzo | Tareas difíciles: Opus. Simples: Sonnet o Haiku ([Modelos](#t1-modelos)) |
 | `/effort` | Cuánto piensa antes de responder: `low`, `medium`, `high`, `xhigh`, `max` | `/effort high` para diseñar algo; `low` para ordenar archivos |
 | `/usage` | Cuánto usaste y cuánto te queda del plan (también `/cost`) | Para no quedarte sin uso en medio del taller |
-| `/insights` | Arma un reporte de cómo venís usando Claude Code | Una vez por semana, para mejorar tus pedidos |
+| `/insights` | Arma un informe de tus sesiones recientes: qué usás más, dónde te trabás y qué conviene convertir en skill o automatizar. Se abre como página | Una vez por semana: copiá lo que te salió bien y armá skills con lo que repetís |
 | `/mcp` | Muestra tus conexiones MCP (n8n, Supabase, Metricool…) y su estado | Cuando una herramienta no responde |
 | `/permissions` | Qué puede hacer Claude sin preguntarte | Para dejar de aprobar siempre lo mismo |
 | `/hooks` | Configura acciones automáticas (por ejemplo, un aviso cuando Claude te necesita) | Una vez, para que te avise |
