@@ -4,55 +4,72 @@ bloque: Desafío
 tiempo: 30 a 90 min
 para: Todos
 necesitas: p1-cerebro
-resultado: Un agente que contesta las preguntas frecuentes con tus respuestas oficiales, filtra a quien no es cliente y te pasa a quien quiere comprar. Probado antes de publicarlo.
+cuentas_mvp: s6-n8n, s7-telegram
+cuentas_completa: s3-herramientas-base, s5-cuentas-nube, s7-telegram, s9-api-anthropic, s13-vapi
+resultado: Un bot de Telegram que contesta tus preguntas frecuentes con tus respuestas, filtra a quien no es cliente y te pasa a quien quiere comprar.
 ---
 
-La mitad de los mensajes que recibís son las mismas 10 preguntas. Y una parte de los que escriben no es tu cliente: busca otra cosa, no puede pagarlo o solo quiere el precio.
-El desafío: armar un agente que contesta eso a cualquier hora, con **tus** respuestas, y que te avisa cuando aparece alguien que sí quiere comprar. Hoy lo probás en Telegram. En el cierre del día vemos cómo llevarlo a WhatsApp ([Cierre: tu bot de WhatsApp](#d7-whatsapp)).
+La mitad de los mensajes son las mismas 10 preguntas. El desafío: un agente que las contesta a cualquier hora, con **tus** respuestas, y te avisa cuando alguien quiere comprar. Hoy en Telegram; WhatsApp, en el [cierre](#d7-whatsapp).
 
 **En 30 segundos**
-- **Qué te llevás:** un agente (un asistente que contesta solo) que responde tus preguntas frecuentes con tus palabras y te avisa cuando alguien quiere comprar.
-- **Cuánto tarda:** 30 min el Rápido (lo probás en tu compu), 90 min el Completo (publicado en Telegram).
-- **Por dónde empezar:** abrí [Un agente que responde y filtra](#p3-agente-preguntas) y seguí el Paso 1.
+- **Cuánto tarda:** 30 a 45 min la MVP, 90 min la completa.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo.
 
-## Qué problema resuelve
-- Consultas que esperan horas (o hasta el día siguiente) porque nadie llega a contestar.
-- Vendedores que pierden tiempo con gente que nunca iba a comprar.
-- Respuestas distintas según quién conteste.
+## Dos versiones: MVP y completa
 
-## Elegí tu camino
-
-| Nivel | Qué hacés | Tutorial |
+| | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Rápido · 30 min** | Armás el "cerebro del agente": su prompt, lo que puede decir y 10 casos de prueba. Lo probás en Claude Code, sin publicar nada. | [Un agente que responde y filtra](#p3-agente-preguntas), Pasos 1 a 4 |
-| **Completo · 90 min** | Lo mismo, más las pruebas automáticas, publicado en internet y conectado a un bot de Telegram que podés compartir. | [Un agente que responde y filtra](#p3-agente-preguntas), completo |
-| **Pro · para después** | Llevalo a WhatsApp, o sumale voz para que atienda llamadas. | [Opciones de WhatsApp](#w1-opciones) · [Agentes de voz](#s13-vapi) |
+| **Qué te llevás** | Un bot de Telegram con tu cerebro, armado por Claude en n8n. | Con pruebas automáticas, en Cloudflare. |
+| **Tiempo** | 30 a 45 min | 90 min |
+| **Cuentas que necesitás** | [n8n](#s6-n8n) · [Telegram](#s7-telegram) | [Telegram](#s7-telegram) · [Clave de API](#s9-api-anthropic) · [Cuentas en la nube](#s5-cuentas-nube) · [Herramientas base](#s3-herramientas-base) · voz: [Vapi](#s13-vapi) |
+| **Costo** | Gratis (prueba de n8n Cloud + sus créditos de IA) | API de Anthropic por uso, Cloudflare gratis ([Stack y costos](#r-stack-y-costos)) |
 
-> **Tip:** el Rápido no es "menos": es la parte más valiosa. Las respuestas y los casos de prueba que escribís hoy son los mismos que va a usar tu bot de WhatsApp.
+### Versión MVP, paso a paso
+1. **Las cuentas.** Tu bot en [Telegram](#s7-telegram) (Pasos 1 a 3). En [n8n](#s6-n8n), los Pasos 1, 3 y 6 (cuenta, credencial de Telegram y MCP). Saltá el 5.
 
-## Qué cuentas necesitás
-- [ ] Claude Code ([Claude Code](#s2-claude-code)). Alcanza para el Rápido.
-- [ ] Para el Completo: un bot de Telegram nuevo ([Telegram](#s7-telegram)), una clave de API, que es la llave para que tu bot use Claude ([Clave de API](#s9-api-anthropic)), y cuenta de Cloudflare, donde queda publicado tu bot ([Cuentas en la nube](#s5-cuentas-nube)).
-- [ ] Tu cerebro con las preguntas frecuentes y objeciones respondidas ([Usá tu borrador](#c2-tu-borrador), Paso 3). Sin respuestas oficiales, el agente no tiene qué decir.
+**Tenés que ver:** en Claude, **Customize › Connectors** muestra n8n conectado.
+
+2. **Que Claude arme el bot.** Abrí Claude Code en la carpeta de tu cerebro y pegá:
+
+```prompt
+Con el MCP de n8n, creá un workflow llamado "agente-[TU-EMPRESA]": Telegram Trigger (mensaje nuevo) → AI Agent → respuesta por Telegram al mismo chat.
+- Modelo: los créditos de IA gratis de n8n (Gateway credits; si no están, los gratis de OpenAI). Memoria simple por chat.
+- Usá mi credencial de Telegram guardada en n8n.
+- Instrucciones: armalas con mi cerebro (ventas/, negocio/). Corto, con vos, solo con esa información. Si no sabe, que derive a una persona. Si quiere comprar, que pida nombre y qué necesita.
+Mostrame el plan antes de crearlo. No lo actives hasta que te diga.
+```
+
+**Tenés que ver:** el plan (3 o 4 nodos). Decile "dale" y te confirma el flujo creado.
+
+> **Ojo:** las cuentas nuevas traen algunos créditos de IA gratis (**Use Gateway credits** en el nodo del modelo); n8n no publica cuántos ([doc](https://docs.n8n.io/deploy/use-n8n-cloud/gateway-credits), nov 2026). Si no aparecen o se terminan, usá tu [clave de API](#s9-api-anthropic).
+
+3. **Prendelo.** En n8n, abrí el flujo y activalo con **Publish** (o el interruptor **Active**, según tu versión).
+
+**Tenés que ver:** el flujo marcado como activo.
+
+4. **Probalo.** Escribile 5 cosas: 2 preguntas frecuentes, 1 que no esté en tu cerebro, 1 de alguien que no es cliente y 1 de alguien que quiere comprar.
+
+**Tenés que ver:** responde con tus palabras y no inventa. Para corregir: "Con el MCP de n8n, cambiá las instrucciones del agente: [QUÉ]".
+
+### Versión completa
+Pruebas automáticas antes de publicar y el agente en Cloudflare con tu clave: [Un agente que responde y filtra](#p3-agente-preguntas). Después: WhatsApp ([Opciones](#w1-opciones)) o voz para llamadas ([Vapi](#s13-vapi)).
+
+Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 
 ## Lo lograste si…
-- [ ] El agente contesta bien tus 10 preguntas frecuentes, con tus palabras.
-- [ ] Ante una pregunta que no está en el cerebro, dice que no sabe y deriva a una persona. No inventa.
-- [ ] Filtra con respeto a quien no es tu cliente.
-- [ ] Cuando alguien quiere comprar, pide los datos que necesitás y te avisa.
-- [ ] Nunca promete algo que tu negocio no puede cumplir (precios viejos, plazos, resultados).
+- [ ] Contesta tus preguntas frecuentes con tus palabras.
+- [ ] Lo que no sabe, lo deriva. No inventa.
+- [ ] Filtra con respeto a quien no es cliente.
+- [ ] A quien quiere comprar le pide los datos.
 
 ## Ideas por tipo de negocio
 Ejemplos inventados:
-- **Venta consultiva (planes, seguros, inmobiliaria):** explica cómo funciona el producto, aclara lo que **no** es, responde "¿es una estafa?" con pruebas y agenda la reunión con el asesor.
-- **Escuela o cursos:** fechas de inicio, horario, lugar, formas de pago y si se puede recuperar una clase.
-- **Agencia de viajes:** junta de una vez todo lo que hace falta para cotizar (destino, fechas, cantidad de pasajeros, presupuesto) y se lo pasa a la vendedora.
-- **Coaching o servicios profesionales:** responde dudas del programa y deriva a quien pregunta por precio especial.
-- **Producción y reparto:** zonas y días de entrega, pedido mínimo y cómo hacer un pedido.
+- **Venta consultiva:** aclara lo que el producto **no** es y agenda con el asesor.
+- **Escuela o cursos:** fechas, horario, lugar y formas de pago.
+- **Agencia de viajes:** junta destino, fechas y pasajeros para cotizar.
 
-> **Datos:** el agente solo sabe lo que está en su conocimiento público. Nada de datos de clientes, precios internos ni márgenes ahí adentro.
+> **Datos:** nada de datos de clientes, precios internos ni márgenes en el agente.
 
 ## Pedí ayuda a la mesa cuando…
-- Las pruebas fallan y no entendés por qué (las pruebas son los 10 casos que el agente tiene que contestar bien).
-- Cloudflare o Telegram te dan un error al publicar.
-- No sabés qué responder a una pregunta frecuente: eso no es técnico, es de tu negocio. Charlalo con tu equipo y anotalo como pendiente.
+- El bot no contesta (¿el flujo está activo? ¿otro flujo usa el mismo bot?).
+- No sabés qué responder a una pregunta: es de tu negocio, anotalo como pendiente.

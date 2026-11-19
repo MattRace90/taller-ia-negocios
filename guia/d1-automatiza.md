@@ -4,55 +4,66 @@ bloque: Desafío
 tiempo: 30 a 90 min
 para: Todos
 necesitas: p1-cerebro
-resultado: Una tarea repetitiva (cargar datos, armar un documento, anotar un gasto) que ahora hace Claude y vos solo revisás.
+cuentas_mvp: ""
+cuentas_completa: s6-n8n, s7-telegram, s9-api-anthropic, s14-meta-y-google
+resultado: Una tarea repetitiva (cargar datos, anotar un gasto) que ahora hace Claude y vos solo revisás.
 ---
 
-Todas las empresas tienen esa tarea que nadie quiere hacer: pasar papeles a una planilla, anotar gastos, armar el mismo documento por décima vez. No es difícil, pero come horas y se cuelan errores.
-El desafío: elegí **una** de esas tareas y dejala resuelta hoy. La regla de siempre: **la IA propone, una persona aprueba.**
+Pasar papeles a una planilla, anotar gastos: come horas y se cuelan errores. Elegí **una** tarea y dejala resuelta hoy. **La IA propone, una persona aprueba.**
 
 **En 30 segundos**
-- **Qué te llevás:** una tarea repetitiva (cargar datos, anotar gastos) que ahora hace Claude. Vos solo revisás.
-- **Cuánto tarda:** 30 min el camino Rápido, 90 min el Completo.
-- **Por dónde empezar:** si es tu primera vez, abrí [De foto a planilla](#p4-foto-a-tabla) y seguí el Paso 1.
+- **Cuánto tarda:** 30 min la MVP, 90 min la completa.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás Claude.
 
-## Qué problema resuelve
-- Carga manual de datos desde fotos, PDF o capturas (remitos, cartas, tickets, formularios).
-- Gastos que se anotan tarde o nunca.
-- Tareas que dependen de una sola persona porque "solo ella sabe cómo se hace".
+## Dos versiones: MVP y completa
 
-## Elegí tu camino
-
-| Nivel | Qué hacés | Tutorial |
+| | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Rápido · 30 min** | Una carpeta donde tirás fotos o PDF y Claude te devuelve una planilla limpia, con lo dudoso separado para que lo revises. | [De foto a planilla](#p4-foto-a-tabla) |
-| **Completo · 90 min** | Un asistente en Telegram: le mandás la foto de un ticket y lo anota en tu planilla; le pasás lo que hablaste en una llamada y te devuelve el documento armado. | [Tu asistente en Telegram](#p2-asistente-telegram) |
-| **Pro · para después** | Que funcione solo: los archivos que caen en una carpeta de Drive se procesan sin que lo pidas y te llega un resumen. | [n8n](#s6-n8n) + [Tareas programadas](#t4-tareas-programadas) |
+| **Qué te llevás** | De foto a tabla en un chat de Claude, guardado como receta. | Una carpeta entera procesada, y un bot de Telegram que anota tus tickets. |
+| **Tiempo** | 30 min | 90 min o más |
+| **Cuentas que necesitás** | Solo Claude ([Tu cuenta](#s1-claude)) | [n8n](#s6-n8n) · [Telegram](#s7-telegram) · [Clave de API](#s9-api-anthropic) · [Google](#s14-meta-y-google) |
+| **Costo** | Tu plan de Claude, nada extra | n8n desde €20/mes ([precios](https://n8n.io/pricing/), nov 2026) + centavos de API |
 
-> **Tip:** si nunca automatizaste nada, hacé el Rápido. Si te sobra tiempo, seguí con el Completo: usan la misma lógica.
+### Versión MVP, paso a paso
+1. **Juntá 3 documentos de prueba** del mismo tipo: fotos o PDF de remitos, tickets o cartas. Tapá datos de clientes.
 
-## Qué cuentas necesitás
-- [ ] Claude con plan Pro o superior ([Tu cuenta](#s1-claude)) y Claude Code ([Claude Code](#s2-claude-code)). Alcanza para el Rápido.
-- [ ] Para el Completo: n8n, el programa que une apps sin programar ([n8n](#s6-n8n)); un bot de Telegram ([Telegram](#s7-telegram)); una clave de API, que es la llave para que otros programas usen Claude ([Clave de API](#s9-api-anthropic)); y tu Google conectado ([Meta y Google](#s14-meta-y-google)).
-- [ ] Si te perdés con tantas cuentas: [la checklist de todo](#s10-conectar-todo).
+2. **Pasalos a tabla.** Abrí un chat nuevo en Claude, adjuntá los 3 archivos y pegá:
+
+```prompt
+Te paso 3 documentos de [QUÉ SON: remitos, tickets, cartas]. Pasalos a una tabla con estas columnas: [COLUMNAS, por ejemplo: fecha, proveedor, concepto, total]. Una fila por documento.
+Si un dato no se lee o no estás seguro, no lo inventes: dejalo vacío y agregá una columna "revisar" con el motivo.
+Al final, dame la misma tabla separada por tabulaciones, para pegarla en Google Sheets.
+```
+
+**Tenés que ver:** una tabla con 3 filas y lo dudoso marcado en "revisar".
+
+3. **Pegala en tu planilla.** Copiá la tabla separada por tabulaciones y pegala en la celda A1 de una hoja nueva de Google Sheets.
+
+**Tenés que ver:** cada dato en su columna.
+
+4. **Guardalo como receta.** Creá un **Proyecto** en Claude (por ejemplo, "Carga de tickets") y pegá el prompt del paso 2 en sus instrucciones. La próxima vez, solo adjuntás las fotos.
+
+> **Ojo:** verificá en pantalla dónde se cargan las instrucciones del Proyecto ([Dónde trabajar](#t3-donde-trabajar)).
+
+**Tenés que ver:** un chat nuevo dentro del Proyecto que, con 1 foto y sin prompt, te devuelve la fila.
+
+### Versión completa
+Una carpeta entera a planilla con la skill `extraer-a-tabla`: [De foto a planilla](#p4-foto-a-tabla). Un bot que anota tus gastos: [Tu asistente en Telegram](#p2-asistente-telegram) (o, sin clave de API, el patrón de la MVP del [D2](#d2-agente)).
+
+Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 
 ## Lo lograste si…
-- [ ] Le pasaste 3 documentos reales (o de prueba) y salieron 3 filas correctas en la planilla.
-- [ ] Lo dudoso quedó separado o marcado para revisar, no cargado en silencio.
-- [ ] Sabés cuánto tardabas antes y cuánto tardás ahora con esa tarea.
-- [ ] Alguien más del equipo podría usarlo sin que se lo expliques.
+- [ ] Pasaste 3 documentos y salieron 3 filas correctas.
+- [ ] Lo dudoso quedó marcado para revisar, no cargado en silencio.
+- [ ] El prompt quedó guardado en un Proyecto para repetirlo.
+- [ ] Sabés cuánto tardabas antes y cuánto tardás ahora.
 
 ## Ideas por tipo de negocio
-Ejemplos inventados, para que te des una idea:
-- **Producción y reparto:** la foto del remito en papel pasa a una fila de ventas, y se ve qué remitos faltan cargar.
-- **Marketplace o app:** la carta de un restaurante (foto o PDF) pasa a una tabla de platos con su etiqueta "sin TACC" o "vegano".
-- **Venta consultiva (planes, seguros, inmobiliaria):** la solicitud escaneada pasa a los campos del sistema, y avisa si falta alguno.
-- **Escuela o cursos:** cada video de alumno se renombra y se guarda en su carpeta (está en el [tutorial de video](#p7-video), Parte 2).
-- **Agencia de viajes o servicios:** el ticket de un gasto del viaje de un grupo se anota solo desde el celular.
-- **Cualquier negocio:** los comprobantes del mes pasan a una planilla de gastos por categoría.
-
-> **Datos:** para practicar, usá documentos de prueba o tapá nombres, DNI y teléfonos de clientes antes de sacar la foto.
+Ejemplos inventados:
+- **Producción y reparto:** la foto del remito en papel pasa a una fila de ventas.
+- **Marketplace o app:** la carta de un restaurante pasa a una tabla de platos con su etiqueta "sin TACC" o "vegano".
+- **Venta consultiva:** la solicitud escaneada pasa a los campos del sistema y avisa si falta alguno.
 
 ## Pedí ayuda a la mesa cuando…
-- Claude Code no arranca o no encuentra tu carpeta.
-- n8n o Telegram te piden algo que no entendés. Por ejemplo: un **token** (una clave larga que identifica a tu bot), un **webhook** (la dirección a la que un servicio le avisa a otro que pasó algo) o un **chat ID** (el número de tu chat de Telegram).
-- Llevás 15 minutos trabado en el mismo paso. No lo pelees solo: levantá la mano.
+- n8n o Telegram te piden un **token** (la clave de tu bot) o un **chat ID** (el número de tu chat) y no sabés cuál.
+- Llevás 15 minutos trabado en el mismo paso. Levantá la mano.

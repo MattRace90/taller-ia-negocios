@@ -4,55 +4,68 @@ bloque: Desafío
 tiempo: 30 a 90 min
 para: Todos
 necesitas: p1-cerebro
-resultado: Un reporte que llega solo cada semana y, si invertís en publicidad, un equipo de agentes que te dice cuánto invertir y dónde, con tu aprobación.
+cuentas_mvp: ""
+cuentas_completa: s8-conectores-y-mcp, s14-meta-y-google
+resultado: Un reporte con 3 números clave y 3 acciones armado desde tu planilla y, si invertís en publicidad, un equipo de agentes que te dice cuánto invertir, con tu aprobación.
 ---
 
-"¿Cuánto tengo que invertir en Meta?", "¿estamos ganando plata?", "¿cómo vinieron los leads esta semana?". Son preguntas que se responden con números, pero armar ese informe a mano lleva horas y por eso no se hace.
-El desafío: que el informe se arme solo y te llegue, en lenguaje simple, con qué decidir.
+"¿Estamos ganando plata?" Armar ese informe a mano lleva horas y no se hace. El desafío: que salga en minutos, simple, con qué decidir.
 
 **En 30 segundos**
-- **Qué te llevás:** un reporte semanal que llega solo, o un equipo de agentes que te dice cuánto invertir en Meta y nunca toca nada sin tu OK.
-- **Cuánto tarda:** 30 min el reporte (Rápido), 90 min Meta Ads con agentes (Completo).
-- **Por dónde empezar:** abrí [El reporte que llega solo](#p10-extras) y andá al Paso 4.
+- **Cuánto tarda:** 30 min la MVP, 90 min la completa.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás Claude y una planilla.
 
-## Qué problema resuelve
-- Informes manuales que se hacen tarde o nunca.
-- Plata en publicidad sin saber cuánto deja cada venta.
-- Decisiones "a ojo" porque los números están en cinco planillas distintas.
+## Dos versiones: MVP y completa
 
-## Elegí tu camino
-
-| Nivel | Qué hacés | Tutorial |
+| | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Rápido · 30 min** | El reporte que llega solo: cada lunes Claude lee una planilla y te manda un resumen con lo importante y qué hacer. | [El reporte que llega solo](#p10-extras), Parte B |
-| **Completo · 90 min** | Meta Ads con un equipo de agentes (asistentes con un rol cada uno): analiza tus campañas, te dice cuánto invertir con números, escribe creativos y solo toca tu cuenta cuando escribís APROBADO. | [Meta Ads con agentes](#p9-meta-ads) |
-| **Pro · para después** | Conectar tu cuenta real de Meta y dejar la revisión programada en la nube, para que corra aunque tu compu esté apagada. | [Meta y Google](#s14-meta-y-google) · [Tareas programadas](#t4-tareas-programadas) |
+| **Qué te llevás** | 3 números, qué cambió y 3 acciones, desde tu planilla. | Reporte automático cada lunes y Meta Ads con agentes (solo tocan si escribís APROBADO). |
+| **Tiempo** | 30 min | 90 min |
+| **Cuentas que necesitás** | Ninguna extra | [Conectores](#s8-conectores-y-mcp) · [Meta y Google](#s14-meta-y-google) |
+| **Costo** | Tu plan de Claude | Tu plan de Claude; la inversión en anuncios es aparte |
 
-> **Tip:** antes de pedir "cuánto invierto", el cerebro tiene que saber tu precio, tu margen y cuántas consultas necesitás para cerrar una venta. Sin eso, ningún agente te puede contestar.
+### Versión MVP, paso a paso
+1. **Bajá tu planilla.** En Google Sheets: **Archivo › Descargar › Valores separados por comas (.csv)**. ¿No tenés una? Pedile a Claude una de práctica con el prompt de [El reporte que llega solo](#p10-extras), Paso 4.
 
-## Qué cuentas necesitás
-- [ ] Claude Code ([Claude Code](#s2-claude-code)).
-- [ ] Una planilla con tus datos (ventas, gastos, leads o stock). Para practicar, hay una de ejemplo en el tutorial.
-- [ ] Para Meta Ads: el conector de Meta Ads ([Conectores y MCP](#s8-conectores-y-mcp)) y acceso a tu Administrador de anuncios ([Meta y Google](#s14-meta-y-google)). Para la demo alcanza con el CSV de ejemplo.
-- [ ] Para que corra solo: [Tareas programadas](#t4-tareas-programadas).
+**Tenés que ver:** un archivo `.csv` en tu carpeta de Descargas.
+
+2. **Pedí el reporte.** En un chat de Claude, adjuntá el archivo y pegá:
+
+```prompt
+Sos mi analista. Esta planilla es de [VENTAS / LEADS / GASTOS / STOCK] de mi negocio. Dame:
+1. Los 3 números más importantes de la última semana, comparados con la anterior.
+2. Qué cambió y por qué podría ser (decí si es una suposición).
+3. 3 acciones concretas para esta semana.
+Lenguaje simple, máximo media página. Si falta un dato o algo no cierra, decilo. No inventes números.
+```
+
+**Tenés que ver:** 3 números, una explicación corta y 3 acciones.
+
+3. **Chequeá un número a mano.** Elegí uno del reporte y buscalo en tu planilla.
+
+**Tenés que ver:** coincide. Si no, pedile a Claude que muestre la cuenta.
+
+4. **Guardalo como receta.** Creá un **Proyecto** en Claude ("Reporte semanal") con el prompt del paso 2 en sus instrucciones. Cada lunes, adjuntás la planilla nueva y listo.
+
+### Versión completa
+El reporte que corre solo cada lunes: [El reporte que llega solo](#p10-extras), Parte B ([Tareas programadas](#t4-tareas-programadas)). Cuánto invertir en Meta: [Meta Ads con agentes](#p9-meta-ads).
+
+Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 
 ## Lo lograste si…
-- [ ] Tenés un primer reporte con 3 números clave y 3 acciones concretas.
-- [ ] Quedó programado para el próximo lunes (o sabés cómo programarlo).
-- [ ] Si invertís en Meta: sabés cuánto podés pagar como máximo por una venta y si hoy estás por arriba o por abajo.
-- [ ] Ningún agente puede cambiar tu presupuesto sin tu aprobación por escrito.
+- [ ] Tenés un reporte con 3 números clave y 3 acciones concretas.
+- [ ] Chequeaste un número a mano y coincide.
+- [ ] El prompt quedó guardado para repetirlo el próximo lunes.
+- [ ] Sabés qué vas a hacer distinto esta semana.
 
 ## Ideas por tipo de negocio
 Ejemplos inventados:
 - **Producción y reparto:** costo por unidad, margen por producto y comparación con el mes anterior.
-- **Venta consultiva:** cuántos leads entraron, cuántos se contactaron, cuántos llegaron a reunión y de qué anuncio vinieron los que compraron.
-- **Coaching o formación:** cuánto invertir por campaña para llegar a una meta de ventas, con el costo por conversación real.
-- **Marketplace o app:** el tablero de cada lunes con "qué sigue esta semana" para cada socio.
-- **Agencia de viajes:** consultas por canal y presupuestos enviados contra confirmados.
+- **Venta consultiva:** leads que entraron, cuántos se contactaron y cuántos llegaron a reunión.
+- **Coaching o formación:** cuánto invertir por campaña para llegar a una meta de ventas.
 
-> **Datos:** las métricas de tus campañas no son datos personales, pero sí información de tu negocio. No las pegues en grupos ni en herramientas que no conocés.
+> **Datos:** tus métricas son información de tu negocio. No las pegues en grupos ni en herramientas que no conocés.
 
 ## Pedí ayuda a la mesa cuando…
-- No ves tu cuenta publicitaria en el conector de Meta.
-- La tarea programada no corrió.
 - Los números del reporte no coinciden con tu planilla.
+- La tarea programada no corrió.

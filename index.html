@@ -407,15 +407,15 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     {id:"d5-vender", g:"Desafíos", t:"Vendé más: propuestas y seguimiento", k:"D5", c:8},
     {id:"d6-medir", g:"Desafíos", t:"Medí y decidí: Meta Ads y reportes", k:"D6", c:8},
     {id:"d7-whatsapp", g:"Desafíos", t:"Cierre: tu bot de WhatsApp", k:"D7", c:13},
-    {id:"s5-cuentas-nube", g:"Cuentas según tu desafío", t:"Vercel, Supabase, Cloudflare, Lovable", k:"S5", req:["d2","d3"], c:3},
-    {id:"s6-n8n", g:"Cuentas según tu desafío", t:"n8n", k:"S6", req:["d1","d5"], c:4},
-    {id:"s7-telegram", g:"Cuentas según tu desafío", t:"Tu bot de Telegram", k:"S7", req:["d1","d2","d5"], c:2},
-    {id:"s8-conectores-y-mcp", g:"Cuentas según tu desafío", t:"Conectores y MCP", k:"S8", req:["d4","d6"], c:3},
-    {id:"s9-api-anthropic", g:"Cuentas según tu desafío", t:"Clave de API", k:"S9", req:["d1","d2","d5"], c:2},
+    {id:"s5-cuentas-nube", g:"Cuentas según tu desafío", t:"Vercel, Supabase, Cloudflare, Lovable", k:"S5", req:["d2","d3"], mvp:["d3"], c:3},
+    {id:"s6-n8n", g:"Cuentas según tu desafío", t:"n8n", k:"S6", req:["d1","d2","d5","d7"], mvp:["d2","d7"], c:4},
+    {id:"s7-telegram", g:"Cuentas según tu desafío", t:"Tu bot de Telegram", k:"S7", req:["d1","d2","d5","d7"], mvp:["d2","d7"], c:2},
+    {id:"s8-conectores-y-mcp", g:"Cuentas según tu desafío", t:"Conectores y MCP", k:"S8", req:["d4","d6"], mvp:[], c:3},
+    {id:"s9-api-anthropic", g:"Cuentas según tu desafío", t:"Clave de API", k:"S9", req:["d1","d2","d5"], mvp:[], c:2},
     {id:"s10-conectar-todo", g:"Cuentas según tu desafío", t:"Conectar cualquier cosa + checklist", k:"S10", req:"ref", c:4},
-    {id:"s12-creativas", g:"Cuentas según tu desafío", t:"Higgsfield, HeyGen, ElevenLabs, Canva, Metricool", k:"S12", req:["d4"], c:4},
-    {id:"s13-vapi", g:"Cuentas según tu desafío", t:"Vapi: agentes de voz", k:"S13", req:["d2"], c:4},
-    {id:"s14-meta-y-google", g:"Cuentas según tu desafío", t:"Meta y Google", k:"S14", req:["d1","d6","d7"], c:4},
+    {id:"s12-creativas", g:"Cuentas según tu desafío", t:"Higgsfield, HeyGen, ElevenLabs, Canva, Metricool", k:"S12", req:["d4"], mvp:["d4"], c:4},
+    {id:"s13-vapi", g:"Cuentas según tu desafío", t:"Vapi: agentes de voz", k:"S13", req:["d2"], mvp:[], c:4},
+    {id:"s14-meta-y-google", g:"Cuentas según tu desafío", t:"Meta y Google", k:"S14", req:["d1","d5","d6","d7"], mvp:[], c:4},
     {id:"s15-apify", g:"Cuentas según tu desafío", t:"Apify: datos de la web (opcional)", k:"S15", req:"opcional", c:2},
     {id:"p2-asistente-telegram", g:"Tutoriales", t:"Propuestas y gastos en Telegram", k:"P2", c:7},
     {id:"p3-agente-preguntas", g:"Tutoriales", t:"Agente que responde y filtra", k:"P3", c:6},
@@ -512,8 +512,9 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     if(p.req==="todos") return {cls:"must", txt:"Obligatoria"};
     if(p.req==="ref") return {cls:"ref", txt:"Referencia"};
     if(p.req==="opcional") return {cls:"ref", txt:"Opcional"};
-    var ch = chosen(), hit = p.req.filter(function(d){ return ch.some(function(c){ return c.indexOf(d+"-")===0; }); });
-    if(hit.length) return {cls:"prio", txt:"Para vos"};
+    var ch = chosen(), isCh = function(d){ return ch.some(function(c){ return c.indexOf(d+"-")===0; }); };
+    if((p.mvp||[]).some(isCh)) return {cls:"prio", txt:"Para vos"};
+    if(p.req.some(isCh)) return {cls:"dep", txt:"Si vas por la completa"};
     return {cls:(ch.length?"later":"dep"), txt:p.req.map(function(d){return d.toUpperCase();}).join("·")};
   }
 
@@ -822,7 +823,14 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
         md += "## "+(RONDA[i]||"Extra")+" · "+p.k+" · "+p.t+"\n";
         if(fm.resultado) md += "**Te llevás:** "+fm.resultado+"\n\n";
         if(fm.tiempo) md += "**Tiempo:** "+fm.tiempo+"\n\n";
-        md += "**Cuentas que necesitás:** "+(acc.length ? acc.map(function(x){ return "["+x.k+" · "+x.t+"](#"+x.id+")"; }).join(" · ") : "ninguna extra")+"\n\n";
+        function lst(v){ return (v||"").split(",").map(function(x){return x.trim();}).filter(function(x){ return byId[x]; }); }
+        var mv = lst(fm.cuentas_mvp), cp = lst(fm.cuentas_completa).filter(function(x){ return mv.indexOf(x)<0; });
+        if(fm.cuentas_mvp!==undefined){
+          md += "**Cuentas para la versión MVP:** "+(mv.length ? mv.map(function(x){ return "["+byId[x].k+" · "+byId[x].t+"](#"+x+")"; }).join(" · ") : "ninguna extra")+"\n\n";
+          if(cp.length) md += "**Si vas por la completa, sumá:** "+cp.map(function(x){ return "["+byId[x].k+" · "+byId[x].t+"](#"+x+")"; }).join(" · ")+"\n\n";
+        } else {
+          md += "**Cuentas que necesitás:** "+(acc.length ? acc.map(function(x){ return "["+x.k+" · "+x.t+"](#"+x.id+")"; }).join(" · ") : "ninguna extra")+"\n\n";
+        }
         md += "[Abrir "+p.k+" · "+p.t+" →](#"+id+")\n\n";
       });
       md += "## Cierre para todos · 16:30 · D7 · Tu bot de WhatsApp\nNo se elige: lo hacemos todos juntos. [Abrir D7 →](#d7-whatsapp)\n\n";
@@ -885,7 +893,12 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
             '<small>'+(isCh?'Tocá de nuevo para sacarlo.':(full?'Sacá uno de tus desafíos para elegir este. Igual podés leerlo y hacerlo después.':'Podés elegir hasta '+MAX_DESAFIOS+': uno por ronda de la tarde.'))+'</small></div>';
         }
         var acc = PAGES.filter(function(x){ return Array.isArray(x.req) && x.req.indexOf(id.slice(0,2))>=0; });
-        if(acc.length) head += '<p class="needs">Cuentas que vas a necesitar: '+acc.map(function(x){ return '<a href="#'+x.id+'">'+esc(x.k+" · "+x.t)+'</a>'; }).join(" · ")+'</p>';
+        function lst2(v){ return (v||"").split(",").map(function(x){return x.trim();}).filter(function(x){ return byId[x]; }); }
+        if(m.cuentas_mvp!==undefined){
+          var mv2 = lst2(m.cuentas_mvp), cp2 = lst2(m.cuentas_completa).filter(function(x){ return mv2.indexOf(x)<0; });
+          head += '<p class="needs"><b>Cuentas para la MVP:</b> '+(mv2.length ? mv2.map(function(x){ return '<a href="#'+x+'">'+esc(byId[x].k+" · "+byId[x].t)+'</a>'; }).join(" · ") : 'ninguna extra')+
+            (cp2.length ? '<br><b>La completa suma:</b> '+cp2.map(function(x){ return '<a href="#'+x+'">'+esc(byId[x].k+" · "+byId[x].t)+'</a>'; }).join(" · ") : '')+'</p>';
+        } else if(acc.length) head += '<p class="needs">Cuentas que vas a necesitar: '+acc.map(function(x){ return '<a href="#'+x.id+'">'+esc(x.k+" · "+x.t)+'</a>'; }).join(" · ")+'</p>';
       }
       var html = marked.parse(fm.body, {gfm:true, breaks:false});
       var prev = PAGES[p.i-1], next = PAGES[p.i+1];

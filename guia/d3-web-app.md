@@ -4,53 +4,63 @@ bloque: Desafío
 tiempo: 30 a 90 min
 para: Todos
 necesitas: p1-cerebro
+cuentas_mvp: s5-cuentas-nube
+cuentas_completa: s3-herramientas-base, s5-cuentas-nube
 resultado: Una app interna tuya funcionando en un link, o tu web publicada con tus textos y un formulario que guarda cada consulta.
 ---
 
-¿No tenés web? ¿Llevás el control del negocio en un cuaderno o en una planilla que solo entiende una persona? Hoy se arma escribiendo lo que querés, sin programar.
-El desafío: salir con algo publicado en un link. Puede ser una **app interna** para tu equipo o tu **web** para clientes.
+¿Sin web, o con el negocio en un cuaderno? El desafío: salir con algo publicado en un link, sin programar.
 
 **En 30 segundos**
-- **Qué te llevás:** un link que funciona: una app simple para tu equipo o tu web con formulario de contacto.
-- **Cuánto tarda:** 30 min la app (Rápido), 90 min la web (Completo).
-- **Por dónde empezar:** si nunca hiciste algo así, abrí [Una app en Lovable](#p6-lovable-y-calendario) y seguí el Paso A1.
+- **Cuánto tarda:** 30 min la MVP, 90 min la completa.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás Lovable.
 
-## Qué problema resuelve
-- No tener presencia online, o tener una web vieja que no explica lo que hacés.
-- Controles diarios (stock, pedidos, alumnos, leads) en papel o en planillas que se rompen.
-- Consultas de la web que llegan a un mail que nadie mira.
+## Dos versiones: MVP y completa
 
-## Elegí tu camino
-
-| Nivel | Qué hacés | Tutorial |
+| | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Rápido · 30 min** | Una app simple para tu equipo (control diario, mini CRM, portal de alumnos) armada en Lovable con un prompt que Claude escribe desde tu cerebro. | [Una app en Lovable](#p6-lovable-y-calendario), Parte A |
-| **Completo · 90 min** | Tu web: elegís la de un referente de tu rubro, Claude copia la estructura, la llena con tus textos y tu marca y la publica, con formulario de contacto. | [Tu web](#p5-web-propia) |
-| **Pro · para después** | Dominio propio, que las consultas de la web entren a tu CRM y aparecer cuando alguien busca tu rubro en Google o en ChatGPT. | [Tu web](#p5-web-propia), Paso 8 · [Conectar cualquier cosa](#s10-conectar-todo) |
+| **Qué te llevás** | Una app o página en Lovable, con un prompt que Claude escribe desde tu cerebro. | Tu web con tus textos y un formulario que guarda cada consulta. |
+| **Tiempo** | 30 min | 90 min |
+| **Cuentas que necesitás** | [Lovable](#s5-cuentas-nube) | [Herramientas base](#s3-herramientas-base) · [Vercel y Supabase](#s5-cuentas-nube) |
+| **Costo** | Gratis con los créditos de Lovable ([precios](https://lovable.dev/pricing), nov 2026) | Vercel y Supabase gratis para empezar ([Stack y costos](#r-stack-y-costos)) |
 
-## Qué cuentas necesitás
-- [ ] Para el Rápido: cuenta de Lovable ([Cuentas en la nube](#s5-cuentas-nube)) y Claude ([Tu cuenta](#s1-claude)).
-- [ ] Para el Completo: Claude Code ([Claude Code](#s2-claude-code)); GitHub, donde se guarda el código ([GitHub](#s4-github)); Vercel, que publica la web, y Supabase, la base de datos que guarda las consultas ([Cuentas en la nube](#s5-cuentas-nube)).
-- [ ] Tu cerebro con `negocio/` y `marca/` completos (logo, colores, cómo hablás). Sin eso, la web sale genérica.
+### Versión MVP, paso a paso
+1. **Creá tu cuenta de Lovable** ([Cuentas en la nube](#s5-cuentas-nube), parte de Lovable).
+
+2. **Que Claude escriba el pedido.** En Claude (mejor si es dentro del Proyecto o la carpeta de tu cerebro), pegá:
+
+```prompt
+Escribime un prompt para Lovable que arme [UNA APP INTERNA PARA CONTROLAR: stock, pedidos, alumnos, leads / UNA PÁGINA PARA CLIENTES DE: qué vendo]. Usá lo que sabés de mi negocio y mi marca (colores, tono). Incluí: qué pantallas tiene, qué campos carga, 5 datos de ejemplo inventados y que se vea bien en el celular. En español, máximo 25 líneas. Si te falta un dato de mi negocio, preguntame antes.
+```
+
+**Tenés que ver:** un prompt de menos de 25 líneas con tus colores y tus palabras.
+
+3. **Pegalo en Lovable.** Creá un proyecto nuevo, pegá el prompt y esperá la vista previa. Pedile 2 o 3 cambios cortos.
+
+**Tenés que ver:** la app funcionando en la vista previa, con los datos de ejemplo.
+
+4. **Publicala** con el botón **Publish** y abrí el link en tu celular.
+
+**Tenés que ver:** tu link abierto en el celular. Paso a paso con más detalle: [Una app en Lovable](#p6-lovable-y-calendario), Parte A.
+
+### Versión completa
+Claude Code copia la **estructura** de una web referente de tu rubro, la llena con tu marca y la publica con formulario: [Tu web](#p5-web-propia).
+
+Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 
 ## Lo lograste si…
 - [ ] Tenés un link que funciona y lo abriste desde el celular.
 - [ ] Los textos son tuyos (salieron del cerebro), no "Bienvenidos a nuestra empresa líder".
-- [ ] Si es web: mandaste una consulta de prueba desde el formulario y quedó guardada.
-- [ ] Si es app: cargaste 3 datos de prueba y se ven bien.
-- [ ] Si la app guarda datos de clientes, tiene login y nadie de afuera los puede ver.
+- [ ] Cargaste 3 datos de prueba y se ven bien.
 
 ## Ideas por tipo de negocio
 Ejemplos inventados:
-- **Producción y reparto:** una app para que la granja o el depósito cargue cada día la producción y el stock desde el celular.
-- **Escuela o cursos:** una web con los niveles, fechas, ubicación y un botón a WhatsApp; o un portal donde cada alumno ve su material.
-- **Venta consultiva:** un mini CRM donde cada vendedor ve sus leads y marca en qué estado está cada uno.
-- **Agencia de viajes:** una página por salida grupal con itinerario, precio y formulario de interés.
-- **Coaching:** una página de venta por programa, con testimonios y preguntas frecuentes.
+- **Producción y reparto:** una app para cargar cada día la producción y el stock desde el celular.
+- **Escuela o cursos:** una página con niveles, fechas, ubicación y un botón a WhatsApp.
+- **Venta consultiva:** un mini CRM donde cada vendedor marca en qué estado está cada lead.
 
-> **Datos:** en la app de práctica usá datos inventados. Si después cargás clientes reales, son datos personales: login obligatorio.
+> **Datos:** en la app de práctica usá datos inventados. Con clientes reales, son datos personales: login obligatorio.
 
 ## Pedí ayuda a la mesa cuando…
-- Lovable o Vercel te piden conectar algo y no sabés qué.
-- La web se publicó pero el formulario no guarda.
+- Se te terminaron los créditos de Lovable: afiná el prompt en Claude antes de volver a pedir.
 - Te piden tarjeta y no sabés si hace falta (para empezar, en general no).

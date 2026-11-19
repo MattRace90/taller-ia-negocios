@@ -4,58 +4,64 @@ bloque: Desafío
 tiempo: 30 a 90 min
 para: Todos
 necesitas: p1-cerebro
-resultado: Contenido de tu marca hecho con IA y con tu voz (placas, calendario, imágenes o un reel que grabás y la IA edita), listo para revisar y publicar.
+cuentas_mvp: s12-creativas
+cuentas_completa: s3-herramientas-base, s8-conectores-y-mcp, s12-creativas
+resultado: Contenido de tu marca hecho con IA y con tu voz (placas, calendario o un reel que grabás y la IA edita), listo para revisar y publicar.
 ---
 
-Publicar todos los días con tu voz, tu estética y sin depender de la inspiración (ni de una sola persona) es el pedido más repetido de las empresas.
-El desafío: que Claude, leyendo tu cerebro, te arme contenido que **suene a vos**. Vos solo pulís y aprobás.
+El desafío: que Claude, leyendo tu cerebro, te arme contenido que **suene a vos**. Vos pulís y aprobás.
 
 **En 30 segundos**
-- **Qué te llevás:** un carrusel o dos semanas de publicaciones en tu voz (Rápido), o el plan del mes con placas y un reel editado (Completo).
-- **Cuánto tarda:** 30 min el Rápido, 90 min el Completo (más 20 a 30 min de instalación).
-- **Por dónde empezar:** abrí [Placas en tu voz](#p10-extras) y seguí el Paso 1.
+- **Cuánto tarda:** 30 min la MVP, 90 min la completa (más 20 a 30 min de instalación).
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Sin instalar nada.
 
-## Qué problema resuelve
-- Contenido que depende de una sola persona y se corta cuando esa persona no puede.
-- Publicaciones "en el momento", sin plan.
-- Textos o videos con IA que no suenan a tu marca.
-- Horas editando videos: cortar silencios, subtítulos, placa final.
+## Dos versiones: MVP y completa
 
-## Elegí tu camino
-
-| Nivel | Qué hacés | Tutorial |
+| | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Rápido · 30 min** | Un carrusel en tu voz y tu estilo, listo para pulir. O dos semanas de publicaciones escritas por Claude y cargadas en Metricool para revisar. | [Placas en tu voz](#p10-extras), Parte A · [Tu calendario de contenido](#p6-lovable-y-calendario), Parte B |
-| **Completo · 90 min** | La fábrica entera: plan del mes, guiones, placas con IA y la edición del video que grabás con el celular, todo con tu marca. | [Fábrica de contenidos](#u-fabrica) |
-| **Pro · para después** | Tu propio editor de video: corta silencios, subtitula y pone tu placa final solo. | [Tu editor de video](#p7-video) |
+| **Qué te llevás** | Un carrusel escrito por Claude con tu voz y diseñado en Canva. | Plan del mes, placas con IA y tu video editado. |
+| **Tiempo** | 30 min | 90 min + 20 a 30 min de instalación |
+| **Cuentas que necesitás** | [Canva](#s12-creativas) | [Herramientas base](#s3-herramientas-base) · [Conectores](#s8-conectores-y-mcp) · [Herramientas creativas](#s12-creativas) |
+| **Costo** | Tu plan de Claude + Canva gratis | Gratis; Higgsfield, HeyGen o Metricool aparte ([Stack y costos](#r-stack-y-costos)) |
 
-> **Ojo:** la fábrica y el editor **editan video que ya grabaste**: no inventan un video desde cero. Si querés video generado 100% con IA (escenas o un presentador virtual que habla por vos), eso se hace con Higgsfield o HeyGen: mirá [Herramientas creativas](#s12-creativas).
+### Versión MVP, paso a paso
+1. **El guion.** En Claude, dentro del Proyecto o la carpeta de tu cerebro, pegá:
+
+```prompt
+Escribí un carrusel de 6 placas para Instagram sobre [TEMA]. Usá mi voz (marca/voz.md) y lo que vendo (negocio/). Placa 1: un gancho de menos de 10 palabras. Placas 2 a 5: una idea por placa, máximo 20 palabras. Placa 6: qué hacer ahora. Sumá el texto de la publicación. No prometas resultados que no podemos garantizar.
+```
+
+**Tenés que ver:** 6 placas con frases cortas que suenan a vos.
+
+2. **El diseño.** Si tenés el conector de Canva en Claude, pedile: "Con Canva, armá este carrusel en formato 1080x1350 con mis colores". Si no, abrí una plantilla de carrusel en Canva y pegá los textos a mano.
+
+**Tenés que ver:** las 6 placas con tus colores y tu logo. Otras formas de diseñarlo: [Placas en tu voz](#p10-extras), Paso 2.
+
+3. **La prueba.** Mostráselo a alguien del equipo. Lo que no suene a ustedes, pedíselo a Claude: "Cambiá la placa 3: suena muy formal".
+
+**Tenés que ver:** una pieza lista para publicar (vos decidís cuándo).
 
 > **Tip:** la calidad depende de `marca/voz.md`. Si tu cerebro no tiene 2 o 3 textos reales tuyos, empezá por ahí ([Usá tu borrador](#c2-tu-borrador), Paso 3).
 
-## Qué cuentas necesitás
-- [ ] Claude y Claude Code ([Tu cuenta](#s1-claude) · [Claude Code](#s2-claude-code)).
-- [ ] Las herramientas creativas que vayas a usar: Canva, Metricool, Higgsfield, HeyGen o ElevenLabs ([Herramientas creativas](#s12-creativas)).
-- [ ] Metricool conectado a Claude, para el calendario ([Conectores y MCP](#s8-conectores-y-mcp)). Un conector es el permiso para que Claude use otra app por vos.
-- [ ] Para el video: las herramientas base instaladas ([Herramientas base](#s3-herramientas-base)).
+### Versión completa
+La fábrica entera: [Fábrica de contenidos](#u-fabrica). Calendario en Metricool: [Tu calendario](#p6-lovable-y-calendario), Parte B. Editor de video: [Tu editor de video](#p7-video).
+
+> **Ojo:** la fábrica **edita video que ya grabaste**. Video 100% con IA: [Herramientas creativas](#s12-creativas).
+
+Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 
 ## Lo lograste si…
-- [ ] Le mostraste el resultado a alguien de tu equipo y dijo "eso suena a nosotros".
-- [ ] Usa tus colores, tu logo y tu forma de hablar, sin que se lo expliques en el prompt.
-- [ ] Tenés al menos 1 pieza lista para publicar (o 2 semanas cargadas para revisar).
-- [ ] Nada se publica solo: todo pasa por tu aprobación.
+- [ ] Alguien de tu equipo lo leyó y dijo "eso suena a nosotros".
+- [ ] Usa tus colores, tu logo y tu forma de hablar.
+- [ ] Tenés al menos 1 pieza lista para publicar.
 - [ ] No promete resultados que tu rubro no puede prometer (plata, salud, garantías).
 
 ## Ideas por tipo de negocio
 Ejemplos inventados:
-- **Coaching o formación:** carruseles con la voz de la docente a partir de una clase, y reels cortados de un vivo con subtítulos.
-- **Marketplace o app:** calendario mensual con pilares fijos (lugares nuevos, recetas, mitos) y guiones de reels.
-- **Venta consultiva:** contenido que deja claro qué es y qué **no** es tu producto, para atraer al cliente correcto.
-- **Escuela o cursos:** videos cortos de alumnos (con su permiso) editados con la placa de la marca.
-- **Agencia de viajes:** una placa por salida grupal, con la estética de la marca.
+- **Coaching o formación:** carruseles con la voz de la docente a partir de una clase.
+- **Venta consultiva:** contenido que deja claro qué es y qué **no** es tu producto.
 - **Producción y reparto:** placa semanal de disponibilidad y precios para la difusión de WhatsApp.
 
 ## Pedí ayuda a la mesa cuando…
-- Metricool no aparece conectado en Claude.
-- Las imágenes salen con texto deformado o fuera de tu estética.
-- El editor de video te tira un error al instalar.
+- Canva no aparece conectado en Claude.
+- La fábrica o el editor de video te tiran un error al instalar.
