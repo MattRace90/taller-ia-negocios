@@ -19,13 +19,11 @@ Esta guía es tu mapa del día y te queda para después. A la mañana armamos la
    - [ ] [S2 · Claude Code](#s2-claude-code)
    - [ ] [S3 · Git](#s3-herramientas-base) (de esa página, solo Git es obligatorio)
    - [ ] [S4 · GitHub](#s4-github)
-   - [ ] [S11 · Obsidian](#s11-obsidian) (después de armar tu cerebro)
-   - [ ] [S11b · Atajos de Obsidian](#s11b-obsidian-atajos) (apenas lo tengas abierto)
-3. Después, todos juntos: **tu cerebro** (obligatorio, de 12 a 13): [Armá tu cerebro](#p1-cerebro) y [Usá tu borrador](#c2-tu-borrador).
+3. Después, todos juntos: **tu cerebro** (obligatorio, de 12 a 13): [Armá tu cerebro](#p1-cerebro) y [Usá tu borrador](#c2-tu-borrador). Para verlo como un cuaderno con links está [Obsidian](#s11-obsidian): es **opcional**, lo mostramos en vivo y lo podés instalar en casa.
 4. A la tarde **elegí tus desafíos: hasta 3, uno por ronda** (D1 a D6). En el [menú de desafíos](#inicio) de más abajo tocá **☆ Elegir** en cada uno y después **Ir a mis desafíos →**: ahí te quedan solo los tuyos. El cierre (D7, WhatsApp) no se elige: lo hacemos todos juntos. El índice de la izquierda te marca en verde **"Para vos"** las cuentas que vas a necesitar. Hacé solo esas, en el momento en que arrancás el desafío.
 5. Las demás cuentas quedan en el índice, más clarito. No las necesitás hoy: están ahí para cuando quieras sumar otro desafío.
 
-**Tenés que ver:** en el índice, el grupo **Cuentas obligatorias** con sus 5 pasos y, después de elegir, tus desafíos con una ★.
+**Tenés que ver:** en el índice, el grupo **Cuentas obligatorias** con sus 4 pasos y, después de elegir, tus desafíos con una ★.
 
 ## La agenda
 | Hora | Bloque | Qué hacemos |

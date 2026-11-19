@@ -389,15 +389,15 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
 <script>
 (function(){
   var PAGES = [
-    {id:"inicio", g:"Empezá acá", t:"El día, el menú y tu ruta", k:"→", c:8},
+    {id:"inicio", g:"Empezá acá", t:"El día, el menú y tu ruta", k:"→", c:6},
     {id:"s1-claude", g:"Cuentas obligatorias", t:"Cuenta y app de Claude", k:"S1", req:"todos", c:2},
     {id:"s2-claude-code", g:"Cuentas obligatorias", t:"Claude Code", k:"S2", req:"todos", c:3},
     {id:"s3-herramientas-base", g:"Cuentas obligatorias", t:"Git y herramientas base", k:"S3", req:"todos", c:4},
     {id:"s4-github", g:"Cuentas obligatorias", t:"GitHub", k:"S4", req:"todos", c:2},
-    {id:"s11-obsidian", g:"Cuentas obligatorias", t:"Obsidian: tu segundo cerebro", k:"S11", req:"todos", c:3},
-    {id:"s11b-obsidian-atajos", g:"Cuentas obligatorias", t:"Usá Obsidian como un pro (atajos)", k:"S11b", req:"todos", c:4},
     {id:"p1-cerebro", g:"Tu cerebro", t:"Armá tu cerebro", k:"C1", req:"todos", c:3},
     {id:"c2-tu-borrador", g:"Tu cerebro", req:"todos", t:"Usá tu borrador y mantenelo", k:"C2", c:9},
+    {id:"s11-obsidian", g:"Tu cerebro", t:"Obsidian: ver tu cerebro (opcional)", k:"S11", req:"opcional", c:3},
+    {id:"s11b-obsidian-atajos", g:"Tu cerebro", t:"Atajos de Obsidian (opcional)", k:"S11b", req:"opcional", c:4},
     {id:"elegir", g:"Desafíos", t:"Elegí tus desafíos (menú)", k:"☆", c:0},
     {id:"mis-desafios", g:"Desafíos", t:"Mis desafíos (los que elegiste)", k:"★", c:0},
     {id:"d1-automatiza", g:"Desafíos", t:"Automatizá una tarea", k:"D1", c:7},
@@ -873,7 +873,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       if(needs) head += '<p class="needs">Antes: '+needs+'</p>';
       if(p.req){
         if(p.req==="todos") head += '<div class="reqbox must"><b>Obligatoria para todos</b>'+(p.g==='Tu cerebro' ? 'Va después de las cuentas obligatorias, de 12 a 13. Todo lo de la tarde usa tu cerebro.' : 'Hacela a la mañana (o antes del taller). Sin esto no funciona nada de lo demás.')+'</div>';
-        else if(p.req==="opcional") head += '<div class="reqbox"><b>Opcional</b>No hace falta para el taller. Sumala si te sirve: queda acá para cuando la quieras.</div>';
+        else if(p.req==="opcional") head += '<div class="reqbox"><b>Opcional</b>'+(p.g==='Tu cerebro' ? 'Hoy no hace falta: tu cerebro funciona igual sin Obsidian. Mati lo muestra en vivo y lo podés instalar en casa cuando quieras.' : 'No hace falta para el taller. Sumala si te sirve: queda acá para cuando la quieras.')+'</div>';
         else if(p.req==="ref") head += '<div class="reqbox"><b>Referencia</b>Leela cuando quieras conectar algo nuevo. Queda acá para siempre.</div>';
         else {
           var ch = chosen();
