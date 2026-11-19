@@ -1,5 +1,5 @@
 ---
-titulo: 'Dónde trabajar: Chat, Projects, Cowork, Claude Code y la nube'
+titulo: "'Dónde trabajar: Chat, Projects, Cowork, Claude Code y la nube'"
 bloque: Teoría
 tiempo: 20 min de lectura
 para: Todos
@@ -8,16 +8,16 @@ resultado: Sabés en qué lugar de Claude conviene hacer cada tarea, cómo pasar
 ---
 
 Claude no es un solo lugar. Es el mismo cerebro trabajando en distintas "oficinas": el chat, Cowork, Claude Code en tu compu y Claude Code en la nube.
-Elegir bien te ahorra horas. Ejemplo: Manuel Martínez arma el bot de su escuela en Claude Code en la compu, lo deja corriendo en la nube a la noche y lo revisa desde el celular a la mañana.
+**En el taller trabajamos en la pestaña Code de la app de escritorio** (Claude Code local, sin terminal). Elegir bien te ahorra horas. Ejemplo: Manuel Martínez arma el bot de su escuela en la pestaña Code, en su compu, lo deja corriendo en la nube a la noche y lo revisa desde el celular a la mañana.
 
-> **Datos:** verificado en la documentación oficial (code.claude.com/docs y [support.claude.com](https://support.claude.com)) el 18/11/2026. Estas funciones cambian seguido: si un botón no está donde dice, buscá el nombre parecido.
+> **Datos:** verificado en la documentación oficial (code.claude.com/docs y [support.claude.com](https://support.claude.com)) el 18 y 19/11/2026. Estas funciones cambian seguido: si un botón no está donde dice, buscá el nombre parecido.
 
 ## El mapa rápido
 | Oficina | Analogía | Dónde corre | Toca tus archivos | Plan |
 |---|---|---|---|---|
 | **Chat y Projects** | La sala de reuniones: pensás en voz alta | En la nube | No (subís archivos a mano o usás conectores) | Free y pagos |
 | **Cowork** | El asistente administrativo | En la nube, y en tu compu a través de la app de escritorio | Sí, las carpetas que le das | Pro o superior |
-| **Claude Code local** | El técnico que trabaja en tu escritorio | En tu compu | Sí, toda la carpeta donde lo abrís | Pro o superior |
+| **Claude Code local: pestaña Code de la app** (camino del taller) | El técnico que trabaja en tu escritorio | En tu compu | Sí, toda la carpeta que abrís | Pro o superior |
 | **Claude Code en la nube** | El técnico que se lleva el trabajo a su taller | En una compu de Anthropic | No: trabaja sobre una copia de tu repo de GitHub (tu carpeta guardada en GitHub) | Pro, Max, Ultra o Team |
 | **Remote Control** | El control remoto de la tele | En tu compu (vos mirás desde otro lado) | Sí | Pro o superior |
 
@@ -81,14 +81,17 @@ En la carpeta [NOMBRE DE LA CARPETA] hay archivos mezclados. Proponeme cómo ord
 
 > **Ojo:** para plata, mensajes que salen a tu nombre o archivos importantes, quedate en **Manual** y mirá lo que hace.
 
-## Claude Code en tu compu
-Es Claude trabajando **en tu computadora**: lee y escribe archivos, instala programas, corre comandos, arma bots y webs. Es la herramienta principal del taller.
-Dos formas de abrirlo, mismo Claude Code:
-- **Terminal**: escribís `claude` parado en la carpeta de tu proyecto.
-- **Pestaña Code de la app**: tocás **Code** arriba de la barra lateral, y en el selector de entorno elegís **Local › Open folder…**. Sin terminal, con botones.
+## Claude Code en tu compu: la pestaña Code (camino del taller)
+Es Claude trabajando **en tu computadora**: lee y escribe archivos, instala programas, corre comandos, arma bots y webs. Es la herramienta principal del taller, y la usamos desde la **pestaña Code** de la app de escritorio: sin terminal, con botones.
+1. En la app, tocá **Code** (arriba de la barra lateral) y **+ New**.
+2. En el selector de entorno (debajo del cuadro) elegí **Local**.
+3. Tocá **Open folder…** y elegí la carpeta de tu cerebro o de tu proyecto.
+4. Escribí tu pedido. Cuando Claude quiere crear un archivo o correr un comando, te muestra un pedido de permiso con botones: leé qué va a hacer y aprobá.
 
-Lee el `CLAUDE.md` de la carpeta donde lo abrís. Por eso: **abrilo siempre parado en la carpeta de tu cerebro o de tu proyecto**.
-Instalación: [Instalá Claude Code](#s2-claude-code). Comandos: [Atajos](#t5-atajos).
+Lee el `CLAUDE.md` de la carpeta que abrís. Por eso: **abrí siempre la carpeta de tu cerebro o de tu proyecto**.
+Instalación: [Instalá Claude Code](#s2-claude-code). Comandos y teclas: [Atajos](#t5-atajos).
+
+> **Ojo:** el nombre del botón para elegir la carpeta puede variar según la versión de la app.
 
 **Probalo:**
 
@@ -96,77 +99,40 @@ Instalación: [Instalá Claude Code](#s2-claude-code). Comandos: [Atajos](#t5-at
 Mirá qué hay en esta carpeta y explicame en 5 líneas qué es este proyecto. Después proponeme 3 cosas que podríamos automatizar acá.
 ```
 
-**Tenés que ver:** un resumen de los archivos de la carpeta donde abriste Claude Code. Si te dice que la carpeta está vacía, lo abriste en otra carpeta.
+**Tenés que ver:** un resumen de los archivos de la carpeta que abriste. Si te dice que está vacía, abriste otra carpeta.
 
 ## Claude Code en la web (agente en la nube)
 Claude Code corriendo en una compu de Anthropic, no en la tuya. Le das una tarea y **sigue trabajando aunque cierres la laptop**.
-- Se abre en [claude.ai/code](https://claude.ai/code), en la pestaña **Code** de la app del celular, o en la app de escritorio eligiendo un entorno de **Cloud** en el selector.
+- Se abre en la app de escritorio eligiendo **Cloud** en el selector de entorno, en [claude.ai/code](https://claude.ai/code) o en la pestaña **Code** de la app del celular.
 - Trabaja sobre un **repo de GitHub**: lo copia, hace los cambios en una **rama** nueva (una copia aparte) y te propone un **pull request** (PR): un pedido para sumar esos cambios, que vos revisás y aceptás. Por eso necesitás [GitHub](#s4-github) conectado. Estas palabras están en el [glosario](#t2-piezas).
 - Consume el mismo límite de uso de tu plan. La compu de la nube no se cobra aparte.
-- Ves los cambios en la tarjeta **Changes** al costado del chat.
 
 Ejemplo: desde el celular, Viajes TDH le pide "cambiá el precio del paquete a Mendoza en la web y abrí el PR". A la noche revisa el cambio y lo publica.
 
-**Probalo** (en [claude.ai/code](https://claude.ai/code), con el repo de tu cerebro o tu web):
+**Probalo** (entorno **Cloud**, con el repo de tu cerebro o tu web):
 
 ```prompt
 Leé el CLAUDE.md de este repo. Revisá los archivos y armame una lista de lo que está desactualizado o dice PENDIENTE. No cambies nada: solo dejame la lista en notas/pendientes.md y abrí un PR.
 ```
 
-## Pasar una sesión de tu compu a la nube (y volver)
+## Pasar una sesión de tu compu a la nube
+1. **Antes que nada:** subí tus cambios a GitHub (en GitHub Desktop: **Commit to main** y **Push origin**). La nube copia lo que está en GitHub.
+2. En la pestaña Code, abrí el menú de la sesión (al lado del título, o en la fila de la barra lateral) › **Open in** › **Cloud**.
+3. Leé el aviso: te dice qué pasa con los archivos y con la sesión local. Confirmá.
 
-### De tu compu a la nube
-**Antes que nada:** subí tus cambios a GitHub (en GitHub Desktop: **Commit to main** y después **Push origin**). La nube copia lo que está en GitHub, no lo que tenés en la compu.
+**Tenés que ver:** la sesión en la nube, trabajando (también la ves en [claude.ai/code](https://claude.ai/code)).
 
-**Desde la app (pestaña Code):** abrí el menú de la sesión (la flechita al lado del título, o la fila en la barra lateral) › **Open in** › **Cloud**. La conversación pasa a la nube como un resumen.
+> **Ojo:** si tu carpeta no está en GitHub, puede subir una copia de la carpeta, con archivos sensibles como `.env`. Antes, revisá que no haya claves en la carpeta.
 
-**Desde la terminal:** no se puede "empujar" una sesión que ya está abierta. Lo que sí podés es arrancar una **nueva** en la nube con la tarea:
-
-<div data-os="mac">
-
-```bash
-claude --cloud "Terminá la página de contacto y abrí el PR"
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-claude --cloud "Terminá la página de contacto y abrí el PR"
-```
-
-En Windows, **Open in › Cloud** no funciona con sesiones en WSL (si no sabés qué es WSL, no lo estás usando).
-
-</div>
-
-**Tenés que ver:** la sesión nueva en [claude.ai/code](https://claude.ai/code), trabajando.
-
-> **Ojo:** si tu carpeta no está en GitHub, Claude Code sube una copia de la carpeta a la nube, y puede incluir archivos sensibles como `.env` (sobre todo en Windows). Antes de usar `--cloud`, revisá que no haya claves en archivos de la carpeta.
-
-> **Tip:** planificá en tu compu y ejecutá en la nube. Usá el modo plan para acordar los pasos, guardá el plan en un archivo, subilo a GitHub y después: `claude --cloud "Ejecutá el plan de notas/plan-web.md"`.
-
-### De la nube a tu compu
-- En la terminal, parado en la carpeta del mismo repo: `claude --teleport` (te muestra la lista de sesiones) o, adentro de Claude Code, `/teleport` (o `/tp`).
-- Desde [claude.ai/code](https://claude.ai/code): menú de la sesión › **Open in › Terminal** te copia el comando para pegar.
-- Necesitás estar en la misma cuenta y no tener cambios sin guardar (si los hay, te ofrece guardarlos aparte).
-
-### Mandarle un mensaje a una sesión en la nube sin abrirla
-Reemplazá `[ID-O-LINK-DE-LA-SESIÓN]` por el link de la sesión (lo copiás desde la barra del navegador en [claude.ai/code](https://claude.ai/code)). En Windows, el mismo comando va en PowerShell.
-
-```bash
-claude -p "Cuando termines, armá también la versión en inglés" --cloud [ID-O-LINK-DE-LA-SESIÓN]
-```
+> **Tip:** planificá en tu compu y ejecutá en la nube. Usá el modo **Plan**, guardá el plan en un archivo, subilo a GitHub y abrí una sesión **Cloud** con "Ejecutá el plan de notas/plan-web.md".
 
 ## Remote Control: seguir desde el celular
-Distinto de la nube: con Remote Control, **Claude sigue trabajando en tu compu** (con tus archivos y tus conexiones) y vos lo mirás y le escribís desde el celular o desde otro navegador.
-1. Dentro de una sesión de Claude Code (terminal o pestaña Code), escribí `/remote-control` (o `/rc`). La primera vez confirmás con **Enable Remote Control**.
-2. Te muestra un link y, en la terminal, un código QR.
-3. Escaneá el QR con el celular o buscá la sesión en la app de Claude › **Code**. Las sesiones conectadas tienen un ícono de compu con un punto verde.
-4. Para desconectar, escribí `/remote-control` otra vez.
+Distinto de la nube: con Remote Control, **Claude sigue trabajando en tu compu** (con tus archivos y conexiones) y vos lo mirás y le escribís desde el celular o desde otro navegador.
+1. En la sesión de la pestaña Code, activá el interruptor **Remote Control** (en la tarjeta **Environment** de la sesión) o escribí `/remote-control`. La primera vez confirmás con **Enable Remote Control**.
+2. En el celular, abrí la app de Claude › **Code** y buscá la sesión. Las sesiones conectadas tienen un ícono de compu con un punto verde.
+3. Para desconectar, apagá el interruptor o escribí `/remote-control` otra vez.
 
-Otras formas: `claude --remote-control` abre una sesión nueva ya conectada. `/mobile` te muestra un QR para bajar la app de Claude.
-
-> **Ojo:** la compu tiene que quedar **prendida** y Claude Code **abierto**. Si se duerme o se corta internet, se reconecta solo cuando vuelve. Si querés que siga con la compu apagada, usá la nube.
+> **Ojo:** la compu tiene que quedar **prendida** y la app **abierta**. Si se duerme o se corta internet, se reconecta sola cuando vuelve. Si querés que siga con la compu apagada, usá la nube.
 
 **Probalo:**
 
@@ -184,23 +150,23 @@ Después abrí la app de Claude en el celular, entrá a **Code** y mandá un men
 | Pensar una idea, escribir un mail, revisar un texto | **Chat** | Rápido, sin instalar nada |
 | Consultar tu cerebro desde el celular | **Projects** | Tus archivos cargados en todos los chats |
 | Ordenar carpetas, armar planillas, informes o presentaciones sin código | **Cowork** | Trabaja tus archivos sin terminal |
-| Instalar programas, armar un bot, una web, editar video, automatizar | **Claude Code local** | Tiene tu compu entera a mano |
-| Que trabaje mientras dormís o con la compu apagada | **Claude Code en la nube** | Corre en la compu de Anthropic |
+| Armar tu cerebro, instalar programas, armar un bot, una web, editar video, automatizar | **Pestaña Code** de la app (Local), el camino del taller | Tiene tu compu entera a mano, con botones y sin terminal |
+| Que trabaje mientras dormís o con la compu apagada | **Pestaña Code › Cloud** (Claude Code en la nube) | Corre en la compu de Anthropic |
 | Cambiar algo en tu web o tu cerebro desde cualquier lado | **Claude Code en la nube** (app del celular › **Code**) | Trabaja sobre GitHub y te deja un PR |
-| Seguir desde el celular algo que arrancaste en tu compu | **Remote Control** | Sigue usando tus archivos y conexiones locales |
-| Que algo pase solo todos los lunes | **Tareas programadas** | Ver [Tareas programadas](#t4-tareas-programadas) |
+| Seguir desde el celular algo que arrancaste en tu compu | **Remote Control** (interruptor de la sesión) | Sigue usando tus archivos y conexiones locales |
+| Que algo pase solo todos los lunes | **Pestaña Code › Scheduled** | Ver [Tareas programadas](#t4-tareas-programadas) |
 | Un bot que responde a clientes 24 h | **API** + n8n o un servidor | Ver [Las piezas](#t2-piezas) y [Asistente en Telegram](#p2-asistente-telegram) |
 
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
+| No veo **Code** o no puedo elegir **Local** | Actualizá la app y revisá que tu plan sea Pro o superior ([Instalá Claude Code](#s2-claude-code)). |
 | No veo **Cowork** en Windows | Falta permiso de administrador o **Virtual Machine Platform**. Reinstalá la app como admin. |
-| [claude.ai/code](https://claude.ai/code) no muestra mi repo | Conectá GitHub e instalá la app de Claude en ese repo ([GitHub](#s4-github)). |
-| `--cloud` dice "Branch … is not on GitHub" | Subí tu rama a GitHub (push) y volvé a correrlo. |
-| `--teleport` da error de cuenta | Entrá con tu cuenta de Claude: `claude auth login` (o `/login` adentro). |
-| Remote Control no conecta | Revisá que la compu esté prendida y con internet, y corré `/remote-control` de nuevo. |
+| En **Cloud** no aparece mi repo | Conectá GitHub e instalá la app de Claude en ese repo ([GitHub](#s4-github)). |
+| **Open in › Cloud** da error de rama | Subí tus cambios a GitHub (**Push origin** en GitHub Desktop) y probá de nuevo. |
+| Remote Control no conecta | Revisá que la compu esté prendida, con internet y la app abierta, y activalo de nuevo. |
 
 ## Para seguir solo
 - Creá un Proyecto en [claude.ai](https://claude.ai) con los archivos de tu cerebro y usalo una semana desde el celular.
-- Probá mandar una tarea chica a la nube antes de irte a dormir y revisá el PR a la mañana.
-- Activá `/remote-control` la próxima vez que dejes a Claude haciendo algo largo y salgas de la oficina.
+- Mandá una tarea chica a la nube antes de irte a dormir y revisá el PR a la mañana.
+- **Avanzado, en la terminal:** Claude Code también se usa escribiendo `claude` en la terminal, parado en la carpeta. Desde ahí, `claude --cloud "[TAREA]"` arranca una sesión en la nube, `claude --teleport` (o `/teleport` adentro) trae a tu compu una sesión de la nube, y `claude --remote-control` abre una sesión ya conectada al celular (con QR).

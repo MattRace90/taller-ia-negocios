@@ -27,7 +27,7 @@ resultado: Una app interna tuya funcionando en un link, o tu web publicada con t
 ### Versión MVP, paso a paso
 1. **Creá tu cuenta de Lovable** ([Cuentas en la nube](#s5-cuentas-nube), parte de Lovable).
 
-2. **Que Claude escriba el pedido.** En Claude (mejor si es dentro del Proyecto o la carpeta de tu cerebro), pegá:
+2. **Que Claude escriba el pedido.** En la app de Claude, abrí la **pestaña Code**, elegí la carpeta de tu cerebro y pegá:
 
 ```prompt
 Escribime un prompt para Lovable que arme [UNA APP INTERNA PARA CONTROLAR: stock, pedidos, alumnos, leads / UNA PÁGINA PARA CLIENTES DE: qué vendo]. Usá lo que sabés de mi negocio y mi marca (colores, tono). Incluí: qué pantallas tiene, qué campos carga, 5 datos de ejemplo inventados y que se vea bien en el celular. En español, máximo 25 líneas. Si te falta un dato de mi negocio, preguntame antes.
@@ -44,7 +44,7 @@ Escribime un prompt para Lovable que arme [UNA APP INTERNA PARA CONTROLAR: stock
 **Tenés que ver:** tu link abierto en el celular. Paso a paso con más detalle: [Una app en Lovable](#p6-lovable-y-calendario), Parte A.
 
 ### Versión completa
-Claude Code copia la **estructura** de una web referente de tu rubro, la llena con tu marca y la publica con formulario: [Tu web](#p5-web-propia).
+Claude (en la pestaña Code) copia la **estructura** de una web referente de tu rubro, la llena con tu marca y la publica con formulario: [Tu web](#p5-web-propia).
 
 Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 

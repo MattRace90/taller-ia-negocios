@@ -1,37 +1,38 @@
 ---
-titulo: 'Kit del taller: skills y agentes'
+titulo: "'Kit del taller: skills y agentes'"
 bloque: Referencia
 tiempo: 5 min por skill
 para: Todos
 necesitas: s2-claude-code
-resultado: Las skills del taller instaladas en tu Claude Code (y, si querés, en la app de Claude).
+resultado: Las skills del taller instaladas desde la pestaña Code de la app de Claude (y, si querés, también en la app web y el celular).
 ---
 
 Una **skill** es un proceso escrito una vez que Claude ejecuta mil veces: cómo armar una propuesta, cómo extraer una carta a una planilla, cómo hacer el seguimiento. Un **agente** (subagente) es un especialista con su propio rol, al que Claude le delega una parte del trabajo.
 Todas las de esta página las escribimos para el taller. Copialas, instalalas y cambialas a tu medida: son texto.
 
 ## Antes de empezar
-- [ ] Claude Code instalado ([Instalá Claude Code](#s2-claude-code)).
+- [ ] La app de Claude con la **pestaña Code** funcionando ([Claude Code](#s2-claude-code)). No hace falta la terminal.
 - [ ] Tu carpeta del cerebro creada ([Tu cerebro](#p1-cerebro)).
 
-## Cómo instalar una skill en Claude Code
-1. Abrí la terminal (en Mac, **Terminal**; en Windows, **PowerShell**) y escribí `claude` para abrir Claude Code. Sirve cualquier carpeta.
+## Cómo instalar una skill (pestaña Code)
+1. En la app de Claude, abrí la **pestaña Code** y elegí una carpeta (sirve la de tu cerebro).
 2. Tocá **Copiar** en la skill que quieras (más abajo).
-3. Pegá este prompt en Claude Code y, abajo, el contenido copiado. Cambiá `[NOMBRE-DE-LA-SKILL]` por el nombre de la skill (por ejemplo `seguimiento`). En Windows, `[MI-USUARIO]` es tu usuario de Windows; si no lo sabés, dejalo así: Claude Code lo averigua.
+3. Pegá este prompt en el cuadro de abajo y, debajo, el contenido copiado. Cambiá `[NOMBRE-DE-LA-SKILL]` por el nombre de la skill (por ejemplo `seguimiento`). Claude sabe si tu compu es Mac o Windows y elige la carpeta correcta.
 
 ```prompt
-Creá una skill personal llamada [NOMBRE-DE-LA-SKILL]. Guardá el texto que pego abajo, exacto y sin cambios, en el archivo SKILL.md de la carpeta de skills de mi usuario (~/.claude/skills/[NOMBRE-DE-LA-SKILL]/SKILL.md; en Windows C:\Users\[MI-USUARIO]\.claude\skills\[NOMBRE-DE-LA-SKILL]\SKILL.md). Cuando termines, decime la ruta exacta.
+Creá una skill personal llamada [NOMBRE-DE-LA-SKILL]. Guardá el texto que pego abajo, exacto y sin cambios, en el archivo SKILL.md de la carpeta de skills de mi usuario (.claude/skills/[NOMBRE-DE-LA-SKILL]/SKILL.md dentro de mi carpeta de usuario). Cuando termines, decime la ruta exacta.
 
 [PEGÁ ACÁ EL CONTENIDO DE LA SKILL]
 ```
 
-4. Salí con `/exit`, volvé a entrar con `claude` y escribí `/` para verla en la lista.
+4. Cuando Claude pida permiso para crear el archivo, tocá **Permitir**.
+5. Abrí una sesión nueva en la pestaña Code y escribí `/` para verla en la lista.
 
-**Tenés que ver:** la skill aparece en `/skills`.
+**Tenés que ver:** la skill aparece en la lista al escribir `/`.
 
 ## Cómo usarla también en la app de Claude (web y celular)
 La app pide la skill como un archivo ZIP.
-1. En Claude Code:
+1. En la pestaña Code, pegá:
 
 ```prompt
 Comprimí la carpeta de mi skill [NOMBRE-DE-LA-SKILL] (la carpeta entera, con SKILL.md adentro) en un archivo [NOMBRE-DE-LA-SKILL].zip en mi Escritorio.
@@ -122,7 +123,7 @@ Todas las páginas del taller, las skills y los agentes en una carpeta para tu c
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
-| La skill no aparece en `/` | Salí y volvé a entrar. Si sigue igual: "Fijate si existe ~/.claude/skills/[NOMBRE]/SKILL.md y si el name del encabezado coincide con la carpeta". |
+| La skill no aparece en `/` | Abrí una sesión nueva en la pestaña Code. Si sigue igual, pedile: "Fijate si existe mi skill [NOMBRE] en la carpeta de skills de mi usuario y si el name del encabezado coincide con la carpeta". |
 | Claude cambió el texto al guardarla | Pedile que la guarde "exacta, sin cambios" de nuevo. |
 | La app de Claude rechaza el ZIP | El ZIP tiene que tener adentro la carpeta de la skill, no el SKILL.md suelto. |
 

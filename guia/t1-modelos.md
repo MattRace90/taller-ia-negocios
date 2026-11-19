@@ -1,5 +1,5 @@
 ---
-titulo: 'Modelos: qué son y cuál usar'
+titulo: "'Modelos: qué son y cuál usar'"
 bloque: Teoría
 tiempo: 15 min (10 de lectura + 5 de prueba)
 para: Todos

@@ -1,278 +1,139 @@
 ---
 titulo: "Tu bot de WhatsApp con Zernio (vía oficial)"
 bloque: WhatsApp
-tiempo: "60 min con el número de prueba de Zernio. Conectar tu número real: 30 min más las verificaciones de Meta"
+tiempo: "60 min con el número de prueba de Zernio. Tu número real: 30 min más las verificaciones de Meta"
 para: Quien ya publica en redes o quiere WhatsApp oficial sin armar la API de Meta a mano (por ejemplo, Viajes TDH Docta y Celve)
 necesitas: p1-cerebro, s2-claude-code, w1-opciones
-resultado: Zernio conectado a Claude Code, un bot que contesta con tu cerebro probado en el número de prueba de Zernio, y los pasos para pasar tu número real por la vía oficial de Meta.
+resultado: Zernio conectado a Claude, un bot que contesta con tu cerebro probado en el número de prueba de Zernio, y los pasos para pasar tu número real por la vía oficial de Meta.
 ---
 
-Zernio es un servicio que conecta muchas redes (Instagram, Facebook, WhatsApp y más) con una sola API y un MCP. Para WhatsApp usa la **vía oficial de Meta**, así que no te bloquean el número por usar un bot. Hoy lo conectás a Claude Code y armás un bot que contesta con tu cerebro, probándolo gratis con el número de prueba de Zernio.
-Ejemplo: Viajes TDH Docta recibe "¿tienen salidas a Bariloche en julio?" a las 23 h. El bot contesta con lo que dice el cerebro, pide fecha y cantidad de personas, y avisa a la vendedora a la mañana.
+Zernio conecta muchas redes (Instagram, Facebook, WhatsApp y más) con una sola API y un MCP. Para WhatsApp usa la **vía oficial de Meta**: no te bloquean el número por usar un bot. Lo conectás a Claude y probás tu bot gratis con su número de prueba.
+Ejemplo: Viajes TDH Docta recibe "¿tienen salidas a Bariloche en julio?" a las 23 h. El bot contesta con el cerebro, pide fecha y cantidad de personas, y avisa a la vendedora.
 
-> **Tip:** palabras que vas a ver en esta página:
-> - **API:** la puerta para que un programa hable con otro. **Clave de API:** la contraseña de esa puerta. Empieza con `sk_`.
-> - **MCP:** el enchufe para que Claude use otra app ([Las piezas](#t2-piezas)).
-> - **Sandbox (número de prueba):** un número de WhatsApp de Zernio, compartido y gratis, que solo le escribe a tu celular durante 7 días.
-> - **Webhook:** la dirección a la que Zernio le avisa a tu bot cada mensaje nuevo.
-> - **Worker:** el programita tuyo que vive en Cloudflare y contesta los mensajes. Lo armaste en [la práctica del agente](#p3-agente-preguntas).
-> - **Alta guiada de Meta (Embedded Signup):** la ventana de Meta donde elegís tu negocio y tu número para conectarlos por la vía oficial.
-
-> **Datos:** el bot contesta con lo que está en tu cerebro. Nunca pegues claves en el chat de Claude y no copies conversaciones con nombres o teléfonos de clientes en tus pruebas.
+> **Ojo:** **hoy en el taller** hacés la **Versión MVP** de [Cierre: tu bot de WhatsApp](#d7-whatsapp): las instrucciones de tu bot, probadas en Telegram con n8n. Esta página es para **después**. Todo lo técnico se lo pedís a Claude en la pestaña **Code**; las claves, nunca en el chat.
 
 ## Cuánto cuesta (nov 2026)
-- **Cuentas:** las 2 primeras cuentas conectadas, gratis y sin tarjeta. De la 3 a la 10, 6 USD por mes cada una. Cada red conectada (tu WhatsApp, tu Instagram) cuenta como una cuenta.
-- **Mensajes:** los primeros 10.000 mensajes enviados por mes, gratis. Después, 1 USD cada 10.000. Los que recibís son gratis.
-- **Meta cobra aparte:** las plantillas (mensajes fuera de las 24 horas) las cobra Meta directo a tu cuenta de WhatsApp Business. Desde el 1/10/2026, Meta también cobra los mensajes de servicio después de los primeros 1.000 por número y por mes ([cómo se cobra](#w1-opciones)).
-- **Números:** si comprás un número en Zernio, desde 3 USD por mes según el país. Podés usar tu propio número y no pagar esto.
-- **El número de prueba (sandbox):** gratis.
+- **Cuentas:** las 2 primeras gratis, sin tarjeta. De la 3 a la 10, 6 USD por mes cada una (cada red conectada cuenta como una).
+- **Mensajes:** 10.000 enviados por mes gratis; después, 1 USD cada 10.000. Los recibidos, gratis.
+- **Meta cobra aparte** las plantillas y, desde el 1/10/2026, los mensajes de servicio pasados los 1.000 por mes ([cómo se cobra](#w1-opciones)).
+- **Número de prueba:** gratis. Precios oficiales: [zernio.com/pricing](https://zernio.com/pricing).
 
-Precios oficiales: [zernio.com/pricing](https://zernio.com/pricing). Sin impuestos, en dólares.
-
-## Pros y contras
 | A favor | En contra |
 |---|---|
-| Vía oficial de Meta: riesgo de bloqueo bajo. | Dependés de un intermediario: si Zernio cambia precios o se cae, te afecta. |
-| Más simple que armar la API de Meta a mano: el alta con Meta la guía Zernio. | No acepta un WhatsApp personal: necesitás una cuenta de WhatsApp Business dentro de un portfolio de Meta. |
-| Tiene MCP: Claude Code puede leer y contestar la bandeja. | El bot automático lo armás vos (con Claude Code). |
-| Plan gratis para empezar y número de prueba sin trámites. | La documentación está en inglés. |
-| Además de WhatsApp, publica y mide en tus redes. | Si usás "coexistencia" (app y API a la vez), se apagan los grupos y las llamadas por la API. |
+| Vía oficial: riesgo de bloqueo bajo. | Dependés de un intermediario. |
+| El alta con Meta la guía Zernio. | No acepta un WhatsApp personal. |
+| Tiene MCP: Claude lee y contesta la bandeja. | El bot automático lo armás vos (con Claude). |
+| Plan gratis y número de prueba sin trámites. | Documentación en inglés. |
 
 ## Antes de empezar
-- [ ] Tu cerebro armado ([Armá el cerebro](#p1-cerebro)) y, si lo hiciste, las instrucciones del bot de [Cierre: tu bot de WhatsApp](#d7-whatsapp) en `bot/instrucciones-del-bot.md`.
-- [ ] Claude Code instalado ([Instalá Claude Code](#s2-claude-code)).
-- [ ] Un celular con WhatsApp para recibir los mensajes de prueba.
-- [ ] Solo para el bot automático (Paso 6): el agente de [la práctica del agente](#p3-agente-preguntas) publicado en Cloudflare.
-- [ ] Solo para tu número real (Paso 9): acceso de administrador a tu portfolio en [business.facebook.com](https://business.facebook.com) ([Meta y Google](#s14-meta-y-google)) y una tarjeta para cargar en Meta.
+- [ ] `bot/instrucciones-del-bot.md` de [Cierre: tu bot de WhatsApp](#d7-whatsapp), o tu cerebro ([Armá el cerebro](#p1-cerebro)).
+- [ ] La app de Claude con la pestaña **Code** ([Instalá Claude Code](#s2-claude-code)).
+- [ ] Un celular con WhatsApp para recibir las pruebas.
+- [ ] Solo para el modo automático (Paso 5): el agente de [la práctica del agente](#p3-agente-preguntas) publicado en Cloudflare.
+- [ ] Solo para tu número real (Paso 7): acceso de administrador a tu portfolio en [business.facebook.com](https://business.facebook.com) ([Meta y Google](#s14-meta-y-google)) y una tarjeta para Meta.
 
-## Paso 1 · Creá tu cuenta de Zernio
-1. Entrá a [zernio.com](https://zernio.com) y tocá el botón para registrarte.
-2. Creá la cuenta con tu mail del negocio.
-3. Entrá al panel.
-
-> **Ojo:** verificá en pantalla el nombre exacto del botón de registro y de los menús: la web está en inglés y cambia seguido.
-
-**Tenés que ver:** el panel de Zernio con el menú **Connections** (conexiones).
-
-## Paso 2 · Creá tu clave de API
-1. Abrí [zernio.com/dashboard/api-keys](https://zernio.com/dashboard/api-keys).
-2. Tocá **Create API key**.
-3. Copiá la clave **ahora**: empieza con `sk_` y no se vuelve a mostrar. Guardala en tu gestor de contraseñas o en una nota privada.
-
-> **Ojo:** la clave es como la llave de tu WhatsApp. No se la pegues a Claude en el chat ni la subas a GitHub. En el próximo paso la ponés vos en un archivo.
-
-**Tenés que ver:** la clave nueva en la lista de **API keys** (solo se ve el principio).
-
-## Paso 3 · Probá con el número de prueba de Zernio (gratis)
-Zernio tiene un número de WhatsApp compartido para probar sin Meta, sin comprar nada y sin pagar. Le escribe solo a tu celular, hasta 50 mensajes por día, durante 7 días.
-
-1. Abrí la terminal (en Mac, **Terminal**; en Windows, **PowerShell**; si no sabés cómo, mirá el Paso 1 de [Instalá Claude Code](#s2-claude-code)), creá la carpeta y abrí el archivo de claves:
-
-<div data-os="mac">
-
-```bash
-mkdir -p ~/Documents/cerebro-[TU-EMPRESA]/agente/zernio
-cd ~/Documents/cerebro-[TU-EMPRESA]/agente/zernio
-touch .env
-open -e .env
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-New-Item -ItemType Directory -Force $HOME\Documents\cerebro-[TU-EMPRESA]\agente\zernio
-cd $HOME\Documents\cerebro-[TU-EMPRESA]\agente\zernio
-notepad .env
-```
-
-En Windows, si el Bloc de notas pregunta si querés crear el archivo, tocá **Sí**.
-
-</div>
-
-2. Escribí esta línea, pegá tu clave después del `=` (sin espacios ni comillas), guardá y cerrá:
-
-```text
-ZERNIO_API_KEY=[TU-CLAVE]
-```
-
-3. Abrí Claude Code en la carpeta del cerebro:
-
-<div data-os="mac">
-
-```bash
-cd ~/Documents/cerebro-[TU-EMPRESA]
-claude
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-cd $HOME\Documents\cerebro-[TU-EMPRESA]
-claude
-```
-
-</div>
-
-4. Pegá este prompt. Cambiá `[TU-CELULAR]` por tu número con código de país y sin espacios. En Argentina, con el 9: `+549351XXXXXXX`.
+## Paso 1 · Creá la cuenta y la clave de API
+1. Registrate en [zernio.com](https://zernio.com) con el mail del negocio.
+2. Abrí [zernio.com/dashboard/api-keys](https://zernio.com/dashboard/api-keys) › **Create API key**. Dejá la pantalla abierta: la clave (empieza con `sk_`) se ve una sola vez.
+3. En la app de Claude, tocá **Code**, elegí **Local › Open folder…** y abrí `cerebro-[TU-EMPRESA]`. Pegá:
 
 ```prompt
-En agente/zernio armá una prueba de WhatsApp con el número de prueba (sandbox) de Zernio. Antes de escribir código, leé https://docs.zernio.com/platforms/whatsapp/sandbox.mdx y seguilo.
-1. Usá Node.js y el SDK oficial @zernio/node. La clave está en agente/zernio/.env como ZERNIO_API_KEY: leela de ahí, nunca la muestres ni la escribas en el código. Confirmá que .env está en el .gitignore.
-2. Un comando npm run sandbox que: busque el número de prueba con GET /v1/phone-numbers, abra una sesión para mi celular [TU-CELULAR] con POST /v1/whatsapp/sandbox/sessions y me diga que conteste el WhatsApp que me llega.
-3. Un comando npm run sandbox-estado que me diga si la sesión ya está activa.
-4. Un comando npm run sandbox-enviar que, con la sesión activa, me mande la plantilla de prueba con POST /v1/inbox/conversations.
-Explicame cada respuesta de Zernio en castellano. Si algo da error, pará y preguntame.
+Creá el archivo agente/zernio/.env con la línea ZERNIO_API_KEY= vacía, sumalo al .gitignore y abrímelo en el editor de texto de mi compu. No me pidas la clave en el chat.
 ```
 
-5. Corré `npm run sandbox` (te lo indica Claude), contestá el WhatsApp que te llega con cualquier texto, corré `npm run sandbox-estado` y después `npm run sandbox-enviar`.
+4. Pegá la clave después del `=` (sin espacios), guardá y escribile a Claude `listo`.
 
-> **Tip:** en Windows, si `npm` da "la ejecución de scripts está deshabilitada", usá `npm.cmd` (ej.: `npm.cmd run sandbox`).
+> **Ojo:** verificá en pantalla los nombres de los botones de Zernio: la web está en inglés y cambia seguido.
 
-**Tenés que ver:** un WhatsApp desde el número de prueba de Zernio en tu celular, y `sandbox-estado` diciendo que la sesión está **active**.
+**Tenés que ver:** Claude confirma que la línea tiene valor, sin mostrarlo.
 
-## Paso 4 · Conectá Zernio a Claude Code por MCP
-Con el MCP, Claude Code puede leer tus cuentas y tu bandeja de Zernio conversando, sin código.
-
-1. Salí de Claude Code con `/exit`. En la misma terminal, pegá (igual en Mac y Windows):
-
-```bash
-claude mcp add --transport http zernio https://mcp.zernio.com/mcp
-```
-
-2. Abrí Claude Code de nuevo con `claude`, escribí `/mcp`, elegí **zernio** e iniciá sesión con tu cuenta de Zernio en el navegador que se abre.
-3. Preguntale:
+## Paso 2 · Probá con el número de prueba (gratis)
+El número de prueba de Zernio le escribe solo a tu celular, hasta 50 mensajes por día, durante 7 días. Cambiá `[TU-CELULAR]` (en Argentina, con el 9: `+549351XXXXXXX`):
 
 ```prompt
-¿Qué cuentas tengo conectadas en Zernio? Y decime qué herramientas del MCP de Zernio sirven para leer y contestar conversaciones de WhatsApp.
+En agente/zernio armá una prueba con el número de prueba (sandbox) de WhatsApp de Zernio. Antes, leé https://docs.zernio.com/platforms/whatsapp/sandbox.mdx. Usá Node.js y el SDK oficial @zernio/node, con la clave de agente/zernio/.env (nunca la muestres). Abrí una sesión para mi celular [TU-CELULAR] y avisame que conteste el WhatsApp que me llega. Cuando te diga "contesté", revisá que la sesión esté activa y mandame la plantilla de prueba. Explicame cada respuesta de Zernio en castellano. Si algo da error, pará y preguntame.
 ```
 
-> **Ojo:** la documentación de Zernio no publica la lista de herramientas de WhatsApp del MCP. Usá la respuesta de este prompt para ver cuáles hay en tu cuenta antes de armar algo encima.
+**Tenés que ver:** un WhatsApp del número de prueba en tu celular y la sesión **active**.
 
-**Tenés que ver:** en `/mcp`, **zernio** como conectado, y Claude te lista tus cuentas y las herramientas de la bandeja.
-
-## Paso 5 · Modo asistido: Claude propone, vos aprobás
-La forma más segura de empezar: Claude lee las conversaciones nuevas, escribe la respuesta con tu cerebro y **solo la manda si le decís que sí**. Ideal para la primera semana.
-
-1. Mandale un WhatsApp al número de prueba desde tu celular, como si fueras un cliente (por ejemplo: "hola, ¿qué horario tienen?").
-2. Pegá en Claude Code:
+## Paso 3 · Conectá Zernio a Claude por MCP
+1. Pegá:
 
 ```prompt
-Sos el asistente de atención de mi empresa por WhatsApp. Leé bot/instrucciones-del-bot.md (si no existe, agente/prompt-del-agente.md y agente/conocimiento-publico.md). Con el MCP de Zernio, buscá las conversaciones de WhatsApp que esperan respuesta. Para cada una, mostrame el último mensaje del cliente y la respuesta que proponés, escrita SOLO con lo que dicen esos archivos. Si no está en mi cerebro, proponé derivar a una persona. No mandes nada hasta que yo te diga "mandala". Fuera de las 24 horas desde el último mensaje del cliente, avisame que solo se puede mandar una plantilla.
+Agregá el MCP de Zernio a mi Claude Code para todos mis proyectos: claude mcp add --transport http --scope user zernio https://mcp.zernio.com/mcp. Decime qué salió, en simple.
 ```
 
-**Tenés que ver:** la respuesta propuesta. Cuando escribís "mandala", te llega a tu celular.
+2. Abrí una conversación nueva, escribí `/mcp`, elegí **zernio** e iniciá sesión con tu cuenta de Zernio en el navegador.
+3. Preguntá: `¿Qué cuentas tengo en Zernio y qué herramientas del MCP sirven para leer y contestar WhatsApp?`
 
-## Paso 6 · Modo automático: el bot contesta solo (con el Worker de la práctica)
-Ahora el mismo agente de Telegram de [la práctica del agente](#p3-agente-preguntas) contesta también los WhatsApp de Zernio. Zernio le avisa al Worker cada mensaje nuevo (webhook) y el Worker contesta por la API.
+> **Ojo:** Zernio no publica la lista de herramientas de WhatsApp del MCP. Usá esta respuesta para ver cuáles hay en tu cuenta.
 
-1. En Claude Code, pegá:
+**Tenés que ver:** **zernio** conectado en `/mcp` y la lista de tus cuentas.
+
+## Paso 4 · Modo asistido: Claude propone, vos aprobás
+La forma más segura de empezar. Mandale un WhatsApp al número de prueba como si fueras un cliente y pegá:
 
 ```prompt
-En agente/bot agregá al Worker una ruta /zernio para contestar WhatsApp a través de Zernio, sin romper Telegram. Antes de escribir código, leé https://docs.zernio.com/webhooks/inbox/message-received.mdx, https://docs.zernio.com/webhooks.mdx y https://docs.zernio.com/platforms/whatsapp/inbox.mdx.
-- Verificá la firma: el encabezado X-Zernio-Signature es el HMAC-SHA256 en hexadecimal del cuerpo crudo, con el secreto ZERNIO_WEBHOOK_SECRET. Si no coincide, respondé 401.
-- Respondé 200 enseguida y procesá después (ctx.waitUntil).
-- Ignorá todo lo que no sea event "message.received", platform "whatsapp" y direction "incoming". Ignorá los mensajes con metadata.standby en true.
-- Evitá duplicados guardando el id del evento en KV.
-- Usá el mismo SYSTEM_PROMPT, la misma memoria en KV y la misma regla DERIVAR que Telegram. Los avisos de derivación siguen yendo a mi Telegram.
-- Contestá con POST https://zernio.com/api/v1/inbox/conversations/{conversationId}/messages, con el accountId de la conversación y el texto, y el encabezado Authorization: Bearer ZERNIO_API_KEY.
-- Si llega un audio o una foto, pedí que lo escriban.
-Generá ZERNIO_WEBHOOK_SECRET al azar y guardalo en .dev.vars. Confirmá que .dev.vars está en el .gitignore. Decime qué secretos tengo que cargar con wrangler secret put. No me pidas que te pegue claves en el chat. No publiques hasta que te diga.
+Sos el asistente de atención de mi empresa por WhatsApp. Leé bot/instrucciones-del-bot.md. Con el MCP de Zernio, buscá las conversaciones de WhatsApp que esperan respuesta. Para cada una, mostrame el último mensaje y la respuesta que proponés, SOLO con lo que dice ese archivo; si no está, proponé derivar a una persona. No mandes nada hasta que te diga "mandala". Si pasaron más de 24 horas, avisame que solo se puede mandar una plantilla.
 ```
 
-2. Abrí **una segunda terminal**, entrá a la carpeta del bot y cargá los dos secretos, uno por vez. Cuando te pida el valor, pegá tu clave de Zernio (Paso 2) y después el secreto que está en tu `.dev.vars`:
+**Tenés que ver:** la respuesta propuesta y, cuando escribís "mandala", el mensaje en tu celular.
 
-<div data-os="mac">
+## Paso 5 · Modo automático: el bot contesta solo
+El agente de [la práctica del agente](#p3-agente-preguntas) contesta también los WhatsApp de Zernio.
 
-```bash
-cd ~/Documents/cerebro-[TU-EMPRESA]/agente/bot
-npx wrangler secret put ZERNIO_API_KEY
-npx wrangler secret put ZERNIO_WEBHOOK_SECRET
+```prompt
+En agente/bot agregá al Worker una ruta /zernio para contestar WhatsApp a través de Zernio, sin romper Telegram. Antes, leé https://docs.zernio.com/webhooks/inbox/message-received.mdx, https://docs.zernio.com/webhooks.mdx y https://docs.zernio.com/platforms/whatsapp/inbox.mdx.
+- Verificá la firma X-Zernio-Signature (HMAC-SHA256 del cuerpo con ZERNIO_WEBHOOK_SECRET); si no coincide, 401.
+- Respondé 200 enseguida y procesá después. Solo "message.received", platform "whatsapp", direction "incoming"; ignorá metadata.standby en true y los duplicados (id en KV).
+- Mismo SYSTEM_PROMPT, memoria en KV y regla DERIVAR que Telegram; los avisos siguen yendo a mi Telegram.
+- Contestá con POST https://zernio.com/api/v1/inbox/conversations/{conversationId}/messages y Authorization: Bearer ZERNIO_API_KEY. Si llega audio o foto, pedí que lo escriban.
+Generá ZERNIO_WEBHOOK_SECRET al azar en .dev.vars y copiá ZERNIO_API_KEY desde agente/zernio/.env, sin mostrarme ninguno. Corré npm run probar (10 de 10), cargá los dos secretos en Cloudflare y publicá. Al final dame la URL que termina en /zernio.
 ```
 
-</div>
-<div data-os="win">
+**Tenés que ver:** las pruebas en 10 de 10, los secretos cargados y la URL del Worker.
 
-```powershell
-cd $HOME\Documents\cerebro-[TU-EMPRESA]\agente\bot
-npx.cmd wrangler secret put ZERNIO_API_KEY
-npx.cmd wrangler secret put ZERNIO_WEBHOOK_SECRET
+## Paso 6 · Registrá el webhook y probalo
+```prompt
+Registrá en Zernio un webhook llamado "Bot WhatsApp" con la URL de mi Worker terminada en /zernio, el evento message.received y como secreto el valor de ZERNIO_WEBHOOK_SECRET de .dev.vars (POST /v1/webhooks/settings), leyendo los valores de los archivos sin mostrármelos. Después mandá una prueba con POST /v1/webhooks/test y decime qué pasó.
 ```
 
-</div>
+Después, desde tu celular, hacele al número de prueba 3 preguntas de tus casos y pedí hablar con una persona.
 
-3. Corré `npm run probar` (los 10 casos de Telegram tienen que seguir pasando) y publicá con `npm run deploy` (en Windows, `npm.cmd`).
+**Tenés que ver:** el bot contesta solo, con tu cerebro, y el aviso de derivación llega a tu Telegram.
 
-**Tenés que ver:** `Success!` después de cada secreto y la URL del Worker, la que termina en `.workers.dev`.
+## Paso 7 · Conectá tu número real (alta con Meta)
+1. En Zernio, **Connections** › tarjeta **WhatsApp** › **+ Connect** › **Use my own number** › **Continue to WhatsApp setup**.
+2. En la ventana de Meta: iniciá sesión, elegí tu portfolio y la cuenta de WhatsApp Business.
+3. Elegí cómo: **solo API** (número nuevo, que no esté en la app) o **coexistencia** (**Connect existing WhatsApp Business app account**, escaneás un QR desde la app WhatsApp Business: seguís usándola en el celular).
+4. Cargá un método de pago en Meta (se puede en pesos). Tu webhook ya escucha todas tus cuentas.
 
-## Paso 7 · Registrá el webhook en Zernio
-Le decís a Zernio a qué dirección avisar cada mensaje nuevo.
+> **Ojo:** los pasos de Meta cambian seguido: verificalos en pantalla. Cada perfil de Zernio admite un solo número de WhatsApp.
 
-1. Abrí [zernio.com/dashboard/webhooks](https://zernio.com/dashboard/webhooks) y creá un webhook nuevo.
-2. Completá:
-   - **Nombre:** `Bot WhatsApp`.
-   - **URL:** `https://[TU-WORKER].workers.dev/zernio` (`[TU-WORKER]` sale de la dirección del Paso 6).
-   - **Eventos:** `message.received`.
-   - **Secreto:** el mismo valor de `ZERNIO_WEBHOOK_SECRET` que está en tu `.dev.vars`.
-3. Guardá.
-
-> **Ojo:** verificá los nombres de los campos en pantalla: la documentación de Zernio no los detalla. Si no lo encontrás, pedile a Claude Code: "Registrá el webhook con POST /v1/webhooks/settings (name, url, events y secret, leyendo los valores de los archivos sin mostrármelos) y mandá una prueba con POST /v1/webhooks/test".
-
-**Tenés que ver:** el webhook en la lista, con el evento `message.received`.
-
-## Paso 8 · Probá el bot automático
-1. Desde tu celular, escribile al número de prueba de Zernio (la sesión dura 7 días: si venció, corré `npm run sandbox` de nuevo).
-2. Hacé 3 preguntas de tus casos de prueba y pedí hablar con una persona.
-
-**Tenés que ver:** el bot te contesta solo, con tu cerebro, y te llega a Telegram el aviso de derivación.
-
-## Paso 9 · Conectá tu número real (alta con Meta)
-Cuando el bot pasó las pruebas, conectás el número del negocio por la vía oficial. Zernio abre la ventana de Meta y te guía.
-
-1. En el panel de Zernio, andá a **Connections**, abrí la tarjeta **WhatsApp** y tocá **+ Connect**.
-2. Elegí **Use my own number** (usar mi número). Si preferís uno nuevo, **Get a new number** te muestra el precio por país antes de confirmar.
-3. Tocá **Continue to WhatsApp setup**. Se abre el alta guiada de Meta: iniciá sesión con tu Facebook, elegí tu portfolio del negocio y creá o elegí la cuenta de WhatsApp Business.
-4. Elegí cómo conectar el número:
-   - **Solo API (recomendado para un número nuevo):** el número no puede estar en la app de WhatsApp. No elijas "Connect existing WhatsApp Business app account".
-   - **Coexistencia (seguís usando la app WhatsApp Business en el celular):** elegí **Connect existing WhatsApp Business app account**. Meta muestra un QR. En la app WhatsApp Business, andá a **Configuración › Dispositivos vinculados** y escanealo. Funciona solo con la app **WhatsApp Business**, no con el WhatsApp común.
-5. Cargá un método de pago en Meta para los mensajes que cobra (en Argentina se puede en pesos).
-6. Tu webhook del Paso 7 ya escucha todas tus cuentas: el bot contesta también en el número real.
-
-> **Ojo:** verificá en pantalla los pasos de Meta (código de verificación por SMS o llamada, nombre visible del negocio): Meta los cambia seguido. Cada perfil de Zernio admite un solo número de WhatsApp.
-
-**Tenés que ver:** en **Connections**, tu WhatsApp como **connected**.
+**Tenés que ver:** tu WhatsApp como **connected** en **Connections**.
 
 ## Cómo sé que funcionó
-Desde un celular que no sea el del negocio, mandale este WhatsApp al número conectado:
+Desde un celular que no sea el del negocio, mandale al número conectado:
 
 ```text
 Hola, ¿qué horario tienen? Y quiero hablar con una persona.
 ```
 
-Tiene que contestar el horario que está en tu cerebro (no uno inventado), avisar que te pasa con alguien y mandarte el aviso a tu Telegram.
+Tiene que contestar el horario de tu cerebro, avisar que te pasa con alguien y mandarte el aviso a Telegram.
 
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
-| El Worker responde 401 y no contesta | El secreto del webhook en Zernio no es idéntico a `ZERNIO_WEBHOOK_SECRET`. Copialo de nuevo y volvé a cargarlo con `npx wrangler secret put ZERNIO_WEBHOOK_SECRET`. |
-| El bot se contesta a sí mismo en loop | Falta ignorar los mensajes con direction "outgoing". Pedile a Claude Code que lo agregue con una prueba. |
-| El número de prueba dejó de contestarte | La sesión dura 7 días y 50 mensajes por día. Corré `npm run sandbox` de nuevo al otro día. |
-| Al conectar sale `one_whatsapp_per_profile` | Ese perfil ya tiene un WhatsApp. Conectalo en otro perfil de Zernio. |
-| Los mensajes fallan con `(#200) You do not have the necessary permission` | Meta rechazó el PIN de verificación en dos pasos del número. Registralo de nuevo con el PIN, como explica la [documentación de Zernio](https://docs.zernio.com/platforms/whatsapp/connect). |
-| No le llega la respuesta a alguien que escribió hace días | Pasaron más de 24 horas: solo se le puede mandar una plantilla aprobada por Meta. |
-| En Windows: "la ejecución de scripts está deshabilitada" | Usá `npm.cmd` y `npx.cmd` en vez de `npm` y `npx`. |
+| El Worker responde 401 | El secreto del webhook no coincide. Pedile a Claude que lo vuelva a registrar desde `.dev.vars`. |
+| El bot se contesta a sí mismo | Falta ignorar direction "outgoing". Pedile a Claude que lo agregue con una prueba. |
+| El número de prueba dejó de contestar | La sesión dura 7 días y 50 mensajes por día. Pedile a Claude que abra una sesión nueva. |
+| Sale `one_whatsapp_per_profile` | Ese perfil ya tiene un WhatsApp: usá otro perfil de Zernio. |
+| Error `(#200) You do not have the necessary permission` | Meta rechazó el PIN de verificación en dos pasos. Mirá la [documentación de Zernio](https://docs.zernio.com/platforms/whatsapp/connect). |
 
 ## Para seguir solo
-- **Una semana en modo asistido** antes de prenderlo solo: así ves qué contesta mal sin que lo vea un cliente.
-- **Sumá Instagram y Facebook:** el mismo webhook recibe los mensajes de las redes que conectes. Pedile a Claude Code que acepte también platform "instagram" en la ruta `/zernio`.
-- **Publicá desde Claude:** con el mismo MCP podés programar posteos ("programá este post en Instagram para el viernes a las 19"). Mirá qué más se puede en la [guía del MCP](https://docs.zernio.com/mcp).
+- **Una semana en modo asistido** antes de prenderlo solo.
+- **Sumá Instagram y Facebook:** pedile a Claude que la ruta `/zernio` acepte también platform "instagram".
+- **Publicá desde Claude:** con el mismo MCP, "programá este post en Instagram para el viernes a las 19" ([guía del MCP](https://docs.zernio.com/mcp)).
 
 ## Fuentes (consultadas el 18/11/2026)
-- Zernio, precios: https://zernio.com/pricing
-- Zernio, inicio rápido y clave de API: https://docs.zernio.com/quickstart
-- Zernio, número de prueba de WhatsApp: https://docs.zernio.com/platforms/whatsapp/sandbox
-- Zernio, conectar WhatsApp: https://docs.zernio.com/platforms/whatsapp/connect
-- Zernio, bandeja de WhatsApp: https://docs.zernio.com/platforms/whatsapp/inbox
-- Zernio, webhooks y evento message.received: https://docs.zernio.com/webhooks · https://docs.zernio.com/webhooks/inbox/message-received
-- Zernio, MCP: https://docs.zernio.com/mcp
+- Zernio: https://zernio.com/pricing · https://docs.zernio.com/quickstart · https://docs.zernio.com/platforms/whatsapp/sandbox · https://docs.zernio.com/platforms/whatsapp/connect · https://docs.zernio.com/platforms/whatsapp/inbox · https://docs.zernio.com/webhooks · https://docs.zernio.com/mcp

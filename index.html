@@ -365,6 +365,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
 .seqnav a{font:800 12px/1 var(--f-body);letter-spacing:.04em;color:#0A0A0A;text-decoration:none;border:1.5px solid #0A0A0A;border-radius:999px;padding:7px 11px;background:#FFFFFF;white-space:nowrap}
 .seqnav a:hover{background:var(--gc,#FFE51F)}
 @media (max-width:700px){ .seqnav{margin-left:0;width:100%} .seqnav a{flex:1;text-align:center} }
+.copy.askclaude{background:#FFE51F;color:#0A0A0A;border-color:#FFE51F;margin-left:6px}
 </style>
 
 <header class="top">
@@ -388,28 +389,29 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script>
 (function(){
+  var BUILD = "202611190742";
   var PAGES = [
     {id:"inicio", g:"Empezá acá", t:"El día, el menú y tu ruta", k:"→", c:6},
     {id:"s1-claude", g:"Cuentas obligatorias", t:"Cuenta y app de Claude", k:"S1", req:"todos", c:2},
-    {id:"s2-claude-code", g:"Cuentas obligatorias", t:"Claude Code", k:"S2", req:"todos", c:3},
-    {id:"s3-herramientas-base", g:"Cuentas obligatorias", t:"Git y herramientas base", k:"S3", req:"todos", c:4},
+    {id:"s2-claude-code", g:"Cuentas obligatorias", t:"Claude Code", k:"S2", req:"todos", c:2},
+    {id:"s3-herramientas-base", g:"Cuentas obligatorias", t:"Git y herramientas base", k:"S3", req:"todos", c:2},
     {id:"s4-github", g:"Cuentas obligatorias", t:"GitHub", k:"S4", req:"todos", c:2},
     {id:"p1-cerebro", g:"Tu cerebro", t:"Armá tu cerebro", k:"C1", req:"todos", c:3},
     {id:"c2-tu-borrador", g:"Tu cerebro", req:"todos", t:"Usá tu borrador y mantenelo", k:"C2", c:9},
-    {id:"s11-obsidian", g:"Tu cerebro", t:"Obsidian: ver tu cerebro (opcional)", k:"S11", req:"opcional", c:3},
-    {id:"s11b-obsidian-atajos", g:"Tu cerebro", t:"Atajos de Obsidian (opcional)", k:"S11b", req:"opcional", c:4},
+    {id:"s11-obsidian", g:"Tu cerebro", t:"Obsidian: ver tu cerebro (opcional)", k:"S11", req:"opcional", c:2},
+    {id:"s11b-obsidian-atajos", g:"Tu cerebro", t:"Atajos de Obsidian (opcional)", k:"S11b", req:"opcional", c:2},
     {id:"elegir", g:"Desafíos", t:"Elegí tus desafíos (menú)", k:"☆", c:0},
     {id:"mis-desafios", g:"Desafíos", t:"Mis desafíos (los que elegiste)", k:"★", c:0},
-    {id:"d1-automatiza", g:"Desafíos", t:"Automatizá una tarea", k:"D1", c:7},
-    {id:"d2-agente", g:"Desafíos", t:"Un agente que responde", k:"D2", c:8},
-    {id:"d3-web-app", g:"Desafíos", t:"Tu web o tu app", k:"D3", c:8},
-    {id:"d4-contenido", g:"Desafíos", t:"Tu fábrica de contenido", k:"D4", c:9},
-    {id:"d5-vender", g:"Desafíos", t:"Vendé más: propuestas y seguimiento", k:"D5", c:8},
-    {id:"d6-medir", g:"Desafíos", t:"Medí y decidí: Meta Ads y reportes", k:"D6", c:8},
-    {id:"d7-whatsapp", g:"Desafíos", t:"Cierre: tu bot de WhatsApp", k:"D7", c:13},
+    {id:"d1-automatiza", g:"Desafíos", t:"Automatizá una tarea", k:"D1", c:4},
+    {id:"d2-agente", g:"Desafíos", t:"Un agente que responde", k:"D2", c:4},
+    {id:"d3-web-app", g:"Desafíos", t:"Tu web o tu app", k:"D3", c:3},
+    {id:"d4-contenido", g:"Desafíos", t:"Tu fábrica de contenido", k:"D4", c:4},
+    {id:"d5-vender", g:"Desafíos", t:"Vendé más: propuestas y seguimiento", k:"D5", c:4},
+    {id:"d6-medir", g:"Desafíos", t:"Medí y decidí: Meta Ads y reportes", k:"D6", c:4},
+    {id:"d7-whatsapp", g:"Desafíos", t:"Cierre: tu bot de WhatsApp", k:"D7", c:4},
     {id:"s5-cuentas-nube", g:"Cuentas según tu desafío", t:"Vercel, Supabase, Cloudflare, Lovable", k:"S5", req:["d2","d3"], mvp:["d3"], c:3},
     {id:"s6-n8n", g:"Cuentas según tu desafío", t:"n8n", k:"S6", req:["d1","d2","d5","d7"], mvp:["d2","d7"], c:4},
-    {id:"s7-telegram", g:"Cuentas según tu desafío", t:"Tu bot de Telegram", k:"S7", req:["d1","d2","d5","d7"], mvp:["d2","d7"], c:2},
+    {id:"s7-telegram", g:"Cuentas según tu desafío", t:"Tu bot de Telegram", k:"S7", req:["d1","d2","d5","d7"], mvp:["d2","d7"], c:3},
     {id:"s8-conectores-y-mcp", g:"Cuentas según tu desafío", t:"Conectores y MCP", k:"S8", req:["d4","d6"], mvp:[], c:3},
     {id:"s9-api-anthropic", g:"Cuentas según tu desafío", t:"Clave de API", k:"S9", req:["d1","d2","d5"], mvp:[], c:2},
     {id:"s10-conectar-todo", g:"Cuentas según tu desafío", t:"Conectar cualquier cosa + checklist", k:"S10", req:"ref", c:4},
@@ -417,28 +419,29 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     {id:"s13-vapi", g:"Cuentas según tu desafío", t:"Vapi: agentes de voz", k:"S13", req:["d2"], mvp:[], c:4},
     {id:"s14-meta-y-google", g:"Cuentas según tu desafío", t:"Meta y Google", k:"S14", req:["d1","d5","d6","d7"], mvp:[], c:4},
     {id:"s15-apify", g:"Cuentas según tu desafío", t:"Apify: datos de la web (opcional)", k:"S15", req:"opcional", c:2},
-    {id:"p2-asistente-telegram", g:"Tutoriales", t:"Propuestas y gastos en Telegram", k:"P2", c:7},
+    {id:"p2-asistente-telegram", g:"Tutoriales", t:"Propuestas y gastos en Telegram", k:"P2", c:6},
     {id:"p3-agente-preguntas", g:"Tutoriales", t:"Agente que responde y filtra", k:"P3", c:6},
-    {id:"p4-foto-a-tabla", g:"Tutoriales", t:"De foto a planilla", k:"P4", c:4},
-    {id:"p5-web-propia", g:"Tutoriales", t:"Tu web", k:"P5", c:7},
-    {id:"p6-lovable-y-calendario", g:"Tutoriales", t:"Lovable y calendario", k:"P6", c:5},
+    {id:"p4-foto-a-tabla", g:"Tutoriales", t:"De foto a planilla", k:"P4", c:3},
+    {id:"p5-web-propia", g:"Tutoriales", t:"Tu web", k:"P5", c:6},
+    {id:"p6-lovable-y-calendario", g:"Tutoriales", t:"Lovable y calendario", k:"P6", c:4},
     {id:"u-fabrica", g:"Tutoriales", t:"Fábrica de contenidos", k:"F", c:6},
     {id:"p7-video", g:"Tutoriales", t:"Tu editor de video", k:"P7", c:6},
-    {id:"p8-seguimiento", g:"Tutoriales", t:"Seguimiento", k:"P8", c:5},
-    {id:"p9-meta-ads", g:"Tutoriales", t:"Meta Ads con agentes", k:"P9", c:4},
+    {id:"p8-seguimiento", g:"Tutoriales", t:"Seguimiento", k:"P8", c:4},
+    {id:"p9-meta-ads", g:"Tutoriales", t:"Meta Ads con agentes", k:"P9", c:5},
     {id:"p10-extras", g:"Tutoriales", t:"Placas y reporte automático", k:"P10", c:5},
-    {id:"w1-opciones", g:"WhatsApp", t:"Opciones: pros, contras y precios", k:"W1", c:5},
-    {id:"w2-bot-dlastcrm", g:"WhatsApp", t:"Tu bot con dlastcrm", k:"W2", c:21},
+    {id:"w1-opciones", g:"WhatsApp", t:"Opciones: pros, contras y precios", k:"W1", c:4},
+    {id:"w2-bot-dlastcrm", g:"WhatsApp", t:"Tu bot con dlastcrm", k:"W2", c:6},
     {id:"w3-bot-propio", g:"WhatsApp", t:"Tu plataforma propia (tipo hospital)", k:"W3", c:6},
     {id:"w4-zernio", g:"WhatsApp", t:"Zernio", k:"W4", c:5},
     {id:"w5-unipile", g:"WhatsApp", t:"Unipile", k:"W5", c:4},
-    {id:"w6-evolution-api", g:"WhatsApp", t:"Evolution API", k:"W6", c:6},
+    {id:"w6-evolution-api", g:"WhatsApp", t:"Evolution API", k:"W6", c:5},
     {id:"e-fondus", g:"Empresas", t:"Fondus", k:"E", c:4},
     {id:"e-consejera", g:"Empresas", t:"La Consejera del Éxito", k:"E", c:5},
     {id:"e-manuel", g:"Empresas", t:"Manuel Martínez Oratoria", k:"E", c:5},
     {id:"e-denvet", g:"Empresas", t:"Denvet", k:"E", c:4},
     {id:"e-celve", g:"Empresas", t:"Celve", k:"E", c:4},
     {id:"e-tdh", g:"Empresas", t:"Viajes TDH Docta", k:"E", c:5},
+    {id:"e-vetplus", g:"Empresas", t:"VetPlus", k:"E", c:4},
     {id:"t1-modelos", g:"Teoría", t:"Modelos: qué son y cuál usar", k:"T1", c:0},
     {id:"t2-piezas", g:"Teoría", t:"Agentes, skills, conectores y MCP", k:"T2", c:0},
     {id:"t3-donde-trabajar", g:"Teoría", t:"Chat, Cowork, Code y la nube", k:"T3", c:0},
@@ -639,11 +642,12 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
   }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 
-  function copyBtn(getText){
-    var b = document.createElement("button"); b.className="copy"; b.type="button"; b.textContent="Copiar";
+  function copyBtn(getText, label){
+    label = label || "Copiar";
+    var b = document.createElement("button"); b.className="copy"; b.type="button"; b.textContent=label;
     b.addEventListener("click", function(){
       var t = getText();
-      function ok(){ b.textContent="Copiado"; b.classList.add("ok"); setTimeout(function(){ b.textContent="Copiar"; b.classList.remove("ok"); },1600); }
+      function ok(){ b.textContent="Copiado"; b.classList.add("ok"); setTimeout(function(){ b.textContent=label; b.classList.remove("ok"); },1600); }
       function fallback(){
         var pre = b.closest(".code").querySelector("pre");
         var r = document.createRange(); r.selectNodeContents(pre);
@@ -670,6 +674,11 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       if(box.classList.contains("term") && !osBox) label = (lang==="powershell"||lang==="ps1") ? "PowerShell" : "Terminal";
       var bar = document.createElement("div"); bar.className="bar"; bar.innerHTML = "<span>"+esc(label)+"</span>";
       bar.appendChild(copyBtn(function(){ return c.textContent.replace(/\n$/,""); }));
+      if(box.classList.contains("term")){
+        var ask = copyBtn(function(){ return "Corré este comando en mi compu y decime qué salió, en simple. Si necesita permisos o algo que yo tenga que hacer, avisame antes:\n\n" + c.textContent.replace(/\n$/,""); }, "Pedíselo a Claude");
+        ask.classList.add("askclaude"); ask.title = "Copia el comando como pedido para pegar en la pestaña Code de la app de Claude";
+        bar.appendChild(ask);
+      }
       pre.parentNode.insertBefore(box, pre); box.appendChild(bar); box.appendChild(pre);
     });
   }
@@ -703,7 +712,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
       d.innerHTML = '<div class="code file"><div class="bar"><span>'+esc(path.split("/").slice(-2).join("/"))+'</span></div><pre><code>Cargando…</code></pre></div>';
       var c = d.querySelector("code");
       d.querySelector(".bar").appendChild(copyBtn(function(){ return c.textContent; }));
-      fetch(path).then(function(r){ if(!r.ok) throw 0; return r.text(); })
+      fetch(path+"?v="+BUILD).then(function(r){ if(!r.ok) throw 0; return r.text(); })
         .then(function(t){ c.textContent = t; })
         .catch(function(){ c.textContent = "Este archivo todavía no está publicado."; });
     });
@@ -815,7 +824,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     if(!ch.length){
       return Promise.resolve(head + "Todavía no elegiste ningún desafío.\n\n1. Andá al [menú de desafíos del Inicio](#inicio).\n2. Tocá **☆ Elegir** en hasta 3 (uno por ronda).\n3. Volvé acá con **Ir a mis desafíos →**.\n\n> **Tip:** si no sabés cuál, mirá la página de tu empresa en la sección **Empresas**: ahí tenés los que te sugerimos.\n");
     }
-    return Promise.all(ch.map(function(id){ return fetch("guia/"+id+".md").then(function(r){return r.text();}).catch(function(){return "";}); })).then(function(txts){
+    return Promise.all(ch.map(function(id){ return fetch("guia/"+id+".md?v="+BUILD).then(function(r){return r.text();}).catch(function(){return "";}); })).then(function(txts){
       var md = head + "Estos son los que elegiste, en el orden en que los elegiste. Hacé uno por ronda y arrancá siempre por el camino **Rápido**.\n\n";
       ch.forEach(function(id,i){
         var fm = parseFM(txts[i]||"").meta, p = byId[id];
@@ -842,7 +851,7 @@ main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!i
     if(id==="mis-desafios") return buildMine();
     if(id==="elegir") return load("inicio");
     if(cache[id]) return Promise.resolve(cache[id]);
-    return fetch("guia/"+id+".md").then(function(r){ if(!r.ok) throw 0; return r.text(); }).then(function(t){ cache[id]=t; return t; });
+    return fetch("guia/"+id+".md?v="+BUILD).then(function(r){ if(!r.ok) throw 0; return r.text(); }).then(function(t){ cache[id]=t; return t; });
   }
 
   var navStack = [];

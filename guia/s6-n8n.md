@@ -4,106 +4,91 @@ bloque: Setup
 tiempo: 30 min
 para: Según tu desafío (mirá el recuadro de abajo)
 necesitas: s5-cuentas-nube
-resultado: Cuenta de n8n Cloud en prueba, credenciales de Telegram, Google y Anthropic guardadas en n8n, y n8n conectado a Claude por MCP.
+resultado: Cuenta de n8n Cloud en prueba, credenciales de Telegram, Google y Anthropic guardadas en n8n, y n8n conectado a Claude desde la pestaña Code.
 ---
 
-n8n es una cadena de montaje: "cuando pasa esto, hacé aquello, después aquello otro". Por ejemplo: llega un mensaje a tu bot de Telegram → Claude lo responde con tu cerebro → la consulta queda anotada en una planilla.
-Ejemplo: Manuel Martínez le manda a su bot de Telegram la foto de un ticket y n8n la pasa a Claude, que la anota en su planilla de gastos. Todo corre en la nube, aunque su compu esté apagada.
-Y conectado a Claude por MCP (el "enchufe" estándar entre Claude y otras apps, ver [Las piezas](#t2-piezas)), le podés pedir a Claude que use tus flujos conversando. En n8n, un **flujo** (workflow) es una de esas cadenas; tu **instancia** es tu propio n8n, con su dirección web.
+n8n es una cadena de montaje: "cuando pasa esto, hacé aquello, después aquello otro". Todo corre en la nube, aunque tu compu esté apagada.
+Ejemplo: Manuel Martínez le manda a su bot de Telegram la foto de un ticket, n8n se la pasa a Claude y la anota en su planilla de gastos.
+Conectado a Claude por MCP (el "enchufe" entre Claude y otras apps, ver [Las piezas](#t2-piezas)), le pedís a Claude que arme y use tus flujos conversando. Un **flujo** (workflow) es una de esas cadenas; tu **instancia** es tu propio n8n, con su dirección web.
 
 ## Antes de empezar
 - [ ] Un mail para la cuenta de n8n.
-- [ ] Para el Paso 3: el token de tu bot de Telegram ([Telegram](#s7-telegram)). Si todavía no lo tenés, hacé esa página y volvé.
-- [ ] Para el Paso 5: una API key de Anthropic ([API de Anthropic](#s9-api-anthropic)). Mismo criterio.
-- [ ] Claude Code instalado, si querés conectar n8n también ahí ([Instalá Claude Code](#s2-claude-code)).
+- [ ] Para el Paso 3: el token de tu bot, en tu gestor de contraseñas ([Telegram](#s7-telegram)).
+- [ ] Para el Paso 5: una API key de Anthropic ([API de Anthropic](#s9-api-anthropic)).
+- [ ] La pestaña **Code** abierta en **Local** con tu carpeta `prueba-claude` ([Claude Code](#s2-claude-code)).
 
-## Cloud o en tu compu: qué elegir
-| | **n8n Cloud** (recomendado hoy) | **Self-hosted** (instalado por vos, en tu compu o servidor) |
-|---|---|---|
-| Precio | Prueba gratis; después desde **€20/mes** | Gratis (pagás el servidor si lo subís a uno) |
-| Instalación | Nada: es una web | Necesita **Docker** o **WSL** (programas técnicos para correr servidores en tu compu) |
-| Bots de Telegram o WhatsApp | Funcionan directo | Necesitás un dominio con HTTPS para recibir mensajes de afuera |
-| Mantenimiento | Lo hace n8n | Lo hacés vos |
+> **Costo:** usamos **n8n Cloud** (nada que instalar). La prueba **no pide tarjeta** e incluye 1.000 ejecuciones; fijate la fecha de vencimiento al activarla. Después: **Starter €20/mes** y **Pro €50/mes**, con pago anual (nov 2026; el precio mensual en dólares no está confirmado, verificá en [n8n.io/pricing](https://n8n.io/pricing/)).
 
-> **Costo:** n8n publica sus precios en **euros** y con **pago anual**: **Starter €20/mes** (2.500 ejecuciones por mes) y **Pro €50/mes** (10.000 ejecuciones). La página tiene un selector mensual/anual pero solo muestra los precios anuales; el precio mensual y en dólares (terceros hablan de unos USD 24 para Starter) **no está confirmado al 18/11/2026**. La prueba de n8n Cloud **no pide tarjeta** y tiene 1.000 ejecuciones, 5 a la vez, 180 segundos máximo por ejecución y 1 proyecto. Cuánto dura la prueba **no figura en la página oficial** (terceros dicen 14 días): fijate la fecha de vencimiento cuando la actives.
-
-> **Ojo:** una "ejecución" es cada vez que corre un flujo. Un flujo que revisa algo cada minuto gasta 1.440 ejecuciones por día y se come la prueba en un día. Para bots, usá disparadores que esperan (como el de Telegram), no revisiones cada X minutos.
+> **Ojo:** una "ejecución" es cada vez que corre un flujo. Uno que revisa algo cada minuto gasta 1.440 por día y se come la prueba. Para bots, usá disparadores que esperan (como el de Telegram).
 
 ## Paso 1 · Creá tu cuenta de n8n Cloud
 1. Entrá a **[n8n.io](https://n8n.io)** y empezá la prueba gratis de **n8n Cloud**.
-2. Registrate con tu mail y confirmalo. Si el mail no llega en 2 minutos, mirá en **Spam** o **Promociones**.
-3. Elegí un nombre para tu espacio (por ejemplo, el de tu empresa). Ese nombre forma parte de la dirección de tu n8n.
+2. Registrate con tu mail y confirmalo (si no llega, mirá **Spam**).
+3. Elegí un nombre para tu espacio (por ejemplo, tu empresa).
 
-**Tenés que ver:** el panel de n8n (**Overview**) y, en la barra del navegador, la dirección de tu instancia (algo como `https://[TU-ESPACIO].app.n8n.cloud`). Anotala: te sirve para volver a entrar.
+**Tenés que ver:** el panel de n8n (**Overview**) y en el navegador una dirección como `https://[TU-ESPACIO].app.n8n.cloud`. Anotala.
 
-## Paso 2 · Aprendé dónde se crean las credenciales
-Una **credencial** es una llave guardada adentro de n8n. Se carga una vez y los flujos la usan sin mostrarla.
+## Paso 2 · Aprendé a crear credenciales
+Una **credencial** es una llave guardada adentro de n8n: se carga una vez y los flujos la usan sin mostrarla.
 
-1. Tocá **Create** (arriba a la izquierda del menú o arriba a la derecha en **Overview**) › **Credential**.
-2. Buscá el servicio por nombre.
-3. Completá los datos y tocá **Save**. n8n prueba la credencial al guardarla.
-4. Renombrala con algo claro, por ejemplo `Telegram - bot de turnos`.
+1. **Create** › **Credential** › buscá el servicio.
+2. Completá, tocá **Save** y renombrala con algo claro (por ejemplo `Telegram - bot de turnos`).
 
-> **Datos:** n8n es **el** lugar para estas claves. No las copies en el cerebro, en notas, ni en un chat con Claude.
+> **Datos:** n8n es **el** lugar para estas claves. Las copiás del gestor de contraseñas y las pegás acá, en la web de n8n. Nunca en el chat con Claude.
 
-**Tenés que ver:** la ventana para elegir el servicio de la credencial.
+**Tenés que ver:** la ventana para elegir el servicio.
 
 ## Paso 3 · Credencial de Telegram
-1. **Create › Credential** › buscá **Telegram**.
-2. Abrí tu gestor de contraseñas, copiá el token de tu bot (lo guardaste en [Telegram](#s7-telegram), Paso 3) y pegalo en **Access Token**.
-3. **Save**.
+**Create › Credential** › **Telegram** › pegá el token desde tu gestor en **Access Token** › **Save**.
 
 **Tenés que ver:** la credencial guardada sin errores.
 
 ## Paso 4 · Credencial de Google (Drive, Gmail o Sheets)
-En n8n Cloud no hace falta crear nada en Google Cloud.
+1. **Create › Credential** › **Google Sheets**, **Gmail** o **Google Drive** (cada uno es una credencial aparte).
+2. **Sign in with Google** › elegí tu cuenta › leé los permisos y aceptá.
 
-1. **Create › Credential** › buscá el servicio que vas a usar: **Google Sheets**, **Gmail** o **Google Drive** (cada uno es una credencial distinta).
-2. Tocá **Sign in with Google** y elegí tu cuenta.
-3. Leé los permisos que pide y aceptá.
+**Tenés que ver:** la credencial conectada con tu mail de Google.
 
-> **Ojo:** este inicio de sesión rápido (Managed OAuth2) solo existe en **n8n Cloud** y para algunos servicios de Google (Drive, Gmail y Sheets, entre otros). En self-hosted hay que crear una app en Google Cloud: no lo hagas hoy.
+## Paso 5 · Credencial de Anthropic
+**Create › Credential** › **Anthropic** › pegá tu API key desde el gestor en **API Key** › **Save**.
 
-**Tenés que ver:** la credencial marcada como conectada con tu mail de Google.
-
-## Paso 5 · Credencial de Anthropic (Claude)
-1. **Create › Credential** › buscá **Anthropic**.
-2. Copiá desde tu gestor de contraseñas la clave que creaste en la Console de Anthropic ([API de Anthropic](#s9-api-anthropic)) y pegala en **API Key**.
-3. **Save**.
-
-> **Costo:** cada vez que un flujo usa Claude, se descuenta de tu crédito de la API de Anthropic, que es **aparte** de tu plan Pro. Por eso en la página de la API ponés un límite de gasto.
+> **Costo:** cada vez que un flujo usa Claude, se descuenta de tu crédito de la API, **aparte** de tu plan Pro.
 
 **Tenés que ver:** la credencial guardada sin errores.
 
-## Paso 6 · Conectá n8n con Claude por MCP
-Esto le da a Claude acceso a los flujos que vos habilites (no a todos).
+## Paso 6 · Activá el MCP en n8n
+1. **Settings** (abajo a la izquierda) › **Instance-level MCP** › **Enable MCP access**.
+2. Creá un flujo vacío (**Create › Workflow**), llamalo `prueba-mcp` y guardalo. En el flujo: menú **…** › **Settings** › activá **Available in MCP**.
+3. Volvé a **Settings › Instance-level MCP** › **Connect a client**. Copiá la **Server URL** (termina en `/mcp-server/http`; no es la del navegador). Esa dirección no es secreta.
+4. En ese mismo cuadro, buscá la opción de **Access Token** y generá un token. **No lo copies todavía.**
 
-**6.1 · Activá el MCP en n8n** (hace falta ser dueño o admin de la instancia; en tu cuenta nueva, lo sos):
-1. Abrí **Settings** (suele estar abajo a la izquierda) › **Instance-level MCP** › **Enable MCP access**.
-2. Creá un flujo vacío de prueba (**Create › Workflow**), llamalo `prueba-mcp` y guardalo.
-3. En ese flujo: menú **…** › **Settings** › activá **Available in MCP**.
-4. Volvé a **Settings › Instance-level MCP** › **Connect a client** y copiá la **Server URL**. Termina en `/mcp-server/http`. No es la dirección que ves en el navegador: usá la que muestra ese cuadro.
+> **Ojo:** los nombres de este cuadro pueden variar según la versión de n8n. Si no ves **Access Token** sino solo un inicio de sesión (OAuth), saltá al **Ojo** del Paso 7.
 
-**6.2 · Agregalo en la app de Claude (web o escritorio):**
-1. **Customize › Connectors** › **+ Add** › **Add custom connector**.
-2. **Name:** `n8n`. **URL:** la **Server URL** del paso anterior. **Continue**.
-3. Revisá la autenticación (dejá la que detecta) y tocá **Add**.
-4. Tocá **Connect** y, cuando te lleve a n8n, aprobá el acceso.
+**Tenés que ver:** la Server URL copiada y el token generado a la vista.
 
-> **Tip:** en **Connect a client** de n8n también podés elegir **[Claude.ai](https://Claude.ai)** en **Your client** y usar **One-click setup**.
+## Paso 7 · Conectá n8n a Claude desde la pestaña Code
+1. En la pestaña Code, pegá:
 
-**6.3 · Agregalo en Claude Code (opcional).** En una terminal (no adentro de Claude Code; en Windows, PowerShell). Reemplazá `[PEGÁ-ACÁ-LA-SERVER-URL]` por la **Server URL** que copiaste en el 6.1 (la que termina en `/mcp-server/http`):
-
-```bash
-claude mcp add --transport http n8n [PEGÁ-ACÁ-LA-SERVER-URL]
+```prompt
+Creá en esta carpeta un archivo .env con la línea N8N_MCP_TOKEN= vacía (si ya existe el .env, agregá la línea), asegurate de que .env esté en el .gitignore y abrime el .env en el editor de texto de mi compu. No me pidas el token por el chat.
 ```
 
-Después abrí `claude`, escribí `/mcp`, elegí **n8n** y **Authenticate**.
+2. En el editor, pegá el token de n8n después del `=`, guardá y cerralo. Escribile a Claude `listo`.
+3. Pegá este pedido, reemplazando la dirección por tu **Server URL**:
 
-**Tenés que ver:** en **Customize › Connectors**, n8n como conectado. En Claude Code, `/mcp` muestra n8n conectado.
+```prompt
+Agregá n8n como servidor MCP para mi usuario, con transporte http, en la dirección [PEGÁ-ACÁ-LA-SERVER-URL], usando el token de N8N_MCP_TOKEN del .env como encabezado "Authorization: Bearer". Usá el comando claude mcp add con --scope user. Leé el token del archivo sin mostrármelo ni repetirlo en el chat. Después decime si quedó conectado.
+```
+
+4. Aprobá el permiso para que Claude corra el comando.
+5. Abrí una sesión nueva en Code (**+ New**, misma carpeta) para que cargue n8n.
+
+> **Ojo:** si n8n solo te ofrece inicio de sesión (sin token), pedile a Claude que agregue el servidor sin encabezado y después escribí `/mcp`, elegí **n8n** y **Authenticate**: se abre el navegador para aprobar el acceso.
+
+**Tenés que ver:** en la sesión nueva, escribís `/mcp` y n8n aparece conectado.
 
 ## Cómo sé que funcionó
-En un chat nuevo de Claude, tocá **+ › Connectors**, activá n8n y pegá:
+En la sesión nueva de Code, pegá:
 
 ```prompt
 Usá n8n y decime qué flujos tengo disponibles por MCP y qué hace cada uno. No ejecutes nada.
@@ -114,27 +99,22 @@ Usá n8n y decime qué flujos tengo disponibles por MCP y qué hace cada uno. No
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
-| No aparece **Instance-level MCP** en **Settings** | Revisá que seas dueño o admin de la instancia. Si sigue, avisá en la mesa de ayuda. |
-| Claude se conecta pero dice que no hay flujos | Activá **Available in MCP** en el flujo y guardalo. |
-| Claude no conecta con la URL | Usá la **Server URL** de **Connect a client** (termina en `/mcp-server/http`), no la del navegador. |
-| La credencial de Telegram da error | El token está mal copiado (sobra un espacio o falta un pedazo). Copialo de nuevo desde tu gestor de contraseñas; si lo perdiste, generá uno nuevo con `/token` en @BotFather. |
-| La credencial de Anthropic da error | La clave está mal copiada o no tenés crédito cargado en la Console. |
-| Las ejecuciones de la prueba se terminaron | Revisá qué flujo corre cada pocos minutos y desactivalo. |
+| No aparece **Instance-level MCP** | Revisá que seas dueño o admin de la instancia. Si sigue, mesa de ayuda. |
+| Claude se conecta pero no ve flujos | Activá **Available in MCP** en el flujo y guardalo. |
+| Claude no conecta | Revisá que usaste la **Server URL** de **Connect a client** y que el token en el `.env` esté completo. Abrí una sesión nueva. |
+| La credencial de Telegram da error | El token está mal copiado. Copialo de nuevo desde el gestor. |
+| La credencial de Anthropic da error | Clave mal copiada o sin crédito en la Console. |
+| Se terminaron las ejecuciones de prueba | Buscá el flujo que corre cada pocos minutos y desactivalo. |
 
 ## Para seguir solo
-- Antes de que termine la prueba, decidí: **Starter** en Cloud o self-hosted. Para una pyme sin técnico, Cloud.
+- Antes de que termine la prueba, decidí: **Starter** en Cloud (lo más simple para una pyme) o instalarlo vos.
 - Pedile a Claude: "Usá n8n y armame un flujo que todos los lunes a las 9 me mande por Telegram un resumen de [QUÉ COSA]". Revisalo antes de activarlo.
-- Si en el futuro querés self-hosted, la instalación oficial es `curl -fsSL https://get.n8n.io | sh` y necesita Docker. Para producción, n8n recomienda Docker Compose.
+- También podés usar n8n desde el **Chat** de la app: **Customize › Connectors** › **+ Add** › **Add custom connector** con la misma Server URL.
 
 ## Fuentes
 Consultadas el 18/11/2026.
-- Precios y prueba de n8n Cloud: https://n8n.io/pricing/
-- Instalación self-hosted: https://docs.n8n.io/hosting/
-- Crear credenciales: https://docs.n8n.io/credentials/add-edit-credentials/
-- Credencial de Telegram: https://docs.n8n.io/integrations/builtin/credentials/telegram/
-- Credencial de Google (Managed OAuth2): https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/
-- Credencial de Anthropic: https://docs.n8n.io/integrations/builtin/credentials/anthropic/
+- Precios y prueba: https://n8n.io/pricing/
+- Credenciales: https://docs.n8n.io/credentials/add-edit-credentials/
 - Servidor MCP de instancia: https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server/
-- Ejemplos de clientes MCP (Claude Code y Claude Desktop): https://docs.n8n.io/connect/connect-to-n8n-mcp-server/mcp-client-examples
-- Conectores custom en Claude: https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp
-- Terceros (precio mensual en USD): https://toolradar.com/tools/n8n/pricing
+- Clientes MCP (Claude Code): https://docs.n8n.io/connect/connect-to-n8n-mcp-server/mcp-client-examples
+- MCP en Claude Code: https://code.claude.com/docs/en/mcp

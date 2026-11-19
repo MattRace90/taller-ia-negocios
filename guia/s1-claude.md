@@ -7,7 +7,7 @@ necesitas: nada
 resultado: Cuenta de Claude con plan Pro (o superior), la app de escritorio instalada y sabés dónde está cada cosa.
 ---
 
-Todo el taller pasa por Claude. Con el plan gratis podés chatear, pero Claude Code, Cowork y las skills necesitan un plan pago (**Pro** o superior).
+Todo el taller pasa por la app de Claude, y casi todo desde su pestaña **Code**. Con el plan gratis podés chatear, pero Code, Cowork y las skills necesitan un plan pago (**Pro** o superior).
 Si en tu empresa van a usarlo varias personas, cada una necesita su propia cuenta.
 
 ## Antes de empezar
@@ -61,7 +61,7 @@ Descargá la app desde **[claude.ai/download](https://claude.ai/download)**.
 | **Chat** | Conversación con Claude | Preguntas sueltas, borradores |
 | **Projects** | Carpetas de chats con conocimiento fijo | Subir tu cerebro para usarlo desde el celular |
 | **Cowork** | Un agente que trabaja con los archivos de tu compu | Ordenar carpetas, armar documentos y planillas |
-| **Code** | Claude Code dentro de la app | Todo lo técnico del taller, sin terminal |
+| **Code** | Claude Code dentro de la app | **Casi todo el taller**: crear archivos, instalar programas, conectar servicios. Sin terminal ([cómo se usa](#s2-claude-code)) |
 | **Customize › Skills** | Tus procesos escritos | Instalar las skills del taller en la app |
 | **Customize › Connectors** | Conexiones con Drive, Gmail, Calendar, Canva y más | [Conectores](#s8-conectores-y-mcp) |
 | **Settings › Capabilities** | Permisos de Claude | Activar **Code execution and file creation** (las skills lo necesitan) |
@@ -93,7 +93,7 @@ Reemplazá lo que está entre corchetes con tus datos (los corchetes también se
 **Tenés que ver:** la segunda respuesta es mucho más útil. Esa diferencia es lo que vamos a guardar en tu cerebro.
 
 ## Cómo sé que funcionó
-- Plan **Pro** activo, la app abierta con las pestañas **Chat**, **Cowork** y **Code**, y **Code execution and file creation** activado.
+- Plan **Pro** activo, la app abierta con las pestañas **Chat**, **Cowork** y **Code**, y **Code execution and file creation** activado. Lo siguiente: [Claude Code en la pestaña Code](#s2-claude-code).
 
 ## Si algo falla
 | Te pasa | Hacé esto |

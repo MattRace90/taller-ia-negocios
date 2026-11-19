@@ -13,7 +13,7 @@ resultado: Un reporte con 3 números clave y 3 acciones armado desde tu planilla
 
 **En 30 segundos**
 - **Cuánto tarda:** 30 min la MVP, 90 min la completa.
-- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás Claude y una planilla.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás la **pestaña Code** de la app de Claude y una planilla.
 
 ## Dos versiones: MVP y completa
 
@@ -27,12 +27,14 @@ resultado: Un reporte con 3 números clave y 3 acciones armado desde tu planilla
 ### Versión MVP, paso a paso
 1. **Bajá tu planilla.** En Google Sheets: **Archivo › Descargar › Valores separados por comas (.csv)**. ¿No tenés una? Pedile a Claude una de práctica con el prompt de [El reporte que llega solo](#p10-extras), Paso 4.
 
-**Tenés que ver:** un archivo `.csv` en tu carpeta de Descargas.
+Mové ese archivo a una carpeta `datos` dentro de la carpeta de tu cerebro.
 
-2. **Pedí el reporte.** En un chat de Claude, adjuntá el archivo y pegá:
+**Tenés que ver:** el archivo `.csv` dentro de `datos`.
+
+2. **Pedí el reporte.** En la app de Claude, abrí la **pestaña Code**, elegí la carpeta de tu cerebro y pegá:
 
 ```prompt
-Sos mi analista. Esta planilla es de [VENTAS / LEADS / GASTOS / STOCK] de mi negocio. Dame:
+Sos mi analista. Leé el archivo .csv de la carpeta datos/. Es una planilla de [VENTAS / LEADS / GASTOS / STOCK] de mi negocio. Dame:
 1. Los 3 números más importantes de la última semana, comparados con la anterior.
 2. Qué cambió y por qué podría ser (decí si es una suposición).
 3. 3 acciones concretas para esta semana.
@@ -45,7 +47,13 @@ Lenguaje simple, máximo media página. Si falta un dato o algo no cierra, decil
 
 **Tenés que ver:** coincide. Si no, pedile a Claude que muestre la cuenta.
 
-4. **Guardalo como receta.** Creá un **Proyecto** en Claude ("Reporte semanal") con el prompt del paso 2 en sus instrucciones. Cada lunes, adjuntás la planilla nueva y listo.
+4. **Guardalo como receta.** En la misma pestaña Code, pegá:
+
+```prompt
+Convertí el pedido del reporte en una skill de este proyecto llamada mi-reporte: que lea el .csv más nuevo de datos/ y arme el mismo reporte, con las mismas reglas.
+```
+
+**Tenés que ver:** en una sesión nueva, `/mi-reporte` te arma el reporte. Cada lunes, ponés la planilla nueva en `datos` y lo escribís.
 
 ### Versión completa
 El reporte que corre solo cada lunes: [El reporte que llega solo](#p10-extras), Parte B ([Tareas programadas](#t4-tareas-programadas)). Cuánto invertir en Meta: [Meta Ads con agentes](#p9-meta-ads).
@@ -55,7 +63,7 @@ Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te 
 ## Lo lograste si…
 - [ ] Tenés un reporte con 3 números clave y 3 acciones concretas.
 - [ ] Chequeaste un número a mano y coincide.
-- [ ] El prompt quedó guardado para repetirlo el próximo lunes.
+- [ ] El pedido quedó guardado como skill (`/mi-reporte`) para el próximo lunes.
 - [ ] Sabés qué vas a hacer distinto esta semana.
 
 ## Ideas por tipo de negocio

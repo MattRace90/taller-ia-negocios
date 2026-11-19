@@ -1,251 +1,149 @@
 ---
 titulo: Tu editor de video y dónde conviene trabajar
 bloque: Tutorial
-tiempo: 60 a 75 min (más las descargas, si no las hiciste antes)
+tiempo: 45 a 60 min (más las descargas, si no las hiciste antes)
 para: Manuel Martínez Oratoria, La Consejera del Éxito (y cualquiera que grabe videos)
 necesitas: p1-cerebro, s2-claude-code, s3-herramientas-base
 resultado: Tu propio editor de video que corta silencios, subtitula y agrega tu placa final; un script que manda cada video de alumno a su carpeta de Drive; y claro cuándo usar el chat, Cowork, Claude Code o Claude Code en la web.
 ---
 
-Grabar no es el problema. Lo que cansa es lo que viene después: cortar los silencios, poner subtítulos, la placa final, renombrar 20 archivos y subirlos a la carpeta de cada uno.
-Hoy armás un editor de video propio, de cero, que hace eso solo con tu marca. Y resolvemos un cuello de botella típico de las escuelas: que cada video de alumno llegue a su carpeta sin tocarlo a mano.
+Grabar no es el problema. Lo que cansa es lo que viene después: cortar silencios, subtitular, la placa final, renombrar 20 archivos y subirlos a la carpeta de cada uno.
+Hoy armás un editor de video propio que hace eso con tu marca, y un script para que cada video de alumno llegue solo a su carpeta. Todo pidiéndoselo a Claude en la pestaña **Code**.
 
-> **Ojo:** este editor **trabaja sobre video que ya grabaste**: corta, subtitula y le pone tu placa. No inventa un video desde cero. Para video generado 100% con IA (escenas, o un presentador virtual que habla por vos) se usan Higgsfield o HeyGen: mirá [Herramientas creativas](#s12-creativas).
+> **Ojo:** este editor **trabaja sobre video que ya grabaste**. No inventa video desde cero. Para video 100% con IA: [Herramientas creativas](#s12-creativas).
 
 ## Antes de empezar
-- [ ] Claude Code instalado y saber abrir la terminal: en Mac, **Terminal**; en Windows, **PowerShell** ([Instalá Claude Code](#s2-claude-code), Paso 1).
-- [ ] Node y ffmpeg instalados ([Herramientas base](#s3-herramientas-base)). Probalo: `node --version` y `ffmpeg -version` tienen que responder.
-- [ ] Tu cerebro con `marca/identidad-visual.md` (colores en hex, tipografía, logo) ([Tu cerebro](#p1-cerebro)).
-- [ ] Un video **tuyo** hablando a cámara, de 30 a 90 segundos, grabado con el celular. Que tenga pausas: así se nota el corte de silencios.
+- [ ] La app de escritorio de Claude con la pestaña **Code** ([Instalá Claude Code](#s2-claude-code)).
+- [ ] Node y ffmpeg instalados ([Herramientas base](#s3-herramientas-base)).
+- [ ] Tu cerebro con `marca/identidad-visual.md` (colores, tipografía, logo) ([Tu cerebro](#p1-cerebro)).
+- [ ] Un video **tuyo** hablando a cámara, de 30 a 90 segundos, con pausas.
 - [ ] Parte 2: Google Drive para escritorio instalado y con tu sesión iniciada.
-- [ ] Unos 3 GB libres en el disco (el editor y el modelo de transcripción).
+- [ ] Unos 3 GB libres en el disco.
 
-> **Datos:** todo lo de este tutorial corre **en tu compu**: el video y la transcripción no se suben a ninguna IA en la nube. Igual, para practicar usá un video tuyo, no de un cliente o alumno.
+> **Datos:** todo corre **en tu compu**: el video y la transcripción no se suben a la nube. Igual, practicá con un video tuyo, no de un cliente o alumno.
 
 ## Parte 1 · Tu editor de video con Remotion (30 min)
-Remotion es una herramienta para hacer videos con código. Vos no escribís el código: lo escribe Claude Code, y vos le pedís cambios en castellano.
+Remotion hace videos con código. El código lo escribe Claude; vos pedís cambios en castellano.
 
-## Paso 1 · Creá el proyecto del editor
-Abrí la terminal y escribí estas dos líneas (la segunda descarga Remotion y tarda un par de minutos):
+> **Ojo:** Remotion y el modelo de transcripción bajan cientos de MB. Si el wifi está lento, hacé la Parte 1 en el almuerzo y mientras tanto mirá la Parte 3.
 
-> **Ojo:** Remotion y, más adelante, el modelo de transcripción bajan bastante (cientos de MB). Si el wifi está lento, hacé estos dos pasos en el almuerzo o con los datos del celular, y mientras tanto mirá la Parte 3. En Windows: si `npx` o `npm` salen en rojo con "running scripts is disabled", escribí `npx.cmd` y `npm.cmd`; si `cd $HOME\Documents` da error de ruta (pasa con OneDrive), usá el truco de arrastrar la carpeta de [Tu cerebro](#p1-cerebro), Paso 1.
-
-<div data-os="mac">
-
-```bash
-cd ~/Documents
-npx create-video@latest
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-cd $HOME\Documents
-npx create-video@latest
-```
-
-</div>
-
-El asistente te hace preguntas en la terminal. Te movés con las flechas y confirmás con Enter. Respondé así:
-1. Nombre de la carpeta: `editor-video`.
-2. Plantilla: **Blank** (en blanco).
-3. Si pregunta por **Agent Skills** (instrucciones para que Claude Code sepa usar Remotion): **sí**.
-4. Si pregunta por gestor de paquetes: **npm**.
-
-Después entrá a la carpeta y abrí la vista previa:
-
-<div data-os="mac">
-
-```bash
-cd editor-video
-npm install
-npm run dev
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-cd editor-video
-npm install
-npm run dev
-```
-
-</div>
-
-**Tenés que ver:** el **Remotion Studio** abierto en el navegador, con una composición vacía. Dejá esa terminal abierta.
-
-> **Costo:** Remotion es gratis para personas y para empresas de **hasta 3 personas**, incluso para uso comercial. Si tu empresa tiene más gente, necesitás una licencia de empresa. Ver [Stack y costos](#r-stack-y-costos).
-
-## Paso 2 · Instalá la skill editar-video y abrí Claude Code
-1. Abrí **otra** terminal y entrá a la carpeta del editor:
-
-<div data-os="mac">
-
-```bash
-cd ~/Documents/editor-video
-claude
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-cd $HOME\Documents\editor-video
-claude
-```
-
-</div>
-
-2. Instalá la skill `editar-video`: en el [Kit del taller](#r-kit) (abrilo en otra pestaña) tocá **Copiar** en `editar-video` y pegala debajo de este prompt:
+## Paso 1 · Pedile a Claude que cree el editor
+App de Claude › **Code** › selector de entorno **Local** › **Open folder…** › elegí **Documentos**. Pegá:
 
 ```prompt
-Creá una skill personal llamada editar-video. Guardá el texto que pego abajo, exacto y sin cambios, en el archivo SKILL.md de la carpeta de skills de mi usuario (~/.claude/skills/editar-video/SKILL.md; en Windows es C:\Users\[MI-USUARIO]\.claude\skills\editar-video\SKILL.md). Cuando termines, decime la ruta exacta donde quedó.
+Fijate si tengo Node y ffmpeg instalados. Si están, creá en esta carpeta un proyecto de Remotion llamado editor-video, con la plantilla Blank y las Agent Skills de Remotion (para que sepas usarlo). Instalá las dependencias y abrime el Remotion Studio en el navegador, dejándolo corriendo. Si falta algo, decime qué y esperá.
+```
+
+Aprobá los permisos que pide (**Permitir**). Tarda un par de minutos.
+
+**Tenés que ver:** el **Remotion Studio** abierto en el navegador, con una composición vacía.
+
+> **Costo:** Remotion es gratis para personas y empresas de **hasta 3 personas**, incluso uso comercial. Si son más, hace falta licencia. Ver [Stack y costos](#r-stack-y-costos).
+
+## Paso 2 · Instalá la skill editar-video
+1. Abrí una **sesión nueva** en la pestaña Code con **Open folder…** › `Documentos/editor-video`.
+2. En el [Kit del taller](#r-kit) tocá **Copiar** en `editar-video` y pegala debajo de este prompt:
+
+```prompt
+Creá una skill personal llamada editar-video. Guardá el texto que pego abajo, exacto y sin cambios, en la carpeta de skills de mi usuario (.claude/skills/editar-video/SKILL.md dentro de mi carpeta de usuario). Después buscá mi carpeta cerebro-[TU-EMPRESA] en Documentos y guardá su ruta en el CLAUDE.md de este proyecto, para que la skill lea marca/identidad-visual.md. Decime las dos rutas.
 
 [PEGÁ ACÁ EL CONTENIDO DE LA SKILL]
 ```
 
-3. Salí con `/exit` y volvé a entrar con `claude`.
-4. Contale dónde está tu cerebro, una sola vez. Cambiá `[RUTA-DE-TU-CARPETA-CEREBRO]` por la ruta de tu carpeta: en Mac, `~/Documents/cerebro-[TU-EMPRESA]`; en Windows, `C:\Users\[MI-USUARIO]\Documents\cerebro-[TU-EMPRESA]`. También podés arrastrar la carpeta a la ventana y se pega sola.
-
-```prompt
-Mi cerebro está en [RUTA-DE-TU-CARPETA-CEREBRO]. Guardá esa ruta en el CLAUDE.md de este proyecto, para que la skill editar-video sepa dónde leer marca/identidad-visual.md.
-```
-
-**Tenés que ver:** `editar-video` aparece al escribir `/`.
+**Tenés que ver:** `editar-video` aparece al escribir `/`. Si no, abrí otra sesión nueva en la misma carpeta.
 
 ## Paso 3 · Editá tu primer video
-En Claude Code escribí `/editar-video ` (con un espacio al final). Después arrastrá tu video desde Finder o el Explorador a la ventana: se pega su ruta. Abajo, escribí la línea de la placa final, cambiando lo que está entre corchetes por tu frase y tu usuario o web. Queda así:
+Copiá tu video adentro de la carpeta `editor-video` (con Finder o el Explorador de archivos). Después escribí:
 
 ```prompt
-/editar-video [ARRASTRÁ-ACÁ-TU-VIDEO]
+/editar-video [NOMBRE-DE-TU-VIDEO.mp4]
 Placa final: "[TU-LLAMADO-A-LA-ACCIÓN]" y [TU-USUARIO-O-WEB].
 ```
 
-Claude va a:
-1. Copiar el video (nunca toca el original).
-2. Mostrarte cuántos silencios va a cortar y cuántos segundos ahorra. Respondé **"dale"**.
-3. Instalar Whisper (el programa que transcribe) y el modelo en español. La primera vez tarda unos minutos.
-4. Mostrarte las palabras dudosas de los subtítulos para que las corrijas.
-5. Armar la composición en el Studio para que la mires.
-6. Renderizar (generar el archivo de video final) en `salida/`.
+Claude copia el video (nunca toca el original), te dice cuántos silencios corta (respondé **"dale"**), instala Whisper (el programa que transcribe) la primera vez, te muestra las palabras dudosas para corregir y renderiza.
 
-**Tenés que ver:** en el Studio, tu video vertical con subtítulos y la placa con tus colores al final. Después, el archivo `salida/[nombre]-final.mp4`.
+**Tenés que ver:** en el Studio, tu video vertical con subtítulos y tu placa al final. Después, `salida/[nombre]-final.mp4`.
 
-> **Tip:** pedí cambios como se los pedirías a un editor: "Subtítulos más grandes", "Resaltá en amarillo la palabra que digo", "La placa final 2 segundos más". Cuando te guste el estilo: "Guardá este estilo como el default".
-
-> **Tip:** si das clases o hacés vivos, el mismo editor sirve para cortar clips de lo que ya grabaste. Pedí: "De este video de 40 minutos, proponeme los 3 mejores fragmentos de 30 a 60 segundos para reels, con el minuto exacto y por qué".
+> **Tip:** pedí cambios como a un editor: "Subtítulos más grandes", "Resaltá en amarillo la palabra que digo", "Guardá este estilo como el default". Y para clases largas: "De este video de 40 minutos, proponeme los 3 mejores fragmentos para reels, con el minuto exacto".
 
 ## Parte 2 · Cada video de alumno a su carpeta (20 min)
-El caso de una escuela de oratoria: después de cada encuentro hay un video por alumno, y alguien los renombra y los sube uno por uno a la carpeta de cada alumno. La idea:
+El caso de una escuela de oratoria: un video por alumno después de cada encuentro. La idea:
+1. Al empezar cada grabación, el docente dice el nombre: "Juan Pérez, encuentro 3".
+2. Un script (un programita con una tarea fija) transcribe **los primeros segundos**, encuentra el nombre, renombra el video y lo copia a la carpeta del alumno.
+3. Las carpetas están en **Google Drive para escritorio**, que sincroniza solo. No hace falta conectarse a Drive.
 
-1. **Al empezar cada grabación, el docente dice el nombre del alumno en voz alta.** "Juan Pérez, encuentro 3."
-2. Los videos del día se copian a una carpeta de entrada.
-3. Un script (un programita que hace una tarea fija) transcribe **solo los primeros segundos** de cada video, encuentra el nombre, lo renombra (`2026-11-19_Juan-Perez_encuentro-3.mp4`) y lo copia a la carpeta del alumno.
-4. Las carpetas de alumnos están en **Google Drive para escritorio**, que sincroniza solo. Por eso no hace falta conectarse a la API de Drive: el script copia a una carpeta de tu compu y Drive lo sube.
+> **Datos:** el video de un alumno es un dato personal. Hace falta su **consentimiento por escrito** (por ejemplo, en la inscripción). Las carpetas se comparten solo con cada alumno. La transcripción se hace en la compu.
 
-> **Datos:** el video de un alumno es un dato personal. Antes de procesarlo hace falta su **consentimiento por escrito** (por ejemplo, una línea en la inscripción: "Autorizo que se grabe mi exposición y se guarde en mi carpeta privada"). Las carpetas se comparten solo con cada alumno. La transcripción se hace en la compu, no en la nube.
-
-## Paso 4 · Encontrá la ruta de tu Drive
-<div data-os="mac">
-
-1. Abrí **Finder**. En la barra lateral, en **Ubicaciones**, está **Google Drive**.
-2. Entrá a la carpeta donde están (o van a estar) las carpetas de los alumnos.
-3. Arrastrá esa carpeta a la Terminal: se pega la ruta. Va a ser parecida a `/Users/[TU-USUARIO]/Library/CloudStorage/GoogleDrive-[TU-EMAIL]/Mi unidad/Alumnos`.
-
-</div>
-<div data-os="win">
-
-1. Abrí el **Explorador de archivos**. Google Drive aparece como una unidad, normalmente **G:**.
-2. Entrá a la carpeta donde están (o van a estar) las carpetas de los alumnos.
-3. Hacé clic en la barra de direcciones y copiá la ruta. Va a ser parecida a `G:\Mi unidad\Alumnos`.
-
-</div>
-
-**Tenés que ver:** la ruta copiada. Guardala, la usás en el paso siguiente.
-
-## Paso 5 · Que Claude Code arme el script
-En Claude Code, dentro de `editor-video` (ya tiene Whisper instalado de la Parte 1):
+## Paso 4 · Que Claude arme el script
+En la sesión de `editor-video` (ya tiene Whisper de la Parte 1):
 
 ```prompt
-Armá un script para ordenar los videos de mis alumnos. Escribilo en la carpeta alumnos/ de este proyecto.
-
-Cómo funciona:
-1. Lee los videos (.mp4 y .mov) de la carpeta alumnos/entrada/.
-2. De cada video, extrae con ffmpeg los primeros 12 segundos de audio y los transcribe en español con el Whisper.cpp que ya instalamos (modelo multilingüe, idioma es).
-3. Busca en la transcripción el nombre de un alumno de la lista alumnos/lista.csv (columnas: nombre, apellido, carpeta). La coincidencia tiene que tolerar errores chicos de transcripción y tildes. Si dice "encuentro" y un número, lo toma.
-4. Si encuentra al alumno con seguridad: copia el video a [RUTA-DE-TU-DRIVE]/[carpeta del alumno]/ con el nombre AAAA-MM-DD_Nombre-Apellido_encuentro-N.mp4 (la fecha es la de grabación del archivo).
-5. Si no lo encuentra o hay duda entre dos alumnos: lo copia a alumnos/revisar/ y no lo manda a ningún lado.
-6. COPIA, no mueve: el original queda en entrada/ hasta que yo lo borre.
-7. Deja un registro en alumnos/registro.csv: archivo original, lo que transcribió, alumno elegido, confianza, destino.
-8. Tiene un modo prueba (--prueba) que muestra qué haría sin copiar nada.
-
-Creá alumnos/lista.csv con 3 alumnos INVENTADOS de ejemplo y las carpetas de entrada y revisar. Explicame en 5 líneas cómo lo corro.
+Buscá en mi compu la carpeta de Google Drive para escritorio y, adentro, la carpeta [NOMBRE-DE-LA-CARPETA-DE-ALUMNOS]. Decime la ruta.
+Después armá un script en la carpeta alumnos/ de este proyecto que:
+1. Lea los videos (.mp4 y .mov) de alumnos/entrada/.
+2. Transcriba en español los primeros 12 segundos de cada uno con el Whisper que ya instalamos.
+3. Busque el nombre en alumnos/lista.csv (nombre, apellido, carpeta), tolerando errores chicos y tildes. Si dice "encuentro" y un número, lo toma.
+4. Si está seguro: copie el video a la carpeta del alumno en Drive como AAAA-MM-DD_Nombre-Apellido_encuentro-N.mp4.
+5. Si duda: lo copie a alumnos/revisar/.
+6. COPIE, no mueva. Deje un registro en alumnos/registro.csv.
+7. Tenga un modo prueba que muestre qué haría sin copiar nada.
+Creá lista.csv con 3 alumnos INVENTADOS y las carpetas entrada y revisar.
 ```
 
-**Tenés que ver:** la carpeta `alumnos/` con el script, `lista.csv` de ejemplo y las instrucciones para correrlo.
+**Tenés que ver:** la ruta de tu Drive y la carpeta `alumnos/` con el script y `lista.csv` de ejemplo.
 
-## Paso 6 · Probalo con videos tuyos
-1. Grabá 2 videos cortos con el celular. Al empezar decí: "[NOMBRE-INVENTADO-DE-LA-LISTA], encuentro 1". Pasalos a `alumnos/entrada/`.
-2. Pedile a Claude:
+## Paso 5 · Probalo con videos tuyos
+1. Grabá 2 videos cortos diciendo al principio "[NOMBRE-INVENTADO-DE-LA-LISTA], encuentro 1" y copialos a `alumnos/entrada/`.
+2. Pedí:
 
 ```prompt
-Corré el script de alumnos en modo prueba y mostrame qué haría con cada video.
+Corré el script de alumnos en modo prueba y mostrame qué haría con cada video. Si está bien, correlo de verdad.
 ```
 
-3. Si está bien: "Correlo de verdad".
+**Tenés que ver:** los videos renombrados en las carpetas de Drive y, a los pocos minutos, en [drive.google.com](https://drive.google.com).
 
-**Tenés que ver:** los videos renombrados en las carpetas de Drive y, a los pocos minutos, sincronizados en [drive.google.com](https://drive.google.com). El registro en `alumnos/registro.csv`.
-
-> **Tip:** para usarlo de verdad, reemplazá `lista.csv` por la lista real de alumnos y el link de carpeta de cada uno. Esa lista queda en tu compu: no la subas a GitHub (pedile a Claude que la agregue al `.gitignore`).
+> **Tip:** para usarlo de verdad, reemplazá `lista.csv` por la lista real. Esa lista queda en tu compu: pedile a Claude que la sume al `.gitignore` para que nunca vaya a GitHub.
 
 ## Parte 3 · Dónde conviene trabajar (10 min)
-Claude tiene cuatro lugares de trabajo. No compiten: cada uno sirve para algo. Para verlo, el **mismo problema resuelto de las cuatro formas**: "tengo 20 videos del encuentro y quiero cada uno renombrado y en la carpeta de su alumno".
+El mismo problema ("20 videos del encuentro, cada uno a la carpeta de su alumno") en los cuatro lugares:
 
-| Dónde | Qué es | Cómo resuelve el ejemplo | Usalo para |
-|---|---|---|---|
-| **Claude (web o app)**: chat y **Proyectos** | Conversás. No toca tus archivos. Los Proyectos guardan conocimiento fijo para todos los chats. | Te ayuda a definir la convención de nombres y te arma la lista de pasos. Vos hacés el trabajo. | Pensar, escribir, analizar un documento que subís. Desde el celular. |
-| **Cowork** (app de escritorio) | Un agente que lee y escribe archivos de una carpeta de tu compu. Sin código. | Le das la carpeta y le pedís: "renombrá estos videos según esta lista y movelos a estas carpetas". Lo hace una vez, mirando nombres y fechas. No puede escuchar el nombre dicho en el video. | Ordenar, renombrar y clasificar archivos; armar documentos, planillas y presentaciones con lo que tenés en la compu. |
-| **Claude Code local** (terminal o pestaña **Code**) | Trabaja en tu compu con tus archivos **y tus programas** (ffmpeg, Whisper, Node). | Escribe el script de la Parte 2: escucha los primeros segundos, renombra y copia. Queda para siempre y se repite con un comando. | Instalar cosas, automatizar algo que se repite, armar apps, webs y editores. |
-| **Claude Code en la web** (claude.ai/code) | Corre en la nube sobre un repositorio de GitHub. Funciona desde el celular. | Si el script está en GitHub, desde el celular le pedís: "que también acepte archivos .m4v". Hace el cambio y lo deja en el repo; en la compu lo bajás con GitHub Desktop. No ve los videos de tu compu. | Cambios en código o en tu web cuando no estás en la compu. |
+| Dónde | Cómo lo resuelve |
+|---|---|
+| **Chat** (web o app) | Te ayuda a definir los nombres y los pasos. El trabajo lo hacés vos. |
+| **Cowork** | Renombra y mueve los archivos de una carpeta, una vez. No escucha el nombre dicho en el video. |
+| **Pestaña Code** (Claude Code en tu compu) | Escribe el script de la Parte 2, que usa tus programas y se repite siempre. |
+| **Claude Code en la web** | Cambia el script desde el celular si está en GitHub. No ve los videos de tu compu. |
 
-**Demo corta (la hace Mati):** el mismo pedido en Cowork con una carpeta de archivos de prueba, y el mismo cambio en Claude Code en la web desde el celular.
-
-> **Tip:** regla rápida. ¿Solo pensar o escribir? Chat. ¿Ordenar archivos una vez? Cowork. ¿Algo que se repite o que necesita programas? Claude Code. ¿Lejos de la compu y el proyecto está en GitHub? Claude Code en la web.
+Más detalle: [Dónde trabajar](#t3-donde-trabajar).
 
 ## Cómo sé que funcionó
-- Tenés `salida/[nombre]-final.mp4`: vertical, sin silencios, con subtítulos y tu placa final.
-- En tu Drive, el video de prueba quedó en la carpeta del alumno inventado, con el nombre correcto.
-- Prueba final, en Claude Code dentro de `editor-video`:
+- Tenés `salida/[nombre]-final.mp4`: vertical, sin silencios, con subtítulos y tu placa.
+- El video de prueba quedó en la carpeta del alumno inventado, con el nombre correcto.
+- Prueba final, en la sesión de `editor-video`:
 
 ```prompt
-Editá este otro video con el mismo estilo de siempre y sin preguntarme nada salvo las palabras dudosas: [ARRASTRÁ-ACÁ-OTRO-VIDEO]
+Editá [NOMBRE-DE-OTRO-VIDEO.mp4] con el mismo estilo de siempre, sin preguntarme nada salvo las palabras dudosas.
 ```
 
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
-| `npx` o `node` no se reconoce | Node no está instalado o abriste la terminal antes de instalarlo. Cerrala, abrila de nuevo y revisá [Herramientas base](#s3-herramientas-base). |
-| `ffmpeg` no se reconoce | Mismo caso: instalalo desde [Herramientas base](#s3-herramientas-base) y abrí una terminal nueva. |
-| Whisper no se instala en Mac (error de `make` o de compilador) | Corré `xcode-select --install`, aceptá, esperá que termine y pedile a Claude que reintente. |
-| Whisper no se instala en Windows | Pedile a Claude: "Usá @remotion/whisper-webgpu para transcribir en el navegador". |
-| Los subtítulos salen en inglés | El modelo termina en `.en`. Pedí: "Usá el modelo small multilingüe con idioma es". |
-| El script manda todo a `revisar/` | Revisá que el nombre se diga claro al principio y que esté igual en `lista.csv`. Mirá en `registro.csv` qué transcribió. |
-| Drive no sube los archivos | Fijate que Google Drive para escritorio esté abierto y con tu sesión. Los archivos grandes tardan. |
+| Claude dice que no tiene Node o ffmpeg | Instalalos desde [Herramientas base](#s3-herramientas-base), cerrá la app de Claude y abrila de nuevo. |
+| Whisper no se instala en Mac (error de compilador) | Pedí: "Instalá las herramientas de línea de comandos de Xcode". Aceptá la ventana que aparece y, al terminar, "reintentá". |
+| Whisper no se instala en Windows | Pedí: "Usá @remotion/whisper-webgpu para transcribir en el navegador". |
+| Los subtítulos salen en inglés | Pedí: "Usá el modelo small multilingüe con idioma es". |
+| El script manda todo a `revisar/` | Que el nombre se diga claro al principio y esté igual en `lista.csv`. Mirá `registro.csv`. |
+| Drive no sube los archivos | Google Drive para escritorio tiene que estar abierto y con tu sesión. |
 
 ## Para seguir solo
-- **Plantillas por formato:** pedile al editor un estilo para reels, otro para historias y otro horizontal para YouTube, y guardalos con nombre.
-- **El resumen del encuentro:** con la misma transcripción, Claude puede escribir el resumen para el grupo y un borrador de feedback para cada alumno, que el docente revisa antes de enviar.
-- **Automático al terminar el encuentro:** programá el script para que corra solo cada día de encuentro a la noche (pestaña **Code › Scheduled** de la app de escritorio, con la compu prendida).
+- **Plantillas por formato:** un estilo para reels, otro para historias y otro horizontal, guardados con nombre.
+- **El resumen del encuentro:** con la misma transcripción, un resumen para el grupo y un borrador de feedback por alumno, que el docente revisa.
+- **Automático:** programá el script para cada día de encuentro a la noche (**Code › Scheduled**, con la compu prendida). Ver [Tareas programadas](#t4-tareas-programadas).
 
 ## Fuentes
-- Remotion, crear un proyecto (`npx create-video@latest`): https://www.remotion.dev/docs/cli/create-video
-- Remotion, uso con Claude Code (plantilla Blank, Agent Skills, `npm run dev`): https://www.remotion.dev/docs/ai/claude-code
-- Remotion, transcribir audio (opciones oficiales: Whisper.cpp local, WebGPU, OpenAI, ElevenLabs): https://www.remotion.dev/docs/captions/transcribing
-- Remotion, `@remotion/install-whisper-cpp` y `transcribe()` (WAV 16 kHz, `language`, modelos): https://www.remotion.dev/docs/install-whisper-cpp/ · https://www.remotion.dev/docs/install-whisper-cpp/transcribe
-- Remotion, render por línea de comando: https://www.remotion.dev/docs/cli/render
-- Remotion, licencia (gratis hasta 3 personas): https://www.remotion.dev/docs/license/pricing
-- Google, Drive para escritorio en Mac (CloudStorage) y Windows (unidad G:): https://support.google.com/drive/answer/12178485 · https://support.google.com/a/answer/7644837
-- Dónde trabajar y tareas programadas: `investigacion/claude-code-datos.md`.
+- Remotion con Claude Code (Blank, Agent Skills): https://www.remotion.dev/docs/ai/claude-code · crear proyecto: https://www.remotion.dev/docs/cli/create-video
+- Remotion, transcribir (Whisper.cpp, WebGPU): https://www.remotion.dev/docs/captions/transcribing
+- Remotion, licencia: https://www.remotion.dev/docs/license/pricing
+- Google Drive para escritorio: https://support.google.com/drive/answer/12178485
+- Claude Code en la app de escritorio: https://code.claude.com/docs/en/desktop
 - Verificado el 18/11/2026.

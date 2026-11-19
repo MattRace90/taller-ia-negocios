@@ -13,7 +13,7 @@ El desafío: que Claude, leyendo tu cerebro, te arme contenido que **suene a vos
 
 **En 30 segundos**
 - **Cuánto tarda:** 30 min la MVP, 90 min la completa (más 20 a 30 min de instalación).
-- **Por dónde empezar:** la **Versión MVP**, acá abajo. Sin instalar nada.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Sin instalar nada: todo en la **pestaña Code** de la app de Claude.
 
 ## Dos versiones: MVP y completa
 
@@ -25,7 +25,7 @@ El desafío: que Claude, leyendo tu cerebro, te arme contenido que **suene a vos
 | **Costo** | Tu plan de Claude + Canva gratis | Gratis; Higgsfield, HeyGen o Metricool aparte ([Stack y costos](#r-stack-y-costos)) |
 
 ### Versión MVP, paso a paso
-1. **El guion.** En Claude, dentro del Proyecto o la carpeta de tu cerebro, pegá:
+1. **El guion.** En la app de Claude, abrí la **pestaña Code**, elegí la carpeta de tu cerebro y pegá:
 
 ```prompt
 Escribí un carrusel de 6 placas para Instagram sobre [TEMA]. Usá mi voz (marca/voz.md) y lo que vendo (negocio/). Placa 1: un gancho de menos de 10 palabras. Placas 2 a 5: una idea por placa, máximo 20 palabras. Placa 6: qué hacer ahora. Sumá el texto de la publicación. No prometas resultados que no podemos garantizar.
@@ -33,7 +33,7 @@ Escribí un carrusel de 6 placas para Instagram sobre [TEMA]. Usá mi voz (marca
 
 **Tenés que ver:** 6 placas con frases cortas que suenan a vos.
 
-2. **El diseño.** Si tenés el conector de Canva en Claude, pedile: "Con Canva, armá este carrusel en formato 1080x1350 con mis colores". Si no, abrí una plantilla de carrusel en Canva y pegá los textos a mano.
+2. **El diseño.** Si tenés el conector de Canva en Claude, pedile en la misma pestaña Code: "Con Canva, armá este carrusel en formato 1080x1350 con mis colores". Si no, abrí una plantilla de carrusel en Canva y pegá los textos a mano.
 
 **Tenés que ver:** las 6 placas con tus colores y tu logo. Otras formas de diseñarlo: [Placas en tu voz](#p10-extras), Paso 2.
 

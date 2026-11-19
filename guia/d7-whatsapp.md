@@ -50,7 +50,7 @@ dlastcrm tiene dos formas de conectar, por eso hay 7 filas.
 | **Costo** | Gratis: prueba de n8n Cloud y sus créditos de IA | Según la opción (ver el menú) |
 
 ### Versión MVP, paso a paso
-1. **Escribí las instrucciones.** Abrí Claude Code en la carpeta de tu cerebro (como en [Tu cerebro](#p1-cerebro)) y pegá:
+1. **Escribí las instrucciones.** En la app de Claude, abrí la **pestaña Code** y elegí la carpeta de tu cerebro (como en [Tu cerebro](#p1-cerebro)). Pegá:
 
 ```prompt
 Escribí las instrucciones del bot de WhatsApp de mi empresa y guardalas en bot/instrucciones-del-bot.md. Usá SOLO mi cerebro (CLAUDE.md, ventas/, negocio/, marca/). Lo que no esté, marcalo PENDIENTE: no inventes. Si ya hay un prompt de agente en esta carpeta, partí de ese.
@@ -69,9 +69,11 @@ Secciones:
 Máximo 2 páginas. Al final, decime cuántos PENDIENTE quedaron.
 ```
 
+Cuando pida permiso para crear el archivo, tocá **Permitir**.
+
 **Tenés que ver:** Claude te avisa que creó `bot/instrucciones-del-bot.md` y cuántos PENDIENTE quedaron.
 
-2. **Ponelas en un bot de Telegram.** Si hiciste el [desafío del agente](#d2-agente), pegá:
+2. **Ponelas en un bot de Telegram.** Si hiciste el [desafío del agente](#d2-agente), pegá en la misma pestaña Code:
 
 ```prompt
 Con el MCP de n8n, cambiá las instrucciones del AI Agent del workflow "agente-[TU-EMPRESA]" por el contenido de bot/instrucciones-del-bot.md. Mostrame el cambio antes de guardarlo.
@@ -85,7 +87,7 @@ Si no lo hiciste, seguí los pasos 1 a 3 de la Versión MVP del [desafío del ag
 
 **Tenés que ver:** el bot responde como dicen tus instrucciones en al menos 4 de los 5 casos.
 
-> **Tip:** ¿no llegás a armar el bot? Probalo en el mismo chat de Claude Code: "Actuá como el bot siguiendo SOLO bot/instrucciones-del-bot.md. Yo soy un cliente. Cuando escriba FIN, decime qué respondiste mal".
+> **Tip:** ¿no llegás a armar el bot? Probalo en la misma sesión de la pestaña Code: "Actuá como el bot siguiendo SOLO bot/instrucciones-del-bot.md. Yo soy un cliente. Cuando escriba FIN, decime qué respondiste mal".
 
 ### Versión completa
 Elegís una opción del menú y cargás ahí este mismo documento: [Bot con dlastcrm](#w2-bot-dlastcrm), [Plataforma propia](#w3-bot-propio), [Zernio](#w4-zernio), [Unipile](#w5-unipile) o [Evolution API](#w6-evolution-api). Comparativa completa: [Opciones de WhatsApp](#w1-opciones).

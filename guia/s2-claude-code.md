@@ -1,43 +1,93 @@
 ---
-titulo: Instalá Claude Code
+titulo: Claude Code en la pestaña Code de la app
 bloque: Setup
-tiempo: 20 min
+tiempo: 15 min
 para: Todos
 necesitas: s1-claude
-resultado: Claude Code abierto en una carpeta de tu compu, con tu sesión iniciada y respondiendo.
+resultado: La pestaña Code abierta en una carpeta de tu compu, con Claude creando un archivo después de pedirte permiso.
 ---
 
-Claude Code es Claude trabajando en tu compu: lee y escribe archivos, instala programas, arma bots y webs. Es la herramienta principal del taller.
-Hay dos formas de usarlo: desde la **pestaña Code** de la app (sin terminal, ideal si nunca abriste una) o desde la **terminal**: una ventana donde le das órdenes a la compu escribiendo. La pestaña Code ya viene con la app. Acá instalás la versión de terminal, porque algunas prácticas la usan.
+Claude Code es Claude trabajando en tu compu: lee y escribe archivos, instala programas, arma bots y webs. Hoy lo usamos **desde la pestaña Code de la app de Claude**: es el mismo Claude Code, con botones, sin terminal y sin instalar nada aparte.
+Ejemplo: Celve abre su carpeta del cerebro en Code y le pide "armame la lista de precios en una planilla"; Claude le pide permiso, crea el archivo y se lo muestra.
 
 ## Antes de empezar
-- [ ] Plan **Pro** o superior en Claude ([Tu cuenta](#s1-claude)). El plan gratis no incluye Claude Code.
-- [ ] La app de escritorio de Claude instalada.
-- [ ] Mac con **macOS 13 (Ventura) o superior**, o Windows 10 actualizado o Windows 11. Se fija en **menú Apple › Acerca de esta Mac** o en **Configuración › Sistema › Información**.
+- [ ] Plan **Pro** o superior y la app de escritorio instalada ([Tu cuenta](#s1-claude)). El plan gratis no incluye Claude Code.
+- [ ] Mac con **macOS 13 (Ventura) o superior**, o Windows 10 actualizado o Windows 11.
 
-> **Ojo:** si tu Mac es más vieja, o la compu es de la empresa y el antivirus bloquea el instalador (o te pide una clave de administrador que no tenés), no pierdas tiempo: avisá en la mesa de ayuda. Mientras tanto podés seguir con el chat y Cowork en la app.
+## Paso 1 · Abrí la pestaña Code
+En la app de Claude, tocá **Code** arriba de la barra lateral (al lado de **Chat** y **Cowork**).
 
-## Paso 1 · Abrí la terminal
+**Tenés que ver:** un cuadro para escribir y, abajo de él, una fila de controles: el primero es el **selector de entorno** (dónde trabaja Claude) y al lado el de la **carpeta**.
+
+## Paso 2 · Creá tu carpeta de prueba
 
 <div data-os="mac">
 
-Apretá **Cmd+Espacio** (se abre el buscador Spotlight), escribí **Terminal** y apretá **Enter**.
+Abrí **Finder** › **Documentos** › clic derecho en un lugar vacío › **Nueva carpeta** › llamala `prueba-claude`.
 
 </div>
 <div data-os="win">
 
-1. Antes que nada, instalá **Git for Windows**. Entrá a **[git-scm.com/install/windows](https://git-scm.com/install/windows)** (si no carga, a **[git-scm.com](https://git-scm.com)** › **Download**), bajá el instalador de 64 bits y abrilo. Son muchas pantallas: dejá todo como viene y tocá **Next** hasta **Install**, y al final **Finish**. Claude Code funciona sin Git, pero con Git anda mejor y lo vas a necesitar para GitHub.
-2. Apretá la tecla **Windows**, escribí **PowerShell** y abrí **Windows PowerShell**. No hace falta abrirlo como administrador.
+Abrí el **Explorador de archivos** › **Documentos** › clic derecho en un lugar vacío › **Nuevo › Carpeta** › llamala `prueba-claude`.
 
 </div>
 
-**Tenés que ver:** una ventana con texto y un cursor esperando que escribas.
+**Tenés que ver:** la carpeta `prueba-claude` dentro de **Documentos**.
 
-## Paso 2 · Instalá Claude Code
+## Paso 3 · Elegí Local y la carpeta
+1. En el selector de entorno, elegí **Local** (tu compu; no la nube).
+2. Tocá el control de carpeta › **Open folder…** y elegí `Documentos/prueba-claude`.
 
-> **Ojo:** si el wifi está lento, el instalador puede tardar más o cortarse con un error. Esperá un minuto y pegá el mismo comando otra vez: no rompe nada repetirlo.
+> **Ojo:** el nombre del botón puede variar según la versión de la app (**Open folder…**, **Elegir carpeta** o el nombre de la última carpeta usada). Para una sesión nueva, también está **+ New** en la barra lateral.
 
-Copiá el comando con el botón **Copiar**, hacé clic en la terminal, pegalo (**Cmd+V** en Mac; **Ctrl+V** o clic derecho en Windows) y apretá **Enter**. Tarda uno o dos minutos.
+**Tenés que ver:** el nombre `prueba-claude` en el control de carpeta, abajo del cuadro.
+
+## Paso 4 · Tu primer pedido
+
+```prompt
+Creá un archivo hola.md con 3 ideas para usar IA en un negocio como el mío: [DESCRIBÍ TU NEGOCIO EN UNA LÍNEA]. Después mostrame qué archivos hay en esta carpeta.
+```
+
+Antes de crear el archivo, Claude te muestra un **pedido de permiso con botones** (permitir esta vez, permitir siempre o no). Leé qué va a hacer y aprobalo.
+
+> **Tip:** los permisos son tu freno de mano. Si no entendés qué quiere hacer, tocá que no y preguntale "¿qué ibas a hacer y por qué?".
+
+**Tenés que ver:** el cambio en pantalla y `hola.md` en la lista. Para verlo vos, abrí la carpeta `prueba-claude` en **Finder** o en el **Explorador**.
+
+<div data-os="win">
+
+> **Ojo:** si en Windows aparece un aviso de que falta **Git**, instalalo como dice [Herramientas base](#s3-herramientas-base), Paso 1, cerrá la app de Claude, volvé a abrirla y repetí.
+
+</div>
+
+## Paso 5 · Probá un comando
+Escribí en el cuadro y mandalo:
+
+```prompt
+/context
+```
+
+**Tenés que ver:** cuánto de la memoria de la conversación está usada. Los demás comandos (`/compact`, `/clear`, `/btw`, las skills con `/nombre`) se escriben igual: están en la [machete de atajos](#t5-atajos).
+
+## Cómo sé que funcionó
+La pestaña **Code** está abierta en **Local** con la carpeta `prueba-claude`, y `hola.md` existe adentro.
+
+## Si algo falla
+| Te pasa | Hacé esto |
+|---|---|
+| No veo la pestaña **Code** | Revisá que el plan sea Pro o superior y actualizá la app (menú de la app › buscar actualizaciones). |
+| No aparece **Local** en el selector | Actualizá la app. Si sigue, avisá en la mesa de ayuda. |
+| Claude dice que no puede ver o tocar tus archivos | Revisá que elegiste **Local** y la carpeta correcta. Abrí una sesión nueva con **+ New** y elegila otra vez. |
+| Tocaste "no" en un permiso sin querer | Pedile lo mismo de nuevo: te vuelve a preguntar. |
+| Dice que tu plan no incluye Claude Code | Cerrá sesión y volvé a entrar con la cuenta que tiene Pro. |
+
+## Para seguir solo
+- Abrí siempre Code **en la carpeta del proyecto** (por ejemplo, la de tu cerebro): así Claude lee el `CLAUDE.md` de esa carpeta.
+- Probá los modos de permiso (**Manual**, **Accept edits**, **Plan**…) en el selector de modo, o con **Cmd+Shift+M** (Mac) / **Ctrl+Shift+M** (Windows) para pasar al modo plan ([atajos](#t5-atajos)).
+- Avanzado: cosas como `claude -p` o `claude --agent` (correr Claude sin conversación, o con un agente fijo) son de la versión de terminal. Mirá la alternativa de abajo.
+
+## Alternativa: Claude Code en la terminal (opcional)
+Si querés la versión de terminal (no hace falta hoy), abrí **Terminal** (Mac) o **PowerShell** (Windows) y pegá:
 
 <div data-os="mac">
 
@@ -54,93 +104,9 @@ irm https://claude.ai/install.ps1 | iex
 
 </div>
 
-Cuando termine, **cerrá la terminal y abrí una nueva** (así reconoce el comando nuevo) y verificá:
+Cerrá la terminal, abrí una nueva, entrá a tu carpeta y escribí `claude`. La primera vez te pide iniciar sesión con tu cuenta de Claude. Si algo raro pasa, `claude doctor` te dice qué arreglar.
 
-```bash
-claude --version
-```
-
-**Tenés que ver:** un número de versión, por ejemplo `2.1.211 (Claude Code)`.
-
-<div data-os="mac">
-
-> **Ojo:** si dice `command not found: claude`, mirá lo último que escribió el instalador: a veces pide agregar una carpeta al PATH (la lista de lugares donde la compu busca programas). Pegá el comando de abajo, cerrá la Terminal, abrí una nueva y repetí `claude --version`.
-
-```bash
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
-```
-
-</div>
-
-## Paso 3 · Iniciá sesión
-1. Creá una carpeta de prueba en **Documentos** y entrá a ella con este comando:
-
-<div data-os="mac">
-
-```bash
-mkdir -p ~/Documents/prueba-claude && cd ~/Documents/prueba-claude
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-mkdir $HOME\Documents\prueba-claude; cd $HOME\Documents\prueba-claude
-```
-
-En el Explorador, la carpeta `Documents` se ve como **Documentos**: es la misma.
-
-> **Ojo:** si tu Windows guarda Documentos en OneDrive, la carpeta queda en `C:\Users\[TU-USUARIO]\Documents`, que no es la que el Explorador muestra como **Documentos**. Para abrir en el Explorador la carpeta donde estás parado, escribí `explorer .` (con el punto) y apretá **Enter**.
-
-</div>
-
-**Tenés que ver:** la línea de la terminal termina en `prueba-claude`.
-
-2. Abrí Claude Code:
-
-```bash
-claude
-```
-
-3. La primera vez te pregunta el tema de colores: elegí cualquiera con las flechas y apretá **Enter**.
-4. Te pregunta cómo iniciar sesión: elegí la cuenta de Claude (**Claude account with subscription**) y apretá **Enter**. Se abre el navegador: tocá el botón para autorizar y volvé a la terminal.
-5. Te pregunta si confiás en la carpeta: elegí **Yes** y **Enter**.
-
-**Tenés que ver:** un cuadro para escribir con el cursor titilando.
-
-## Paso 4 · Tu primer pedido
-
-```prompt
-Creá un archivo hola.md con 3 ideas para usar IA en un negocio como el mío: [DESCRIBÍ TU NEGOCIO EN UNA LÍNEA]. Después mostrame qué archivos hay en esta carpeta.
-```
-
-Claude te va a pedir permiso para crear el archivo. Leé qué va a hacer y aceptá.
-
-**Tenés que ver:** Claude te lista los archivos y aparece `hola.md`. Para verlo vos: abrí **Finder** (Mac) o el **Explorador de archivos** (Windows) › **Documentos** › **prueba-claude**.
-
-## Paso 5 · La pestaña Code de la app (sin terminal)
-1. En la app de Claude, tocá **Code** arriba de la barra lateral.
-2. En el selector de entorno elegí **Local › Open folder…** y abrí `Documentos/prueba-claude`.
-3. Pedí lo mismo que en la terminal: es el mismo Claude Code, con botones.
-
-**Tenés que ver:** el cuadro de mensaje de Code con el nombre de la carpeta `prueba-claude` arriba o al costado.
-
-> **Tip:** los comandos de la [machete de atajos](#t5-atajos) (`/context`, `/compact`, `/rewind`…) funcionan en los dos lados.
-
-## Cómo sé que funcionó
-`claude --version` muestra una versión, `claude` abre la sesión con tu cuenta y creó `hola.md`.
-
-## Si algo falla
-| Te pasa | Hacé esto |
-|---|---|
-| `claude: command not found` o "no se reconoce" | Cerrá la terminal y abrí una nueva. En Mac, si sigue, hacé lo del **Ojo** del Paso 2. Si sigue, corré el instalador otra vez. |
-| No sé si estoy en la carpeta correcta | Escribí `pwd` y apretá **Enter**: te muestra dónde estás. Para abrir esa carpeta en la ventana de archivos: `open .` (Mac) o `explorer .` (Windows). |
-| En Windows: "The token '&&' is not a valid statement separator" | Estás en PowerShell con un comando de CMD. Usá el comando de PowerShell de arriba. |
-| En Windows: "'irm' is not recognized" | Estás en CMD. Abrí **PowerShell** y repetí. |
-| Dice que tu plan no incluye Claude Code | Revisá que la cuenta tenga Pro y escribí `/login` para volver a entrar. |
-| Algo raro con la instalación | Corré `claude doctor`: revisa todo y te dice qué arreglar. |
-
-## Para seguir solo
-- `claude update` actualiza Claude Code (igual se actualiza solo).
-- Abrí siempre Claude Code **parado en la carpeta del proyecto**: así lee el `CLAUDE.md` de esa carpeta.
-- Mirá la [machete de atajos](#t5-atajos) y probá **Shift+Tab** hasta el modo plan.
+## Fuentes
+Consultadas el 19/11/2026.
+- App de escritorio y pestaña Code: https://code.claude.com/docs/en/desktop
+- Instalación por terminal: https://code.claude.com/docs/en/setup

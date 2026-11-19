@@ -21,7 +21,7 @@ Un **ZIP** es una carpeta comprimida: un solo archivo que adentro tiene muchos. 
 | `plan-b/` (8 ZIP) | Skills extra que usamos en la agencia, sin datos de clientes | Quien quiera ir más allá | 3 KB a 2 MB c/u |
 
 ## Antes de empezar
-- [ ] Claude Code instalado ([S2](#s2-claude-code)).
+- [ ] La app de Claude con la **pestaña Code** funcionando ([S2](#s2-claude-code)). No hace falta la terminal.
 - [ ] Sabés dónde se guardan tus descargas (normalmente la carpeta **Descargas**).
 
 ## Paso 1 · Bajá el ZIP
@@ -62,7 +62,7 @@ Clic derecho sobre el ZIP › **Extraer todo…** › **Extraer**. Aparece una c
 **Cómo se usa:**
 1. Mové la carpeta `taller-ia-para-negocios` a **Documentos**.
 2. Abrila en [Obsidian](#s11-obsidian) con **Abrir carpeta como bóveda**: la leés con formato, sin internet.
-3. O abrí Claude Code parado en esa carpeta y pedile:
+3. O, en la app de Claude, abrí la **pestaña Code**, elegí esa carpeta y pedile:
 
 ```prompt
 Leé guia/inicio.md y guiame paso a paso por el desafío [NOMBRE DEL DESAFÍO]. Andá de a un paso y esperá que te diga "listo" antes de seguir.
@@ -91,21 +91,22 @@ Cada ZIP es **una skill**: una carpeta con un archivo `SKILL.md` (la receta que 
 
 **Cómo se instala una skill del plan B:**
 1. Descomprimí el ZIP (Paso 2).
-2. Abrí Claude Code en cualquier carpeta y pegá este prompt. Para no escribir la ruta a mano, arrastrá la carpeta descomprimida a la ventana de la terminal: se pega sola.
+2. En la app de Claude, abrí la **pestaña Code** y elegí como carpeta **Descargas** (donde quedó la carpeta descomprimida).
+3. Pegá este prompt:
 
 ```prompt
-Instalá como skill personal la carpeta que está en [ARRASTRÁ ACÁ LA CARPETA DESCOMPRIMIDA]. Copiala entera, sin cambiar nada, a la carpeta de skills de mi usuario (~/.claude/skills/ en Mac; C:\Users\[MI-USUARIO]\.claude\skills\ en Windows). Revisá que adentro quede un SKILL.md y decime la ruta final.
+Instalá como skill personal la carpeta [NOMBRE-DE-LA-CARPETA] que está acá. Copiala entera, sin cambiar nada, a la carpeta de skills de mi usuario. Revisá que adentro quede un SKILL.md (no anidado dos veces) y decime la ruta final.
 ```
 
-3. Salí con `/exit`, volvé a entrar con `claude` y escribí `/skills`.
+4. Cuando Claude pida permiso, tocá **Permitir**. Después abrí una sesión nueva en la pestaña Code y escribí `/`.
 
-**Tenés que ver:** la skill nueva en la lista de `/skills`.
+**Tenés que ver:** la skill nueva en la lista al escribir `/`.
 
 > **Tip:** para usarla en la app de Claude (web y celular), subí el ZIP **tal cual lo bajaste** en **Customize › Skills**. Antes activá **Settings › Capabilities › Code execution and file creation**. Más detalle en el [Kit](#r-kit).
 
 ## Cómo sé que funcionó
-- La guía se abre en Obsidian o Claude Code te guía desde `guia/inicio.md`.
-- `/skills` muestra la fábrica o las skills del plan B que instalaste.
+- La guía se abre en Obsidian o Claude te guía desde `guia/inicio.md` en la pestaña Code.
+- Al escribir `/` aparecen la fábrica o las skills del plan B que instalaste.
 
 ## Si algo falla
 | Te pasa | Hacé esto |
@@ -113,7 +114,7 @@ Instalá como skill personal la carpeta que está en [ARRASTRÁ ACÁ LA CARPETA 
 | Drive dice "no se puede analizar en busca de virus" | Es normal en archivos ZIP. Tocá **Descargar de todas formas**. |
 | Mac: "no se puede abrir porque es de un desarrollador no identificado" | Es el instalador de la fábrica. Seguí el aviso de Gatekeeper del tutorial [Fábrica de contenidos](#u-fabrica). |
 | Windows: el ZIP se abre pero los archivos "no están" | No lo extrajiste. Clic derecho › **Extraer todo…** |
-| La skill no aparece en `/skills` | Revisá que la carpeta quedó en `~/.claude/skills/<nombre>/SKILL.md`, no anidada dos veces (`<nombre>/<nombre>/SKILL.md`). Pedíselo a Claude: "Fijate si mi skill [NOMBRE] quedó anidada y arreglala". |
+| La skill no aparece al escribir `/` | Abrí una sesión nueva. Si sigue igual, puede haber quedado anidada dos veces (`<nombre>/<nombre>/SKILL.md`). Pedíselo a Claude: "Fijate si mi skill [NOMBRE] quedó anidada y arreglala". |
 | La app de Claude rechaza el ZIP | Subí el ZIP original, no uno que hayas vuelto a comprimir: adentro tiene que estar la carpeta de la skill. |
 
 ## Para seguir solo

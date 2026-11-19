@@ -4,11 +4,11 @@ bloque: Referencia
 tiempo: 10 min por skill
 para: Todos
 necesitas: s2-claude-code
-resultado: Sabés dónde buscar skills que armó otra gente, cómo revisarlas antes de instalarlas y cómo sumarlas a tu Claude Code.
+resultado: Sabés dónde buscar skills que armó otra gente, cómo revisarlas antes de instalarlas y cómo sumarlas pidiéndoselo a Claude en la pestaña Code.
 ---
 
 No tenés que inventar todo vos. Mucha gente publica sus **skills** (recetas para Claude) y herramientas en GitHub, gratis. Si alguien ya resolvió lo que necesitás, lo bajás, lo revisás y lo adaptás a tu negocio.
-Una skill es una carpeta con un archivo `SKILL.md` adentro. Las del taller están en el [Kit](#r-kit).
+Una skill es una carpeta con un archivo `SKILL.md` adentro. Las del taller están en el [Kit](#r-kit). Todo lo de esta página se hace en la **pestaña Code** de la app de Claude: vos pedís, Claude corre los comandos.
 
 ## Dónde buscar
 | Dónde | Qué hay |
@@ -16,9 +16,11 @@ Una skill es una carpeta con un archivo `SKILL.md` adentro. Las del taller está
 | [github.com/anthropics/skills](https://github.com/anthropics/skills) | Las skills oficiales de Anthropic: documentos, planillas, presentaciones, diseño. |
 | [skills.sh](https://skills.sh) | Un directorio de skills de la comunidad, con el comando para instalar cada una. |
 | [GitHub](https://github.com/search?q=SKILL.md&type=code) | Buscá `SKILL.md` + un tema (por ejemplo "SKILL.md video" o "SKILL.md ventas"). |
-| `/plugin` en Claude Code | Los plugins que trae Claude Code: paquetes de skills, comandos y agentes listos. |
+| `/plugin` en la pestaña Code | Plugins: paquetes de skills, comandos y agentes listos. |
 
-También le podés pedir a Claude que busque por vos:
+> **Ojo:** `/plugin` puede variar según la versión de la app. Si no aparece, usá las otras fuentes de la tabla.
+
+También le podés pedir a Claude, en la pestaña Code, que busque por vos:
 
 ```prompt
 Buscá en GitHub skills para Claude Code que sirvan para [LO QUE NECESITÁS, por ejemplo editar videos verticales]. Mostrame las 3 mejores con: qué hacen, quién las publicó, cuántas estrellas tienen, la licencia y si instalan programas. No instales nada todavía.
@@ -37,23 +39,15 @@ Leé el repo [PEGÁ EL LINK DE GITHUB] sin instalar nada. Explicame en simple qu
 > **Ojo:** nunca pegues claves ni contraseñas para "que ande" una skill de un desconocido. Si te pide algo así, no la instales.
 
 ## Cómo se instala
-Hay dos formas. Las dos dejan la skill en tu carpeta de skills (`~/.claude/skills/`).
-
-**Con el comando de skills.sh** (si la skill lo ofrece):
-
-```bash
-npx skills add [LINK-DEL-REPO]
-```
-
-**Con un pedido a Claude Code:**
+En la app de Claude, abrí la **pestaña Code**, elegí una carpeta (sirve la de tu cerebro) y pegá:
 
 ```prompt
-Instalá como skill personal la skill del repo [PEGÁ EL LINK DE GITHUB]. Copiá su carpeta (la que tiene el SKILL.md) a mi carpeta de skills (~/.claude/skills/ en Mac; C:\Users\[MI-USUARIO]\.claude\skills\ en Windows). Si necesita instalar programas, primero decime cuáles y esperá mi OK.
+Instalá como skill personal la skill del repo [PEGÁ EL LINK DE GITHUB]. Si skills.sh muestra un comando "npx skills add" para esa skill, corrélo vos; si no, copiá su carpeta (la que tiene el SKILL.md) a la carpeta de skills de mi usuario. Si necesita instalar programas, primero decime cuáles y esperá mi OK. Al final, decime la ruta donde quedó.
 ```
 
-Después salí con `/exit`, volvé a entrar con `claude` y escribí `/skills`.
+Claude te va a pedir permiso para correr comandos o crear archivos: leé qué va a hacer y tocá **Permitir**. Después abrí una sesión nueva en la pestaña Code y escribí `/`.
 
-**Tenés que ver:** la skill nueva en la lista de `/skills`.
+**Tenés que ver:** la skill nueva en la lista al escribir `/`.
 
 ## Dos ejemplos para probar
 
@@ -70,15 +64,11 @@ Instalá como skill la carpeta del repo https://github.com/remonkevin99-collab/a
 ### Que Claude use las apps de tu compu
 [github.com/vercel-labs/agent-desktop](https://github.com/vercel-labs/agent-desktop) (Vercel Labs): le da a Claude la posibilidad de **ver y usar programas de tu compu** (Finder, el Explorador de Windows, otras apps de escritorio) leyendo sus botones, sin capturas de pantalla. Funciona en Mac, Windows y Linux.
 
-```bash
-npm install -g agent-desktop
+```prompt
+Instalá agent-desktop: corré "npm install -g agent-desktop" y después "npx skills add https://github.com/vercel-labs/agent-desktop --skill agent-desktop". Si me falta Node.js, avisame antes. Al final, decime si quedó funcionando.
 ```
 
-```bash
-npx skills add https://github.com/vercel-labs/agent-desktop --skill agent-desktop
-```
-
-En Mac, la primera vez te pide permiso de **Accesibilidad**: `agent-desktop permissions --guide` te guía.
+En Mac, la primera vez te pide permiso de **Accesibilidad**. Pedile a Claude: "Corré agent-desktop permissions --guide y explicame en simple qué tengo que tocar". El permiso lo das vos en la configuración de la Mac.
 
 > **Datos:** esta herramienta puede leer lo que hay en tus ventanas. Usala con las apps que querés que Claude toque y cerrá lo privado (banco, mails personales) antes de pedirle algo.
 
@@ -87,9 +77,9 @@ En Mac, la primera vez te pide permiso de **Accesibilidad**: `agent-desktop perm
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
-| La skill no aparece en `/skills` | Revisá que quedó en `~/.claude/skills/<nombre>/SKILL.md` y no anidada dos veces. Pedile a Claude que lo revise. |
-| `npx skills` da error | Revisá que tengas Node ([S3](#s3-herramientas-base)). En Windows, si dice "running scripts is disabled", escribí `npx.cmd` en vez de `npx`. |
-| La skill hace algo que no esperabas | Borrá su carpeta de `~/.claude/skills/` y volvé a abrir Claude Code. |
+| La skill no aparece al escribir `/` | Abrí una sesión nueva. Si sigue igual: "Fijate si mi skill [NOMBRE] quedó en la carpeta de skills de mi usuario y no anidada dos veces". |
+| El comando `npx` da error | Te falta Node.js: instalalo con doble clic desde [Herramientas base](#s3-herramientas-base) y pedile a Claude que lo intente de nuevo (en Windows, Claude sabe usar `npx.cmd` si hace falta). |
+| La skill hace algo que no esperabas | Pedile: "Borrá la skill [NOMBRE] de mi carpeta de skills". Después abrí una sesión nueva. |
 
 ## Para seguir solo
 - Cuando una skill de otro te sirva, pedile a Claude que la adapte a tu negocio y guardá tu versión en el repo de tu cerebro.

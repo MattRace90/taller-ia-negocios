@@ -1,5 +1,5 @@
 ---
-titulo: 'Las piezas: prompt, cerebro, skills, agentes, conectores, MCP y API'
+titulo: "'Las piezas: prompt, cerebro, skills, agentes, conectores, MCP y API'"
 bloque: Teoría
 tiempo: 20 min de lectura
 para: Todos

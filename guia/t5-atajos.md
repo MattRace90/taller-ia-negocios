@@ -4,131 +4,86 @@ bloque: Teoría
 tiempo: 15 min
 para: Todos
 necesitas: s2-claude-code
-resultado: Manejás Claude Code con los comandos y las teclas que más se usan, y sabés armar un buen pedido.
+resultado: Manejás la pestaña Code con los comandos y las teclas que más se usan, y sabés armar un buen pedido.
 ---
 
 Claude Code se maneja escribiendo en español y con unos pocos comandos que empiezan con `/`. Este es el machete para tener abierto durante el día y después.
-Datos verificados en la documentación oficial el 18/11/2026. Si un comando no te aparece, actualizá con `claude update`.
-¿Dudás si usar el chat, Cowork, Claude Code o la nube? Está en [Dónde trabajar](#t3-donde-trabajar).
+**Todo lo que escribís en el cuadro de la pestaña Code funciona igual que en la terminal**: los comandos `/`, tus skills y los `@archivo`. Lo que cambia son algunas teclas: abajo te marcamos cuáles son **solo en la terminal**.
+¿Dudás si usar el chat, Cowork o Claude Code? Está en [Dónde trabajar](#t3-donde-trabajar).
+
+> **Datos:** verificado en la documentación oficial (code.claude.com/docs) el 18 y 19/11/2026.
 
 ## Antes de empezar
-- [ ] Claude Code instalado ([Instalá Claude Code](#s2-claude-code)).
-- [ ] Claude Code abierto en una carpeta de trabajo: en la terminal (la ventana donde escribís comandos; en Windows, **PowerShell**) escribiste `claude`, o abriste la pestaña **Code** de la app. Para practicar sin miedo, usá la carpeta `prueba-claude` de [Instalá Claude Code](#s2-claude-code).
+- [ ] La app de escritorio de Claude con la pestaña **Code** ([Instalá Claude Code](#s2-claude-code)).
+- [ ] Una sesión abierta en una carpeta: **Code › + New › Local › Open folder…**. Para practicar sin miedo, usá una carpeta de prueba.
 
-Los comandos `/` y las teclas funcionan en la terminal y en la pestaña **Code**. Escribí `/` y aparece la lista completa con buscador. Para usar uno, escribilo y apretá **Enter**.
+Escribí `/` en el cuadro: aparece la lista completa con buscador. Para usar uno, escribilo y apretá **Enter**.
 
 **Tenés que ver:** al escribir `/`, una lista de comandos que se filtra a medida que tipeás.
 
-## La memoria de trabajo (que no se "olvide")
-| Comando | Qué hace | Cuándo usarlo |
+## Los que más vas a usar hoy
+| Escribís | Para qué sirve | Ejemplo |
 |---|---|---|
-| `/context` | Muestra cuánto de la "memoria de trabajo" (la ventana de contexto) está ocupada y con qué | Cuando Claude empieza a olvidarse cosas o a andar lento |
-| `/compact` | Resume la conversación y libera lugar | En medio de una tarea larga. Podés guiarlo: `/compact quedate con las decisiones de precios` |
-| `/clear` | Empieza una conversación nueva, vacía. Conserva el `CLAUDE.md` | Cuando cambiás de tema. Una tarea = una conversación |
-| `/resume` | Retoma una conversación anterior de esta compu | Al otro día, para seguir donde quedaste |
-| `/rewind` | Vuelve atrás la conversación y los cambios en archivos (también `/undo`) | Cuando Claude rompió algo |
-| `/export` | Guarda la conversación como texto | Para compartir lo que hiciste o guardarlo en tu cerebro |
+| `/nombre-de-la-skill` | Usa una skill a mano. Igual, Claude las usa solo cuando tu pedido coincide | `/armar-mi-cerebro` · `/propuesta-comercial` |
+| `/btw [pregunta]` | Una pregunta al costado, **sin cortar lo que Claude está haciendo** | `/btw ¿cómo se llamaba el archivo de precios?` |
+| `/compact` | Resume la conversación para liberar lugar sin perder el hilo. Podés decirle qué conservar | `/compact quedate con las decisiones de precios` |
+| `/clear` | Conversación nueva, vacía. Conserva el `CLAUDE.md`. Una tarea = una conversación | Cuando terminás un desafío y arrancás otro |
+| `/context` | Muestra cuánto de la "memoria de trabajo" está ocupada y con qué | Cuando Claude empieza a olvidarse cosas |
+| `/rewind` | Vuelve atrás la conversación y los cambios en archivos | Cuando Claude rompió algo |
+| `@archivo` | Le pasa un archivo puntual (te sugiere a medida que escribís) | `Leé @ventas/objeciones.md y armá 3 respuestas` |
 
-> **Tip:** antes de `/clear`, pedile "guardá en `inbox/` lo que decidimos hoy" (si la carpeta no existe, la crea). La próxima vez lo lee y no repetís todo.
+> **Tip:** antes de `/clear`, pedile "guardá en `inbox/` lo que decidimos hoy". La próxima vez lo lee y no repetís todo.
 
 ## Tu cerebro y tus procesos
-| Comando | Qué hace | Cuándo usarlo |
-|---|---|---|
-| `/init` | Crea un `CLAUDE.md` para la carpeta | En una carpeta nueva que no tiene cerebro |
-| `/memory` | Abre y edita lo que Claude recuerda (tus `CLAUDE.md`) | Para corregir o sumar una regla permanente. También sirve decirle "recordá que…" |
-| `/skills` | Lista tus skills | Para ver qué procesos tenés instalados |
-| `/agents` | Te recuerda cómo crear subagentes: pidiéndoselo a Claude o en `.claude/agents/` | Cuando querés repartir una tarea grande ([Las piezas](#t2-piezas)) |
-| `/plugin` | Instala y maneja plugins (paquetes de skills, agentes y MCP) | Por ejemplo: `/plugin install skill-creator@claude-plugins-official` |
-
-## Los que más vas a usar hoy
-| Atajo | Para qué sirve | Ejemplo |
-|---|---|---|
-| `/nombre-de-la-skill` | Usa una skill a mano. Igual, Claude las usa solo cuando tu pedido coincide con lo que hace la skill | `/armar-mi-cerebro` · `/propuesta-comercial` |
-| `/btw [pregunta]` | Una pregunta al costado: Claude contesta con lo que ya sabe de la conversación, **sin cortar lo que está haciendo** y sin que quede en el historial | `/btw ¿cómo se llamaba el archivo de precios?` mientras Claude sigue trabajando |
-| `/compact` | Resume la conversación para liberar lugar sin perder el hilo. Podés decirle qué conservar | `/compact quedate con las decisiones de precios` |
-| `/clear` | Conversación nueva, vacía. Una tarea = una conversación | Cuando terminás un desafío y arrancás otro |
-| `/context` | Muestra cuánto de la "mochila" está lleno | Cuando Claude empieza a olvidarse cosas |
-| `/resume` | Retoma una conversación anterior | Al otro día, para seguir donde quedaste |
-| `/rewind` o **Esc Esc** | Vuelve atrás la conversación y los cambios en archivos | Cuando Claude rompió algo |
-| **Shift+Tab** | Cambia de modo: manual → acepta cambios → **plan** (solo propone) | Antes de una tarea grande: modo plan |
-| `@archivo` | Le pasa un archivo puntual | `@ventas/objeciones.md` |
-| `/insights` | Informe de cómo venís usando Claude Code y qué conviene automatizar | Los viernes |
+| Comando | Qué hace |
+|---|---|
+| `/init` | Crea un `CLAUDE.md` en una carpeta que no tiene cerebro |
+| `/memory` | Abre lo que Claude recuerda (tus `CLAUDE.md`). También sirve decirle "recordá que…" |
+| `/skills` | Lista tus skills instaladas |
+| `/agents` | Para crear subagentes ([Las piezas](#t2-piezas)) |
+| `/plugin` | Instala plugins (paquetes de skills, agentes y MCP) |
+| `/export` | Guarda la conversación como texto |
 
 ## Modelo, uso y conexiones
-| Comando | Qué hace | Cuándo usarlo |
+| Comando | Qué hace | En la app, también |
 |---|---|---|
-| `/model` | Cambia el modelo (Opus, Sonnet, Haiku, Fable). Con flechas izquierda/derecha cambiás el esfuerzo | Tareas difíciles: Opus. Simples: Sonnet o Haiku ([Modelos](#t1-modelos)) |
-| `/effort` | Cuánto piensa antes de responder: `low`, `medium`, `high`, `xhigh`, `max` | `/effort high` para diseñar algo; `low` para ordenar archivos |
-| `/usage` | Cuánto usaste y cuánto te queda del plan (también `/cost`) | Para no quedarte sin uso en medio del taller |
-| `/insights` | Arma un informe de tus sesiones recientes: qué usás más, dónde te trabás y qué conviene convertir en skill o automatizar. Se abre como página | Una vez por semana: copiá lo que te salió bien y armá skills con lo que repetís |
-| `/mcp` | Muestra tus conexiones MCP (n8n, Supabase, Metricool…) y su estado | Cuando una herramienta no responde |
-| `/permissions` | Qué puede hacer Claude sin preguntarte | Para dejar de aprobar siempre lo mismo |
-| `/hooks` | Configura acciones automáticas (por ejemplo, un aviso cuando Claude te necesita) | Una vez, para que te avise |
+| `/model` | Cambia el modelo (Opus, Sonnet, Haiku, Fable) ([Modelos](#t1-modelos)) | El selector de modelo debajo del cuadro |
+| `/effort` | Cuánto piensa: `low`, `medium`, `high`, `xhigh`, `max` | El menú de esfuerzo |
+| `/usage` | Cuánto usaste y cuánto te queda | |
+| `/insights` | Informe de cómo venís usando Claude Code y qué conviene automatizar | |
+| `/mcp` | Tus conexiones MCP y su estado | |
+| `/permissions` | Qué puede hacer Claude sin preguntarte | |
+| `/schedule` | Programa una tarea que corre sola en la nube | **Scheduled** en la barra lateral ([Tareas programadas](#t4-tareas-programadas)) |
+| `/remote-control` | Seguís esta sesión desde el celular ([Dónde trabajar](#t3-donde-trabajar)) | El interruptor **Remote Control** de la sesión |
 
-## Nube, celular y tareas que corren solas
-| Comando | Qué hace | Más info |
-|---|---|---|
-| `/schedule` | Programa una tarea que corre sola en la nube (también `/routines`). `/schedule list` las muestra | [Tareas programadas](#t4-tareas-programadas) |
-| `/loop 5m [TAREA]` | Repite un pedido cada cierto tiempo mientras la sesión está abierta | [Tareas programadas](#t4-tareas-programadas) |
-| `/remote-control` | Conecta esta sesión para seguirla desde el celular o el navegador (también `/rc`) | [Dónde trabajar](#t3-donde-trabajar) |
-| `/teleport` | Trae a tu compu una sesión que estaba corriendo en la nube (también `/tp`) | [Dónde trabajar](#t3-donde-trabajar) |
-| `/tasks` | Muestra las tareas que corren en segundo plano | |
+> **Ojo:** si un comando no aparece al escribir `/`, actualizá la app de Claude. Lo de modelo y modo también lo tenés con botones debajo del cuadro.
 
-## Cuando algo anda mal
-| Comando | Qué hace |
-|---|---|
-| `/doctor` | Revisa que la instalación esté bien y te dice qué arreglar. Desde afuera: `claude doctor` |
-| `/login` | Volvés a entrar con tu cuenta (si dice que tu plan no incluye Claude Code) |
-| `/feedback` | Le avisás a Anthropic de un error |
+## Teclas en la pestaña Code
+En Windows, donde dice **Cmd** es **Ctrl**.
 
-## Teclas
 | Tecla | Qué hace |
 |---|---|
-| **Shift+Tab** (en Windows puede ser **Alt+M**) | Cambia el modo: **manual** (pregunta todo) → **aceptar cambios** → **plan** (solo propone, no toca nada) |
+| **Enter** | Manda el pedido. Mientras Claude trabaja, podés escribir una corrección y mandarla: la lee después del paso que está haciendo |
 | **Esc** | Frena a Claude en el momento |
-| **Esc Esc** (con el cuadro vacío) | Abre el menú para volver atrás (igual que `/rewind`) |
-| **Ctrl+C** dos veces | Sale de Claude Code |
-| **Flecha arriba** | Repite tus pedidos anteriores |
-| **Ctrl+R** | Busca en tus pedidos anteriores |
-| **Ctrl+V** (Mac) · **Alt+V** (Windows) | Pega una imagen o captura de pantalla. En iTerm2 (Mac): **Cmd+V** |
-| **Option+P** (Mac) · **Alt+P** (Windows) | Cambia de modelo sin escribir `/model` |
-| **Ctrl+G** | Abre tu pedido en un editor de texto, para escribir uno largo cómodo |
-| **Ctrl+B** | Manda la tarea que está corriendo al fondo y te deja seguir escribiendo |
+| **Cmd+Shift+M** | Cambia el modo de permisos (**Manual**, **Accept edits**, **Plan**, **Auto**) |
+| **Cmd+N** | Sesión nueva |
+| **Cmd+;** | Pregunta al costado (igual que `/btw`) |
+| **Cmd+Shift+I** | Menú de modelo |
+| **Cmd+Shift+E** | Menú de esfuerzo |
+| **Cmd+Shift+D** | Panel de cambios (qué archivos tocó) |
+| **Cmd+/** | Muestra todos los atajos |
 
-## Símbolos al principio del pedido
-| Escribís | Qué hace | Ejemplo |
-|---|---|---|
-| `/` | Abre los comandos y tus skills | `/propuesta-comercial` |
-| `@` | Adjunta un archivo o carpeta (te sugiere a medida que escribís) | `Leé @ventas/objeciones.md y armá 3 respuestas` |
-| `!` | Corre un comando de terminal sin salir de Claude Code | `!ls` (Mac) · `!dir` (Windows) |
+Imágenes y capturas: arrastralas al cuadro o usá el botón **+**.
+
+> **Ojo:** en la pestaña Code, **Shift+Tab no cambia el modo** (en la terminal sí). Usá **Cmd+Shift+M** o el selector de modo.
+
+### Solo en la terminal
+Si algún día usás Claude Code en la terminal, estas teclas son de ahí: **Shift+Tab** (cambia el modo), **Esc Esc** (menú para volver atrás), **Ctrl+C** dos veces (sale), **Ctrl+R** (busca pedidos anteriores), **Ctrl+G** (escribe el pedido en un editor), **Ctrl+B** (manda la tarea al fondo), y el símbolo `!` al principio para correr un comando.
 
 ## Modo plan: primero pensá, después hacé
-Para tareas grandes, apretá **Shift+Tab** hasta que diga **plan**. Claude lee, investiga y te propone qué va a hacer, **sin tocar nada**. Lo corregís, y recién cuando estás de acuerdo lo dejás hacer.
-También podés arrancar directo en modo plan (en Windows, el mismo comando en PowerShell):
-
-```bash
-claude --permission-mode plan
-```
-
-En la pestaña **Code** de la app, el modo se elige en el selector de permisos: **Manual**, **Accept edits**, **Plan**, **Auto**.
+Para tareas grandes, elegí **Plan** en el selector de modo (o **Cmd+Shift+M**). Claude lee, investiga y te propone qué va a hacer, **sin tocar nada**. Lo corregís, y recién cuando estás de acuerdo pasás a **Manual** o **Accept edits** para que lo haga.
 
 > **Ojo:** el modo que salta todos los permisos (**Bypass permissions**) no lo uses en el taller. Ver [Datos y seguridad](#t6-datos-y-seguridad).
-
-## Comandos para abrir Claude Code desde la terminal
-Estos se escriben **en la terminal**, antes de entrar a Claude Code (no adentro). Son iguales en Mac y en Windows.
-
-| Comando | Qué hace |
-|---|---|
-| `claude` | Abre Claude Code en la carpeta donde estás |
-| `claude -c` | Sigue la última conversación de esta carpeta |
-| `claude -r` | Te muestra la lista de conversaciones anteriores para elegir una (o `claude -r "[NOMBRE]"`) |
-| `claude -p "[PEDIDO]"` | Hace un pedido único, imprime la respuesta y sale. Sirve para scripts y tareas programadas |
-| `claude --model sonnet` | Abre con un modelo elegido |
-| `claude --cloud "[TAREA]"` | Arranca una sesión nueva en la nube con esa tarea |
-| `claude --teleport` | Trae a la compu una sesión de la nube |
-| `claude --remote-control` | Abre una sesión ya conectada para seguirla desde el celular |
-| `claude update` | Actualiza Claude Code (igual se actualiza solo) |
-| `claude doctor` | Revisa la instalación |
 
 ## Un buen pedido
 Un buen prompt es un brief de trabajo: objetivo, contexto, límites y cómo te das cuenta de que está bien.
@@ -152,21 +107,21 @@ Tres trucos que cambian el resultado:
 /context
 ```
 
-Mirá qué está ocupando la ventana. Después probá `/compact quedate solo con lo que decidimos` y volvé a mirar `/context`.
+Después probá `/compact quedate solo con lo que decidimos` y volvé a mirar `/context`.
 
-**Tenés que ver:** una cuadrícula de colores con cuánto ocupa cada cosa. Después del `/compact`, ocupa menos.
+**Tenés que ver:** el detalle de cuánto ocupa cada cosa. Después del `/compact`, ocupa menos.
 
 ## Si algo falla
 | Te pasa | Hacé esto |
 |---|---|
 | Claude "se olvida" de lo que hablaron | `/context`. Si está lleno, `/compact` o `/clear` y empezá con un pedido claro. |
-| Te pide permiso todo el tiempo | Elegí "permitir siempre" para ese tipo de acción, o revisá `/permissions`. |
-| Hizo un cambio que no querías | `/rewind` o **Esc Esc**. |
+| Te pide permiso todo el tiempo | En el pedido de permiso tocá **Permitir siempre** para ese tipo de acción, o revisá `/permissions`. |
+| Hizo un cambio que no querías | `/rewind`. |
 | Se quedó trabado | **Esc** y pedile que te cuente en qué estaba. |
-| Te quedaste sin uso | `/usage` para ver cuándo se renueva. Pasá a Sonnet con `/model sonnet`. |
-| Un comando no existe | Actualizá con `claude update` y volvé a abrir. |
+| Te quedaste sin uso | `/usage` para ver cuándo se renueva. Pasá a Sonnet en el selector de modelo. |
+| Un comando no existe | Actualizá la app de Claude y abrí una sesión nueva. |
 
 ## Para seguir solo
 - `/insights` cada viernes: mirá qué pedidos te salieron mejor y copialos.
 - Cada prompt que repetís por tercera vez, convertilo en skill ([Las piezas](#t2-piezas) y [Kit del taller](#r-kit)).
-- Probá `/schedule` con algo simple: "todos los lunes a las 9:07, resumime los pendientes de mi cerebro" ([Tareas programadas](#t4-tareas-programadas)).
+- **Avanzado, en la terminal:** `claude` abre Claude Code en la carpeta donde estás, `claude -c` sigue la última conversación, `claude -p "[PEDIDO]"` hace un pedido único y sale (sirve para scripts), `claude --permission-mode plan` arranca en modo plan, y `claude doctor` revisa la instalación.

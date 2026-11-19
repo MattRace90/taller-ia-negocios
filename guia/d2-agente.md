@@ -27,9 +27,9 @@ La mitad de los mensajes son las mismas 10 preguntas. El desafío: un agente que
 ### Versión MVP, paso a paso
 1. **Las cuentas.** Tu bot en [Telegram](#s7-telegram) (Pasos 1 a 3). En [n8n](#s6-n8n), los Pasos 1, 3 y 6 (cuenta, credencial de Telegram y MCP). Saltá el 5.
 
-**Tenés que ver:** en Claude, **Customize › Connectors** muestra n8n conectado.
+**Tenés que ver:** en la app de Claude, **Customize › Connectors** muestra n8n conectado.
 
-2. **Que Claude arme el bot.** Abrí Claude Code en la carpeta de tu cerebro y pegá:
+2. **Que Claude arme el bot.** En la app de Claude, abrí la **pestaña Code**, elegí la carpeta de tu cerebro y pegá:
 
 ```prompt
 Con el MCP de n8n, creá un workflow llamado "agente-[TU-EMPRESA]": Telegram Trigger (mensaje nuevo) → AI Agent → respuesta por Telegram al mismo chat.
@@ -39,7 +39,7 @@ Con el MCP de n8n, creá un workflow llamado "agente-[TU-EMPRESA]": Telegram Tri
 Mostrame el plan antes de crearlo. No lo actives hasta que te diga.
 ```
 
-**Tenés que ver:** el plan (3 o 4 nodos). Decile "dale" y te confirma el flujo creado.
+**Tenés que ver:** el plan (3 o 4 nodos). Decile "dale". Cuando pida permiso para usar n8n, tocá **Permitir**, y te confirma el flujo creado.
 
 > **Ojo:** las cuentas nuevas traen algunos créditos de IA gratis (**Use Gateway credits** en el nodo del modelo); n8n no publica cuántos ([doc](https://docs.n8n.io/deploy/use-n8n-cloud/gateway-credits), nov 2026). Si no aparecen o se terminan, usá tu [clave de API](#s9-api-anthropic).
 
@@ -49,7 +49,7 @@ Mostrame el plan antes de crearlo. No lo actives hasta que te diga.
 
 4. **Probalo.** Escribile 5 cosas: 2 preguntas frecuentes, 1 que no esté en tu cerebro, 1 de alguien que no es cliente y 1 de alguien que quiere comprar.
 
-**Tenés que ver:** responde con tus palabras y no inventa. Para corregir: "Con el MCP de n8n, cambiá las instrucciones del agente: [QUÉ]".
+**Tenés que ver:** responde con tus palabras y no inventa. Para corregir, pedíselo en la misma pestaña Code: "Con el MCP de n8n, cambiá las instrucciones del agente: [QUÉ]".
 
 ### Versión completa
 Pruebas automáticas antes de publicar y el agente en Cloudflare con tu clave: [Un agente que responde y filtra](#p3-agente-preguntas). Después: WhatsApp ([Opciones](#w1-opciones)) o voz para llamadas ([Vapi](#s13-vapi)).

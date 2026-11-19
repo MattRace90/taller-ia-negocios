@@ -12,6 +12,8 @@ Esta guía es tu mapa del día y te queda para después. A la mañana armamos la
 > **Tip:** **el cerebro** es una carpeta con archivos de texto donde queda escrito cómo funciona tu empresa (qué vendés, a quién, cómo hablás). Claude la lee antes de trabajar. **GitHub** es la web donde guardás una copia privada de esa carpeta, con historial. Las palabras técnicas del día están explicadas en una línea en [Las piezas](#t2-piezas).
 
 ## Lo primero que tenés que hacer
+Hoy trabajamos en la **pestaña Code** de la app de Claude (no hace falta la terminal). Está arriba de la barra lateral de la app: **Chat · Cowork · Code**. Elegís la carpeta, escribís tu pedido y aprobás con **Permitir** cuando Claude quiere crear un archivo o correr algo.
+
 1. Arriba de la guía, elegí tu sistema: **Mac** o **Windows**. Desde ahí, la guía te muestra solo los pasos de tu compu.
    **Tenés que ver:** el botón de tu sistema marcado.
 2. Hacé las **cuentas obligatorias**, en este orden. Son las únicas que hace todo el mundo (si podés, hacelas antes del taller):
@@ -76,9 +78,10 @@ Es una sugerencia según lo que nos contaron. Podés cambiarla. En la página de
 | [Denvet](#e-denvet) | [Automatizá una tarea](#d1-automatiza) · [Tu web o tu app](#d3-web-app) · [Medí y decidí](#d6-medir) |
 | [Celve](#e-celve) | [Automatizá una tarea](#d1-automatiza) · [Tu fábrica de contenido](#d4-contenido) · [Medí y decidí](#d6-medir) |
 | [Viajes TDH Docta](#e-tdh) | [Un agente que responde](#d2-agente) · [Vendé más](#d5-vender) · [Tu fábrica de contenido](#d4-contenido) |
+| [VetPlus](#e-vetplus) | [Un agente que responde](#d2-agente) · [Vendé más](#d5-vender) · [Medí y decidí](#d6-medir) |
 
 ## Llevate todo a tu compu
-Esta guía queda online. Además podés bajarla entera (todas las páginas en `.md`, las skills y los agentes) y abrirla con Obsidian o con Claude Code:
+Esta guía queda online. Además podés bajarla entera (todas las páginas en `.md`, las skills y los agentes) y abrirla con Obsidian o con la pestaña Code de la app de Claude:
 
 [Descargá la guía completa](kit/descargas/taller-completo.zip)
 

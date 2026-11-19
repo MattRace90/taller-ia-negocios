@@ -13,23 +13,23 @@ Las ventas se pierden porque la propuesta tardó tres días o porque nadie volvi
 
 **En 30 segundos**
 - **Cuánto tarda:** 30 min la MVP, 90 min la completa.
-- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás Claude Code.
+- **Por dónde empezar:** la **Versión MVP**, acá abajo. Solo necesitás la **pestaña Code** de la app de Claude.
 
 ## Dos versiones: MVP y completa
 
 | | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Qué te llevás** | La skill `propuesta-comercial` en Claude Code: pegás la reunión y sale la propuesta con tu marca y tus precios. | El seguimiento a quien no compró y `/propuesta` desde Telegram. |
+| **Qué te llevás** | La skill `propuesta-comercial` en la pestaña Code de Claude: pegás la reunión y sale la propuesta con tu marca y tus precios. | El seguimiento a quien no compró y `/propuesta` desde Telegram. |
 | **Tiempo** | 30 min | 90 min |
-| **Cuentas que necesitás** | Ninguna extra (Claude Code) | Seguimiento: ninguna extra. Telegram: [n8n](#s6-n8n) · [Telegram](#s7-telegram) · [Clave de API](#s9-api-anthropic) · [Google](#s14-meta-y-google) |
+| **Cuentas que necesitás** | Ninguna extra (la app de Claude) | Seguimiento: ninguna extra. Telegram: [n8n](#s6-n8n) · [Telegram](#s7-telegram) · [Clave de API](#s9-api-anthropic) · [Google](#s14-meta-y-google) |
 | **Costo** | Tu plan de Claude | + n8n desde €20/mes (nov 2026) + centavos de API |
 
 ### Versión MVP, paso a paso
-1. **Instalá la skill** `propuesta-comercial` (una receta escrita que Claude sigue). Hacé solo el Paso 3 de [Tu asistente en Telegram](#p2-asistente-telegram): ahí está el prompt para instalarla.
+1. **Instalá la skill** `propuesta-comercial` (una receta escrita que Claude sigue). En el [Kit](#r-kit), tocá **Copiar** en `propuesta-comercial` y seguí **Cómo instalar una skill**: se lo pedís a Claude en la pestaña Code, sin terminal.
 
-**Tenés que ver:** Claude Code te confirma que la skill quedó instalada.
+**Tenés que ver:** Claude te confirma la ruta donde quedó la skill.
 
-2. **Pegá la reunión.** En el mismo Claude Code, pegá:
+2. **Pegá la reunión.** Abrí una sesión nueva en la **pestaña Code**, con la carpeta de tu cerebro elegida, y pegá:
 
 ```prompt
 Usá la skill propuesta-comercial. Esto es lo que se habló en la reunión con [CLIENTE INVENTADO]: [PEGÁ TUS NOTAS O LA TRANSCRIPCIÓN]. Usá solo los precios y condiciones de mi cerebro; lo que no esté, marcalo PENDIENTE. Guardala en propuestas/ y decime qué me falta confirmar.

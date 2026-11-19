@@ -84,53 +84,14 @@ TELEGRAM_BOT_TOKEN=[TU-TOKEN]
 - En GitHub. Por eso el `.env` va **siempre** en el `.gitignore` (la lista de archivos que git no sube).
 - En el `CLAUDE.md`, en una planilla compartida o en un mensaje de WhatsApp.
 
-Para crear el `.gitignore` con el `.env` adentro:
-
-<div data-os="mac">
-
-```bash
-echo ".env" >> .gitignore
-```
-
-</div>
-<div data-os="win">
-
-```powershell
-Add-Content .gitignore ".env"
-```
-
-</div>
-
 ### Cómo crear el `.env` y pegar la clave vos (sin pasársela a Claude)
-Los archivos que empiezan con punto (`.env`, `.gitignore`) son **ocultos**: no los ves en Finder ni en el Explorador si no los mostrás. Por eso los abrimos desde la terminal.
+Los archivos que empiezan con punto (`.env`, `.gitignore`) son **ocultos**: no los ves en Finder ni en el Explorador. Por eso se los pedís a Claude en la **pestaña Code**, con la carpeta del proyecto abierta:
 
-1. Abrí la terminal parada en la carpeta del proyecto (con `cd`, ver el [glosario](#t2-piezas)).
-2. Creá y abrí el archivo con el editor de texto de tu compu:
-
-<div data-os="mac">
-
-```bash
-touch .env && open -e .env
+```prompt
+Creá en esta carpeta un archivo .env con la línea [NOMBRE_DE_LA_CLAVE]= vacía, agregá .env al .gitignore (crealo si no existe) y abrime el .env en el editor de texto de mi compu. No leas el archivo después de que yo pegue la clave.
 ```
 
-**Tenés que ver:** TextEdit abierto con un documento vacío llamado `.env`.
-
-</div>
-<div data-os="win">
-
-```powershell
-notepad .env
-```
-
-Si te pregunta si querés crear un archivo nuevo, tocá **Sí**.
-
-**Tenés que ver:** el Bloc de notas abierto con un documento vacío llamado `.env`.
-
-</div>
-
-3. Escribí el nombre de la variable que te pide el tutorial, un `=` y pegá tu clave pegada al `=`. Ejemplo: `ANTHROPIC_API_KEY=` y la clave a continuación.
-4. Guardá (**Cmd+S** en Mac, **Ctrl+S** en Windows) y cerrá.
-5. Agregá el `.env` al `.gitignore` con el comando de arriba.
+**Tenés que ver:** el editor de texto (TextEdit en Mac, Bloc de notas en Windows) abierto con el `.env`. Pegá la clave después del `=`, guardá y escribile a Claude "listo".
 
 > **Tip:** para ver los archivos ocultos: en Mac, en Finder apretá **Cmd+Shift+.** (punto). En Windows, en el Explorador: **Ver › Mostrar › Elementos ocultos**.
 
