@@ -329,6 +329,37 @@ main .md td a, main .md th a{color:#4B2FC4}
 main .md blockquote{color:#0A0A0A}
 .forall{color:#0A0A0A!important}
 .gomine.off{opacity:1;background:#55544D;color:#FFFDF6!important}
+
+/* Diseño plano y más corto para las páginas */
+.md .step{border:1.5px solid #D8D3C4;border-left:6px solid var(--gc,#FFE51F);border-radius:12px;margin:18px 0;background:#FFFFFF}
+.md .step > h2{background:transparent!important;border-bottom:0!important;font-size:22px;padding:12px 16px 4px;color:#0A0A0A}
+.md .step > h2 .num{background:var(--gc,#FFE51F);color:#0A0A0A;border:1.5px solid #0A0A0A}
+.md .step > .body{padding:2px 16px 10px}
+.md .step.fold > h2{cursor:pointer;font-size:18px;padding-bottom:12px}
+.md .step.fold > h2::after{content:"▾";margin-left:auto;font-size:16px;opacity:.6}
+.md .step.fold.closed > h2::after{content:"▸"}
+.md .step.fold.closed > .body{display:none}
+.md .step.fold{border-left-color:#D8D3C4;background:#FBFAF5}
+main #page{box-shadow:4px 4px 0 #0A0A0A;border-width:2px}
+.result{box-shadow:none!important;border-width:2px!important;padding:10px 14px!important;font-weight:600}
+.secbox{background:transparent!important;border:0!important;padding:0!important;margin:0 0 8px!important;font-size:13px!important;color:#55544D!important}
+.secbox b{color:#0A0A0A}
+.reqbox{padding:8px 12px!important;border-width:1.5px!important;font-size:14px}
+.reqbox.must{background:#FFFFFF!important;color:#0A0A0A!important;border-left:6px solid #0A0A0A!important}
+.reqbox.must b{color:#0A0A0A!important}
+.stepbox{border:1.5px solid #D8D3C4!important;border-left:6px solid var(--gc,#FFE51F)!important;background:#FFFFFF!important;padding:8px 12px!important;margin-bottom:14px!important}
+.stepbox span{font-size:13px!important}
+.md blockquote{border-width:1.5px;padding:10px 14px}
+.code.prompt{box-shadow:3px 3px 0 #0A0A0A!important;border-width:2px!important}
+h1.title{font-size:clamp(34px,5vw,54px)!important;margin-bottom:12px!important}
+.md a.inlink::after{content:"⧉";display:inline-block;margin-left:3px;font-size:.75em;opacity:.7;text-decoration:none}
+
+/* Avisos suaves */
+main .md blockquote{border:0!important;border-left:5px solid #0A0A0A!important;border-radius:8px!important;background:#F6F4EC!important}
+main .md blockquote.ojo{background:#FFF8D1!important;border-left-color:#E0B800!important}
+main .md blockquote.datos{background:#F1ECFC!important;border-left-color:#8E73D9!important}
+main .md blockquote.costo{background:#E8F8F2!important;border-left-color:#3FA884!important}
+main .md blockquote.tip{background:#F6F4EC!important;border-left-color:#9A988E!important}
 </style>
 
 <header class="top">
@@ -679,6 +710,9 @@ main .md blockquote{color:#0A0A0A}
         if(DESCARGAS_URL){ a.href = DESCARGAS_URL; a.target = "_blank"; a.rel = "noopener"; a.classList.add("dl"); a.title = "Buscá " + file + " en la carpeta de descargas"; a.textContent = a.textContent + " (" + file + ")"; }
         else { var s = document.createElement("span"); s.className = "dl-off"; s.textContent = a.textContent + " · " + file + ": te pasamos el link por el grupo del taller"; a.replaceWith(s); }
       }      else if(/^https?:/i.test(h)){ a.target = "_blank"; a.rel = "noopener"; if(!a.title) a.title = "Se abre en otra pestaña"; }
+      else if(/^#[\w-]+$/.test(h) && byId[h.slice(1)] && !a.closest(".pickbar,.pickbox,.crumbbar")){
+        a.href = location.href.split("#")[0] + h; a.target = "_blank"; a.rel = "noopener"; a.classList.add("inlink"); a.title = "Se abre en otra pestaña: "+byId[h.slice(1)].t;
+      }
     });
   }
 
@@ -691,6 +725,11 @@ main .md blockquote{color:#0A0A0A}
         var m = el.textContent.match(/^Paso\s+(\d+)\s*·\s*(.*)$/);
         if(m){ el.innerHTML = '<span class="num">PASO '+m[1]+'</span><span>'+esc(m[2])+'</span>'; cur.classList.add("paso"); }
         md.insertBefore(cur, el); cur.appendChild(el); cur.appendChild(body); cur._b = body; n++;
+        if(/^(Si algo falla|Para seguir solo|Cómo sé que funcionó)/i.test(el.textContent.trim())){
+          cur.classList.add("fold","closed");
+          el.setAttribute("role","button"); el.tabIndex = 0; el.title = "Tocá para abrir o cerrar";
+          (function(sec){ function tg(){ sec.classList.toggle("closed"); } el.addEventListener("click", tg); el.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); tg(); } }); })(cur);
+        }
       } else if(cur && !el.classList.contains("markdone")){ cur._b.appendChild(el); }
     });
   }
