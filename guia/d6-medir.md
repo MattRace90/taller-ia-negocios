@@ -19,7 +19,7 @@ resultado: Un reporte con 3 números clave y 3 acciones armado desde tu planilla
 
 | | MVP (hoy, rápido) | Completa |
 |---|---|---|
-| **Qué te llevás** | 3 números, qué cambió y 3 acciones, desde tu planilla. | Reporte automático cada lunes y Meta Ads con agentes (solo tocan si escribís APROBADO). |
+| **Qué te llevás** | 3 números, qué cambió y 3 acciones, desde tu planilla. | [MCP oficial de Meta + agentes con tus campañas reales](#p9-meta-ads): te dicen cuánto invertir y solo tocan tu cuenta si escribís APROBADO. Más el reporte automático cada lunes. |
 | **Tiempo** | 30 min | 90 min |
 | **Cuentas que necesitás** | Ninguna extra | [Conectores](#s8-conectores-y-mcp) · [Meta y Google](#s14-meta-y-google) |
 | **Costo** | Tu plan de Claude | Tu plan de Claude; la inversión en anuncios es aparte |
@@ -56,7 +56,7 @@ Convertí el pedido del reporte en una skill de este proyecto llamada mi-reporte
 **Tenés que ver:** en una sesión nueva, `/mi-reporte` te arma el reporte. Cada lunes, ponés la planilla nueva en `datos` y lo escribís.
 
 ### Versión completa
-El reporte que corre solo cada lunes: [El reporte que llega solo](#p10-extras), Parte B ([Tareas programadas](#t4-tareas-programadas)). Cuánto invertir en Meta: [Meta Ads con agentes](#p9-meta-ads).
+El reporte que corre solo cada lunes: [El reporte que llega solo](#p10-extras), Parte B ([Tareas programadas](#t4-tareas-programadas)). Cuánto invertir en Meta, con tus campañas reales: conectá el MCP oficial de Meta Ads y corré los agentes de [Meta Ads con agentes](#p9-meta-ads) (sin campañas, con un CSV).
 
 Arrancá por la MVP. Si te sobra tiempo, pasá a la completa: lo que hiciste te sirve.
 

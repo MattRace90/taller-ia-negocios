@@ -111,16 +111,63 @@ Sin cambiar, enviar ni publicar nada:
 | Google: "acceso bloqueado por el administrador" | Lo habilita el administrador de Google de tu empresa. |
 | En la pestaña Code no aparecen los conectores | Revisá que la app y la pestaña Code usen la misma cuenta de Claude, y que no estén apagados en `/mcp`. |
 
+## Para n8n: tu app de Meta y el token
+Solo si querés que un **flujo de n8n** lea (o cambie) tus campañas, por ejemplo un reporte que se arma solo cada lunes ([n8n](#s6-n8n)). Para usar Meta Ads con Claude **no hace falta**: alcanza con el Paso 3.
+
+n8n no usa el conector de Claude. Necesita dos cosas: una **app de Meta** (el "enchufe" de tu empresa en Meta for Developers) y un **token** (una llave larga) de un **usuario del sistema** (un usuario robot de tu portfolio, que no es una persona y no se desloguea).
+
+> **Datos:** el token es como la llave de tu cuenta publicitaria. **Nunca** lo pegues en el chat de Claude, en el cerebro ni en GitHub. Va directo de la pantalla de Meta a la credencial de n8n. Si se filtra, revocalo (Paso 5 de esta sección) y generá otro.
+
+Necesitás ser **administrador del portfolio comercial**. Tené n8n abierto en otra pestaña antes de generar el token.
+
+**1 · Creá la app.** Entrá a [developers.facebook.com](https://developers.facebook.com) con tu Facebook › **My Apps** (Mis apps) › **Create App** (Crear app). Poné un nombre (por ejemplo `[TU-EMPRESA] n8n`) y tu mail. En **casos de uso**, elegí **Measure ad performance data with Marketing API** (solo leer) o **Create & manage ads with Marketing API** (leer y cambiar). Si te pregunta el tipo de app, elegí **Business**. Vinculala a tu portfolio comercial.
+
+**Tenés que ver:** el panel de tu app, con el caso de uso de Marketing API.
+
+> **Ojo:** Meta cambió hace poco este asistente. En la versión vieja se elegía **Other › Business** y después se agregaba el producto **Marketing API** desde el panel. Si ves esa versión, hacelo así.
+
+**2 · Activá los permisos de la app.** En el menú de la izquierda, **Use cases** (Casos de uso) › tu caso de Marketing API › tocá **Add** al lado de `ads_read`. Sumá `ads_management` **solo** si el flujo va a modificar campañas.
+
+**3 · Creá el usuario del sistema.** En [business.facebook.com](https://business.facebook.com) › **Configuración** › **Usuarios** › **Usuarios del sistema** › **Agregar**. Nombre: `n8n`. Rol: **Empleado** (no le des Administrador si no hace falta).
+
+**Tenés que ver:** el usuario `n8n` en la lista.
+
+**4 · Dale tu cuenta publicitaria y tu app.** Con el usuario `n8n` elegido › **Asignar activos** › **Cuentas publicitarias** › tu cuenta › permiso de **ver rendimiento** (y **administrar campañas** solo si va a modificar) › **Guardar**. Repetí con **Apps** › tu app.
+
+**Tenés que ver:** la cuenta publicitaria y la app en los activos del usuario `n8n`.
+
+> **Ojo:** no pudimos verificar en pantalla los nombres exactos de los botones y permisos en español (cambian seguido). Si no los encontrás, usá el buscador de la configuración del portfolio.
+
+**5 · Generá el token.** Con el usuario `n8n` elegido › **Generar nuevo token** › elegí tu app › vencimiento **Nunca** (si te deja elegir) › tildá `ads_read` (y `ads_management` solo si va a modificar) › **Generar**. Copialo y pegalo directo en n8n (punto 7). Meta lo muestra **una sola vez**. Para anularlo: en el mismo usuario, **Revocar tokens**.
+
+> **Ojo:** según la documentación de Meta, el token de un usuario del sistema **no vence**, pero deja de andar si alguien lo revoca o cambian los permisos de la app.
+
+**6 · Probalo en el Graph API Explorer.** Entrá a [developers.facebook.com/tools/explorer](https://developers.facebook.com/tools/explorer), pegá el token en **Access Token**, escribí `me/adaccounts?fields=name,account_id` y tocá **Submit**. Es una herramienta de Meta: el token no sale de Meta.
+
+**Tenés que ver:** el nombre de tu cuenta publicitaria y su número. Para ver vencimiento y permisos: [Access Token Debugger](https://developers.facebook.com/tools/debug/accesstoken).
+
+**7 · Cargalo en n8n.** En n8n › **Credentials** › **Create credential** › buscá **Facebook Graph API** › pegá el token en **Access Token** › **Save**. Esa credencial la usa el nodo **Facebook Graph API** (por ejemplo, nodo `act_[NÚMERO-DE-CUENTA]/insights` para traer gasto y resultados).
+
+**Tenés que ver:** la credencial guardada sin error y, al probar el nodo, los datos de tu cuenta.
+
+> **Tip:** ¿no sabés armar el flujo? En la pestaña Code, pedile a Claude: "Armame un flujo de n8n que cada lunes traiga el gasto y los resultados de los últimos 7 días de mi cuenta de Meta Ads con la credencial Facebook Graph API y me los mande por mail". Claude arma el flujo; el token ya está en n8n y nunca pasa por el chat.
+
 ## Para seguir solo
 - Tarea programada que cada lunes lea Meta Ads y te deje un resumen en un Google Doc ([Tareas programadas](#t4-tareas-programadas)).
 - Seguí con [Meta Ads con agentes](#p9-meta-ads): un equipo que propone cambios y solo aplica cuando escribís `APROBADO`.
-- **Avanzado:** agregar Meta Ads directo a Claude Code (sin la app) pide crear una app en [developers.facebook.com/apps](https://developers.facebook.com/apps) con su ID de cliente. No hace falta hoy.
+- **Avanzado:** agregar Meta Ads directo a Claude Code (sin la app) pide una app de Meta como la de "Para n8n", con su ID de cliente. No hace falta hoy.
 
 ## Fuentes
-Consultadas el 18/11/2026.
+Consultadas el 18 y 19/11/2026.
 - Meta Ads MCP: https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-get-started
 - Meta, conectores de IA (ayuda): https://www.facebook.com/business/help/1456422242197840
 - Cuenta publicitaria (terceros): https://www.leadsie.com/blog/create-facebook-ad-account
 - Beta y gratuidad (terceros): https://www.jonloomer.com/meta-ads-ai-connectors-claude/
 - Conectores de Google en Claude: https://support.claude.com/en/articles/10166901-use-google-workspace-connectors
 - Conectores de la app dentro de Claude Code: https://code.claude.com/docs/en/mcp
+- Marketing API, autenticación y tokens de usuario del sistema: https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authentication
+- Marketing API, casos de uso al crear la app: https://developers.facebook.com/documentation/development/create-an-app/marketing-api-use-cases
+- Usuarios del sistema (Meta for Developers): https://developers.facebook.com/docs/business-management-apis/system-users
+- Tokens de acceso (Meta for Developers): https://developers.facebook.com/docs/facebook-login/guides/access-tokens
+- Graph API Explorer: https://developers.facebook.com/tools/explorer
+- n8n, credencial Facebook Graph API: https://docs.n8n.io/integrations/builtin/credentials/facebookgraph/
